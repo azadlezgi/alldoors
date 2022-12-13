@@ -259,4 +259,18 @@ class LanguagePhraseController extends Controller
 
     }
 
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            LanguagePhrases::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
 }

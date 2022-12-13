@@ -63,12 +63,25 @@
                             </form>
                         </div>
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.option.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -81,6 +94,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($options->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs sm md">Qrup</th>
@@ -95,18 +116,27 @@
                         @foreach($options as $option)
                             <tr class="table-id-{{ $option->id }}" data-index="{{ $option->id }}"
                                 data-position="{{ $option->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $option->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <!-- ID -->
                                 <td>{{$option->id}}</td>
 
                                 <!--  NAME  -->
                                 <td>
-                                    <a href="{{ route('admin.option.edit',$option->id) }}">{{ $option->optionsTranlations[0]->name }}</a>
+                                    <a href="{{ route('admin.option.edit',$option->id) }}">{{ $option->optionsTranslations[0]->name }}</a>
                                 </td>
 
 
                                 <!--  QRUP  -->
                                 <td>
-                                    <a href="{{ route('admin.option.list',$option->optionsGroupsTranlations[0]->option_group_id) }}">{{ $option->optionsGroupsTranlations[0]->name }}</a>
+                                    <a href="{{ route('admin.option.list',$option->optionsGroupsTranslations[0]->option_group_id) }}">{{ $option->optionsGroupsTranslations[0]->name }}</a>
                                 </td>
 
                                 <!-- SORT -->
@@ -122,7 +152,7 @@
                                 </td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($option->updated_at,$option->optionsTranlations) }}</td>
+                                <td>{{ updateDate($option->updated_at,$option->optionsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -389,4 +419,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.option.allDeleteAjax') }}',
+            '{{ route('admin.option.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

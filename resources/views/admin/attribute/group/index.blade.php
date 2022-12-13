@@ -61,12 +61,24 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.attribute.group.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" >
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -79,6 +91,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($attributesGroups->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th>Sıra</th>
@@ -92,13 +112,22 @@
                         @foreach($attributesGroups as $key => $attributesGroup)
                             <tr class="table-id-{{ $attributesGroup->id }}" data-index="{{ $attributesGroup->id }}"
                                 data-position="{{ $attributesGroup->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $attributesGroup->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <!-- ID -->
                                 <td>{{$attributesGroup->id}}</td>
 
 
                                 <!--  NAME  -->
                                 <td>
-                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}">{{ $attributesGroup->attributesGroupsTranlations[0]->name }}</a>
+                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}">{{ $attributesGroup->attributesGroupsTranslations[0]->name }}</a>
                                 </td>
 
                                 <!-- SORT -->
@@ -110,7 +139,7 @@
                                 </td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($attributesGroup->updated_at,$attributesGroup->attributesGroupsTranlations) }}</td>
+                                <td>{{ updateDate($attributesGroup->updated_at,$attributesGroup->attributesGroupsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -462,4 +491,20 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElementsAttributeOrOptionsGroups(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Seçilmiş atribut qrupları arasında, atribut qrupuna aid atributlar mövcuddur! Bu səbəbdən atributları silmək mümkün olmadı!<br>',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.attribute.group.allDeleteAjax') }}',
+            '{{ route('admin.attribute.group.allDelete') }}',
+            '{{ route('admin.attribute.group.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
 @endsection

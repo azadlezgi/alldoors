@@ -32,7 +32,7 @@ class PageController extends Controller
     {
 
 
-        $pages = Page::with(array('pagesTranlations' => function ($query) {
+        $pages = Page::with(array('pagesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -99,7 +99,7 @@ class PageController extends Controller
     {
         $id = $request->id;
         $page = Page::where('id', $id)
-            ->with('pagesTranlations')->first();
+            ->with('pagesTranslations')->first();
 
 
         return view('admin.page.edit', compact('page'));
@@ -244,6 +244,17 @@ class PageController extends Controller
         $id = intval($request->id);
 
         Page::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Page::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

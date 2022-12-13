@@ -61,6 +61,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.product.manufacturer.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -70,6 +71,16 @@
                             </button>
                         </a>
 
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
 
                     </div>
                 </div>
@@ -82,6 +93,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($productManufacturers->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs">Say</th>
@@ -94,6 +113,14 @@
                         @foreach($productManufacturers as $key => $productManufacturer)
 
                             <tr class="table-id-{{ $productManufacturer->id }}" data-index="{{ $productManufacturer->id }}" data-position="{{ $productManufacturer->sort }}">
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $productManufacturer->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                <!-- ID -->
                                 <td>{{$productManufacturer->id}}</td>
 
@@ -106,7 +133,7 @@
                                 <td><a href="{{ route('admin.product.manufacturers',$productManufacturer->id) }}">{{ count($productManufacturers[$key]->getProductsCount) }}</a></td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($productManufacturer->updated_at,$productManufacturer->productsManufacturersTranlations) }}</td>
+                                <td>{{ updateDate($productManufacturer->updated_at,$productManufacturer->productsManufacturersTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -363,4 +390,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.product.manufacturer.allDeleteAjax') }}',
+            '{{ route('admin.product.manufacturer.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

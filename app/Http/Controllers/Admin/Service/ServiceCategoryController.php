@@ -106,7 +106,7 @@ class ServiceCategoryController extends Controller
     {
         $id = $request->id;
         $serviceCategory = ServiceCategory::where('id', $id)
-            ->with('servicesCategoriesTranlations')->first();
+            ->with('servicesCategoriesTranslations')->first();
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -301,6 +301,18 @@ class ServiceCategoryController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            ServiceCategory::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

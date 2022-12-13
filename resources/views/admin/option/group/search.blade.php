@@ -5,7 +5,6 @@
 
 @section('content')
 
-
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -44,29 +43,42 @@
                         <h3 class="card-label">Seçim Qruplar Axtar</h3>
                     </div>
                     <div class="card-toolbar">
-                                                <div class="card-title">
-                                                    <form action="{{ route('admin.option.group.search') }}" method="GET">
-                                                        <div class="input-group">
-                                                            <input
-                                                                type="search"
-                                                                class="form-control"
-                                                                value="{{ request('search') }}"
-                                                                autocomplete="off"
-                                                                name="search"
-                                                                placeholder="Axtar...">
-                                                            <div class="input-group-append">
-                                                                <button type="submit" class="btn btn-success" type="button">Axtar</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                        <div class="card-title">
+                            <form action="{{ route('admin.option.group.search') }}" method="GET">
+                                <div class="input-group">
+                                    <input
+                                        type="search"
+                                        class="form-control"
+                                        value="{{ request('search') }}"
+                                        autocomplete="off"
+                                        name="search"
+                                        placeholder="Axtar...">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-success" type="button">Axtar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.option.group.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" >
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -79,10 +91,18 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($optionsGroups->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th>Sıra</th>
-                            <th data-breakpoints="xs sm md" >Say</th>
+                            <th data-breakpoints="xs sm md">Say</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Status</th>
                             <th width="40" data-breakpoints="xs sm md" data-sortable="false">Ayarlar</th>
@@ -90,24 +110,37 @@
                         </thead>
                         <tbody id="sortable">
                         @foreach($optionsGroups as $optionsGroup)
-                            <tr class="table-id-{{ $optionsGroup->id }}" data-index="{{ $optionsGroup->id }}" data-position="{{ $optionsGroup->sort }}">
+                            <tr class="table-id-{{ $optionsGroup->id }}" data-index="{{ $optionsGroup->id }}"
+                                data-position="{{ $optionsGroup->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $optionsGroup->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
                                 <!-- ID -->
                                 <td>{{$optionsGroup->id}}</td>
 
 
                                 <!--  NAME  -->
                                 <td>
-                                    <a href="{{ route('admin.option.group.edit',$optionsGroup->id) }}">{{ $optionsGroup->optionsGroupsTranlations[0]->name }}</a>
+                                    <a href="{{ route('admin.option.group.edit',$optionsGroup->id) }}">{{ $optionsGroup->optionsGroupsTranslations[0]->name }}</a>
                                 </td>
 
                                 <!-- SORT -->
                                 <td>{{$optionsGroup->sort}}</td>
 
                                 <!--  SAY  -->
-                                <td><a href="{{ route('admin.option.list',$optionsGroup->id) }}">{{ count($optionsGroup->getOptionsCount) }}</a></td>
+                                <td>
+                                    <a href="{{ route('admin.option.list',$optionsGroup->id) }}">{{ count($optionsGroup->getOptionsCount) }}</a>
+                                </td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($optionsGroup->updated_at,$optionsGroup->optionsGroupsTranlations) }}</td>
+                                <td>{{ updateDate($optionsGroup->updated_at,$optionsGroup->optionsGroupsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -148,7 +181,8 @@
 
                                                 <li
                                                     class="navi-item redakteEt">
-                                                    <a href="{{ route('admin.option.group.edit',$optionsGroup->id) }}" class="navi-link text-center">
+                                                    <a href="{{ route('admin.option.group.edit',$optionsGroup->id) }}"
+                                                       class="navi-link text-center">
 																		<span class="navi-text">
 																			<span
                                                                                 class="label label-xl label-inline label-light-primary">Redaktə et</span>
@@ -338,15 +372,15 @@
                                 $.ajax({
                                     url: "{{ route('admin.option.group.delete') }}",
                                     type: 'POST',
-                                    data: {id:slideID},
+                                    data: {id: slideID},
                                     dataType: 'JSON',
                                     success: function (response) {
 
                                         if (response.success) {
-                                            $('.table-id-'+slideID).fadeOut(1000);
+                                            $('.table-id-' + slideID).fadeOut(1000);
                                             // $('.table-id-'+languageID).remove();
                                             var totalCount = $('.totalCount').text();
-                                            $('.totalCount').text(parseInt(totalCount)-1);
+                                            $('.totalCount').text(parseInt(totalCount) - 1);
 
                                         }
                                     }
@@ -373,4 +407,21 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElementsAttributeOrOptionsGroups(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Seçilmiş seçim qrupları arasında, seçim qrupuna aid seçimlər mövcuddur! Bu səbəbdən seçimləri silmək mümkün olmadı!<br>',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.option.group.allDeleteAjax') }}',
+            '{{ route('admin.option.group.allDelete') }}',
+            '{{ route('admin.option.group.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

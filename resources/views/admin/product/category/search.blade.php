@@ -67,6 +67,8 @@
                             </form>
                         </div>
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.product.category.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -75,6 +77,19 @@
                                 <i class="flaticon-plus"></i>
                             </button>
                         </a>
+
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
 
 
                     </div>
@@ -88,6 +103,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($productCategories->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs">Say</th>
@@ -100,13 +123,23 @@
                         @foreach($productCategories as $key => $productCategory)
 
                             <tr class="table-id-{{ $productCategory->id }}" data-index="{{ $productCategory->id }}" data-position="{{ $productCategory->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $productCategory->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
                                 <!-- ID -->
                                 <td>{{$productCategory->id}}</td>
 
                                 <!--  NAME  -->
                                 <td>
                                     {{ \App\Services\CategoriesService::getTreeProductIndex($defaultLanguage,$productCategory->id,$productCategory->parent) }}
-                                    {{--                                    <a href="{{ route('admin.product.category.edit',$productCategory->id) }}">{{ $productCategory->productsCategoriesTranlations[0]->name }}</a>--}}
+                                    {{--                                    <a href="{{ route('admin.product.category.edit',$productCategory->id) }}">{{ $productCategory->productsCategoriesTranslations[0]->name }}</a>--}}
                                 </td>
 
                                 <!--  SAY  -->
@@ -114,7 +147,7 @@
 
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($productCategory->updated_at,$productCategory->productsCategoriesTranlations) }}</td>
+                                <td>{{ updateDate($productCategory->updated_at,$productCategory->productsCategoriesTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -371,4 +404,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.product.category.allDeleteAjax') }}',
+            '{{ route('admin.product.category.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

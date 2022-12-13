@@ -106,7 +106,7 @@ class PostCategoryController extends Controller
     {
         $id = $request->id;
         $postCategory = PostCategory::where('id', $id)
-            ->with('postsCategoriesTranlations')->first();
+            ->with('postsCategoriesTranslations')->first();
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -297,6 +297,18 @@ class PostCategoryController extends Controller
         $id = intval($request->id);
 
         PostCategory::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            PostCategory::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

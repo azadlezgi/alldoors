@@ -108,7 +108,7 @@
                                                                     <span class="span-dvidder">Title ({{ $language->code }})</span>
                                                                     <textarea
                                                                         name="title[{{ $language->id }}]"
-                                                                        class="tinymceEditor form-control">{{ old('title.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'title')) }}</textarea>
+                                                                        class="tinymceEditor form-control">{{ old('title.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'title')) }}</textarea>
                                                                     @error('title.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -120,7 +120,7 @@
                                                                     <span class="span-dvidder">Sub Title ({{ $language->code }})</span>
                                                                     <textarea
                                                                         name="sub_title[{{ $language->id }}]"
-                                                                        class="tinymceEditor form-control">{{ old('sub_title.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'sub_title')) }}</textarea>
+                                                                        class="tinymceEditor form-control">{{ old('sub_title.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'sub_title')) }}</textarea>
                                                                     @error('sub_title.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -134,7 +134,7 @@
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="button_name[{{ $language->id }}]"
-                                                                           value="{{ old('button_name.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'button_name')) }}">
+                                                                           value="{{ old('button_name.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'button_name')) }}">
                                                                     @error('button_name.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -145,7 +145,7 @@
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="button_url[{{ $language->id }}]"
-                                                                           value="{{ old('button_url.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'button_url')) }}">
+                                                                           value="{{ old('button_url.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'button_url')) }}">
                                                                     @error('button_url.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($banner->updated_at,$banner->bannersTranlations) }}</div>
+                                        <div>{{ updateDate($banner->updated_at,$banner->bannersTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
 
 
                                                         <div
-                                                            style="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'image')) == null?"display:none;":"display:flex;" }}"
+                                                            style="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'image')) == null?"display:none;":"display:flex;" }}"
                                                             data-languageID="{{ $language->id }}"
                                                             tooltip="Sil"
                                                             class="notPhotoPost notPhotoPost_{{ $language->id }}">
@@ -320,7 +320,7 @@
                                                         >
 
                                                             <img
-                                                                src="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'image')) == null?asset('storage/no-image.png'): old('image.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'image')) }}"
+                                                                src="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'image')) == null?asset('storage/no-image.png'): old('image.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'image')) }}"
                                                                 class="previewImage_{{ $language->id }}"
                                                             >
 
@@ -333,7 +333,7 @@
                                                     <input type="text"
                                                            id="image_label_{{ $language->id }}"
                                                            name="image[{{ $language->id }}]"
-                                                           value="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'image')) == null? '': old('image.'. $language->id,getTranslateData($banner->bannersTranlations,$language->id,'image')) }}"
+                                                           value="{{ old('image.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'image')) == null? '': old('image.'. $language->id,getTranslateData($banner->bannersTranslations,$language->id,'image')) }}"
 
                                                            form="submit-form"
                                                     >

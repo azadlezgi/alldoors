@@ -169,7 +169,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="name[{{ $language->id }}]"
-                                                                                value="{{ old('name.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'name')) }}"
+                                                                                value="{{ old('name.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'name')) }}"
                                                                                 class=" form-control">
                                                                             @error('name.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -183,7 +183,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="sub_name[{{ $language->id }}]"
-                                                                                value="{{ old('sub_name.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'sub_name')) }}"
+                                                                                value="{{ old('sub_name.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'sub_name')) }}"
                                                                                 class=" form-control">
                                                                             @error('sub_name.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -197,7 +197,7 @@
                                                                             <textarea
                                                                                 type="text"
                                                                                 name="text[{{ $language->id }}]"
-                                                                                class="tinymceEditor form-control">{{ old('text.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'text')) }}</textarea>
+                                                                                class="tinymceEditor form-control">{{ old('text.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'text')) }}</textarea>
                                                                             @error('text.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -210,7 +210,7 @@
                                                                             <textarea
                                                                                 type="text"
                                                                                 name="short_text[{{ $language->id }}]"
-                                                                                class="tinymceEditor form-control">{{ old('short_text.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'short_text')) }}</textarea>
+                                                                                class="tinymceEditor form-control">{{ old('short_text.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'short_text')) }}</textarea>
                                                                             @error('short_text.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -482,7 +482,7 @@
                                                                             <textarea
                                                                                 type="text"
                                                                                 name="price_table[{{ $language->id }}]"
-                                                                                class="tinymceEditor form-control">{{ old('price_table.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'price_table')) }}</textarea>
+                                                                                class="tinymceEditor form-control">{{ old('price_table.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'price_table')) }}</textarea>
                                                                             @error('price_table.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -972,7 +972,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="title[{{ $language->id }}]"
-                                                                                value="{{ old('title.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'title')) }}"
+                                                                                value="{{ old('title.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'title')) }}"
                                                                                 class=" form-control">
                                                                             @error('title.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -986,7 +986,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="keyword[{{ $language->id }}]"
-                                                                                value="{{ old('keyword.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'keyword')) }}"
+                                                                                value="{{ old('keyword.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'keyword')) }}"
                                                                                 class=" form-control">
                                                                             @error('keyword.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -1001,7 +1001,7 @@
                                                                                 rows="6"
                                                                                 type="text"
                                                                                 name="description[{{ $language->id }}]"
-                                                                                class=" form-control">{{ old('description.'. $language->id,getTranslateData($product->productsTranlations,$language->id,'description')) }}</textarea>
+                                                                                class=" form-control">{{ old('description.'. $language->id,getTranslateData($product->productsTranslations,$language->id,'description')) }}</textarea>
                                                                             @error('description.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -1116,7 +1116,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($product->updated_at,$product->productsTranlations) }}</div>
+                                        <div>{{ updateDate($product->updated_at,$product->productsTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>

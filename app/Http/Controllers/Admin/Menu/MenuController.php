@@ -349,6 +349,50 @@ class MenuController extends Controller
     }
 
 
+
+
+
+    public function allDeleteAjax(Request $request)
+    {
+
+        $ids = $request->IDs;
+
+        $menuPositionNameArr = [];
+        foreach ($ids as $id):
+            $menuPosition = MenuPosition::where('id', $id)
+                ->first();
+
+            if ($menuPosition != null) {
+                $menuPositionNameArr['name'][] = $menuPosition->name;
+            }
+
+        endforeach;
+
+
+        return response()->json([
+            'success' => true,
+            'ids' => $ids,
+            'data' => $menuPositionNameArr,
+        ], 200);
+
+    }
+
+
+
+    public function allDelete(Request $request)
+    {
+
+        $id = $request->IDs;
+
+        MenuPosition::whereIn('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+
+
     public function validateCheck($inputName, $text)
     {
         $this->validatorCheck->after(function ($validator) use ($inputName, $text) {

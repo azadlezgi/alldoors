@@ -33,7 +33,7 @@ class GalleryController extends Controller
     public function index(Request $request)
     {
 
-        $galleries = Gallery::with(array('galleriesTranlations' => function ($query) {
+        $galleries = Gallery::with(array('galleriesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -52,7 +52,7 @@ class GalleryController extends Controller
 
         $id = $request->id;
 
-        $galleries = Gallery::with(array('galleriesTranlations' => function ($query) {
+        $galleries = Gallery::with(array('galleriesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('galleries_categories_lists.category_id',$id)
@@ -90,22 +90,29 @@ class GalleryController extends Controller
         $image = $request->image;
         $slug = $request->slug;
         $categories = $request->categories;
+
+
         $filesArr = $request->input('files');
 
-        $filesArr = array_map(
-            function($str) {
-                return str_replace(env('APP_URL'), '',$str);
-            },
-            $filesArr
-        );
+        $files = '';
+        if($filesArr != null){
+            $filesArr = array_map(
+                function($str) {
+                    return str_replace(env('APP_URL'), '',$str);
+                },
+                $filesArr
+            );
 
-        $files = json_encode($filesArr, JSON_FORCE_OBJECT);
+            $files = json_encode($filesArr, JSON_FORCE_OBJECT);
 
 
 
-        if ($files == '""') {
-            $files = trim($files, '""');
+            if ($files == '""') {
+                $files = trim($files, '""');
+            }
         }
+
+
 
 
 
@@ -159,7 +166,7 @@ class GalleryController extends Controller
     {
         $id = $request->id;
         $gallery = Gallery::where('id', $id)
-            ->with('galleriesTranlations')
+            ->with('galleriesTranslations')
             ->with('galleriesCategories')
             ->first();
 
@@ -183,22 +190,29 @@ class GalleryController extends Controller
         $image = $request->image;
         $slug = $request->slug;
         $categories = $request->categories;
+
+
+
         $filesArr = $request->input('files');
 
-        $filesArr = array_map(
-            function($str) {
-                return str_replace(env('APP_URL'), '',$str);
-            },
-            $filesArr
-        );
+        $files = '';
+        if($filesArr != null){
+            $filesArr = array_map(
+                function($str) {
+                    return str_replace(env('APP_URL'), '',$str);
+                },
+                $filesArr
+            );
 
-        $files = json_encode($filesArr, JSON_FORCE_OBJECT);
+            $files = json_encode($filesArr, JSON_FORCE_OBJECT);
 
 
 
-        if ($files == '""') {
-            $files = trim($files, '""');
+            if ($files == '""') {
+                $files = trim($files, '""');
+            }
         }
+
 
         //CUSTOM VALIDATE START
         $this->validatorCheck = Validator::make(request()->all(), []);
@@ -350,6 +364,20 @@ class GalleryController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Gallery::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
 
     public function validateCheck($inputName, $text)
     {

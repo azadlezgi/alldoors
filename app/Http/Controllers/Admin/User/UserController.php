@@ -500,6 +500,21 @@ class UserController extends Controller
     }
 
 
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            User::where('id', $id)->delete();
+
+            //bu id li userin roleni silir
+            DB::delete("DELETE FROM model_has_roles WHERE model_id = " . $id);
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
     public function validateCheck($inputName, $text)
     {
         $this->validatorCheck->after(function ($validator) use ($inputName, $text) {

@@ -106,7 +106,7 @@ class GalleryCategoryController extends Controller
     {
         $id = $request->id;
         $galleryCategory = GalleryCategory::where('id', $id)
-            ->with('galleriesCategoriesTranlations')->first();
+            ->with('galleriesCategoriesTranslations')->first();
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -301,6 +301,19 @@ class GalleryCategoryController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            GalleryCategory::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

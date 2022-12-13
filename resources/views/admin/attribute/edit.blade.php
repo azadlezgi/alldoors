@@ -84,7 +84,7 @@
                                                             @endif
 
 
-                                                            value="{{ $attributeGroup->id }}">{{ $attributeGroup->attributesGroupsTranlations[0]->name }}</option>
+                                                            value="{{ $attributeGroup->id }}">{{ $attributeGroup->attributesGroupsTranslations[0]->name }}</option>
                                                     @endforeach
 
                                                 </select>
@@ -137,7 +137,7 @@
                                                                     <input
                                                                         type="text"
                                                                         name="name[{{ $language->id }}]"
-                                                                        value="{{ old('name.'. $language->id,getTranslateData($attribute->attributesTranlations,$language->id,'name')) }}"
+                                                                        value="{{ old('name.'. $language->id,getTranslateData($attribute->attributesTranslations,$language->id,'name')) }}"
                                                                         class="form-control">
 
 
@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($attribute->updated_at,$attribute->attributesTranlations) }}</div>
+                                        <div>{{ updateDate($attribute->updated_at,$attribute->attributesTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>

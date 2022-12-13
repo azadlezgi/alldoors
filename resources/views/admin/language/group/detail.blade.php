@@ -75,6 +75,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <button
                             tooltip="Əlavə et"
                             flow="left"
@@ -83,6 +84,18 @@
                             class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                             <i class="flaticon-plus"></i>
                         </button>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
 
                         <!--Elave et Modal START-->
                         <div class="modal fade" id="addDataModalButton"  role="dialog"
@@ -366,6 +379,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($languagePhrases->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Key</th>
                             @foreach($languages as $language)
@@ -377,6 +398,16 @@
                         <tbody>
                         @foreach($languagePhrases as $languagePhrase)
                             <tr class="table-id-{{ $languagePhrase->id }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $languagePhrase->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
                                 <td>{{ $languagePhrase->id }}</td>
                                 <td
                                     class="copyClipboard"
@@ -685,8 +716,7 @@
 
                         Swal.fire({
                             title: "Diqqət?",
-                            html: "<b>" + response.languagePhraseKey + "</b> keyini silmək istədiyinizə əminsiniz?" +
-                                "Key silindikdə, bu keylə bağlı olan bütün ifadələr silinəcək!",
+                            html: "<b>" + response.languagePhraseKey + "</b> keyini silmək istədiyinizə əminsiniz?",
                             icon: "error",
                             showCancelButton: true,
                             confirmButtonText: "Sil!",
@@ -790,4 +820,19 @@
 
     </script>
     <!--  TINYMCE END -->
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.languagePhrase.allDeleteAjax') }}',
+            '{{ route('admin.languagePhrase.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

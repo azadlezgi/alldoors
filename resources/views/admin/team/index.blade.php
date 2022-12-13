@@ -61,6 +61,8 @@
                         {{--                            </form>--}}
                         {{--                        </div>--}}
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.team.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -70,6 +72,15 @@
                             </button>
                         </a>
 
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
 
                     </div>
                 </div>
@@ -79,6 +90,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($teams->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th>Ad</th>
@@ -92,6 +111,15 @@
                         @foreach($teams as $team)
                             <tr class="table-id-{{ $team->id }}" data-index="{{ $team->id }}"
                                 data-position="{{ $team->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $team->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <!-- ID -->
                                 <td>{{$team->id}}</td>
 
@@ -101,12 +129,12 @@
                                        @if(!empty($team->image))
                                             <img
                                                 src="{{ $team->image }}"
-                                                alt="{{ $team->teamsTranlations[0]->name }}">
+                                                alt="{{ $team->teamsTranslations[0]->name }}">
                                         @else
                                             <img
                                                 style="object-fit: contain"
                                                 src="{{ asset('storage/no-image.png') }}"
-                                                alt="{{ $team->teamsTranlations[0]->name }}">
+                                                alt="{{ $team->teamsTranslations[0]->name }}">
                                         @endif
                                     </span>
                                 </td>
@@ -114,15 +142,15 @@
                                 <!--  NAME  -->
                                 <td>
                                     <a href="{{ route('admin.team.edit',$team->id) }}">
-                                    {{ $team->teamsTranlations[0]->name }}
+                                    {{ $team->teamsTranslations[0]->name }}
                                     </a>
                                 </td>
 
                                 <!--  POSITION  -->
-                                <td>{{ $team->teamsTranlations[0]->position }}</td>
+                                <td>{{ $team->teamsTranslations[0]->position }}</td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($team->updated_at,$team->teamsTranlations) }}</td>
+                                <td>{{ updateDate($team->updated_at,$team->teamsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -397,4 +425,20 @@
 
 
     </script>
+
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.team.allDeleteAjax') }}',
+            '{{ route('admin.team.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

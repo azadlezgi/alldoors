@@ -33,7 +33,7 @@ class ReviewsController extends Controller
     {
 
 
-        $reviews = Review::with(array('reviewsTranlations' => function ($query) {
+        $reviews = Review::with(array('reviewsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -96,7 +96,7 @@ class ReviewsController extends Controller
     {
         $id = $request->id;
         $review = Review::where('id', $id)
-            ->with('reviewsTranlations')->first();
+            ->with('reviewsTranslations')->first();
 
 
         return view('admin.review.edit', compact('review'));
@@ -231,6 +231,19 @@ class ReviewsController extends Controller
         $id = intval($request->id);
 
         Review::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Review::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

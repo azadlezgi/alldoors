@@ -70,6 +70,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <button
                             tooltip="Əlavə et"
                             flow="left"
@@ -78,6 +79,19 @@
                             class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                             <i class="flaticon-plus"></i>
                         </button>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
 
                         <!--Elave et Modal START-->
                         <div class="modal fade" id="addDataModalButton" tabindex="-1" role="dialog"
@@ -305,6 +319,8 @@
                         </div>
                         <!--Redakte et Modal END-->
 
+
+
                     </div>
                 </div>
 
@@ -313,6 +329,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($languages->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs sm md">Qısa ad</th>
@@ -326,6 +350,15 @@
                         @foreach($languages as $language)
                             <tr class="table-id-{{ $language->id }}" data-index="{{ $language->id }}" data-position="{{ $language->sort }}">
                                 {{--                                <td>{{$loop->iteration}}</td>--}}
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $language->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <td>{{$language->id}}</td>
                                 <td class="sortableHandle">
                                     <span style="vertical-align: middle;" class="symbol symbol-20 symbol-circle mr-1">
@@ -809,4 +842,19 @@
         /*   EDITOR END   */
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.language.allDeleteAjax') }}',
+            '{{ route('admin.language.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

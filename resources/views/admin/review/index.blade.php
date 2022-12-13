@@ -62,12 +62,24 @@
                         {{--                            </form>--}}
                         {{--                        </div>--}}
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.review.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -80,6 +92,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($reviews->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th>Ad</th>
@@ -92,6 +112,15 @@
                         @foreach($reviews as $review)
                             <tr class="table-id-{{ $review->id }}" data-index="{{ $review->id }}"
                                 data-position="{{ $review->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $review->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <!-- ID -->
                                 <td>{{$review->id}}</td>
 
@@ -108,10 +137,10 @@
                                 </td>
 
                                 <!--  NAME  -->
-                                <td>{{ $review->reviewsTranlations[0]->name }}</td>
+                                <td>{{ $review->reviewsTranslations[0]->name }}</td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($review->updated_at,$review->reviewsTranlations) }}</td>
+                                <td>{{ updateDate($review->updated_at,$review->reviewsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -386,4 +415,18 @@
 
 
     </script>
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.review.allDeleteAjax') }}',
+            '{{ route('admin.review.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

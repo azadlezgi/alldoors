@@ -33,7 +33,7 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
 
-        $services = Service::with(array('servicesTranlations' => function ($query) {
+        $services = Service::with(array('servicesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -52,7 +52,7 @@ class ServiceController extends Controller
 
         $id = $request->id;
 
-        $services = Service::with(array('servicesTranlations' => function ($query) {
+        $services = Service::with(array('servicesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('services_categories_lists.category_id',$id)
@@ -147,7 +147,7 @@ class ServiceController extends Controller
     {
         $id = $request->id;
         $service = Service::where('id', $id)
-            ->with('servicesTranlations')
+            ->with('servicesTranslations')
             ->with('servicesCategories')
             ->first();
 
@@ -345,6 +345,19 @@ class ServiceController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Service::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

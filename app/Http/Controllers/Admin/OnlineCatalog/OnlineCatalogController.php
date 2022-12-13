@@ -34,7 +34,7 @@ class OnlineCatalogController extends Controller
     {
 
 
-        $onlineCatalogs = OnlineCatalog::with(array('onlineCatalogsTranlations' => function ($query) {
+        $onlineCatalogs = OnlineCatalog::with(array('onlineCatalogsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -93,7 +93,7 @@ class OnlineCatalogController extends Controller
     {
         $id = $request->id;
         $onlineCatalog = OnlineCatalog::where('id', $id)
-            ->with('onlineCatalogsTranlations')->first();
+            ->with('onlineCatalogsTranslations')->first();
 
 
         return view('admin.onlineCatalog.edit', compact('onlineCatalog'));
@@ -232,6 +232,19 @@ class OnlineCatalogController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            OnlineCatalog::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
 
     public function validateCheck($inputName, $text)

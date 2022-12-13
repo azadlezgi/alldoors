@@ -173,6 +173,46 @@ class LanguageGroupController extends Controller
 
     }
 
+
+    public function allDeleteAjax(Request $request)
+    {
+
+        $ids = $request->IDs;
+
+        $languageGroupNameArr = [];
+        foreach ($ids as $id):
+            $languageGroup = LanguageGroups::where('id', $id)
+                ->first();
+
+            if ($languageGroup != null) {
+                $languageGroupNameArr['name'][] = $languageGroup->name;
+            }
+
+        endforeach;
+
+
+        return response()->json([
+            'success' => true,
+            'ids' => $ids,
+            'data' => $languageGroupNameArr,
+        ], 200);
+
+    }
+
+
+    public function allDelete(Request $request)
+    {
+
+        $id = $request->IDs;
+
+        LanguageGroups::whereIn('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+
     public function groupDetailPhraseAdd(Request $request)
     {
 

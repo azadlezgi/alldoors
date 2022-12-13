@@ -44,6 +44,8 @@
                         <h3 class="card-label">Menular</h3>
                     </div>
                     <div class="card-toolbar">
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.menu.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -55,6 +57,19 @@
                             </button>
                         </a>
 
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
+
                     </div>
                 </div>
 
@@ -63,6 +78,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($menuPositions->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th width="40" data-breakpoints="xs sm md" data-sortable="false">Ayarlar</th>
@@ -71,6 +94,14 @@
                         <tbody>
                         @foreach($menuPositions as $menuPosition)
                             <tr class="table-id-{{ $menuPosition->id }}">
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $menuPosition->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <td>{{ $menuPosition->id }}</td>
                                 <td><a href="{{ route('admin.menu.edit',$menuPosition->id) }}">{{ $menuPosition->name }}</a></td>
                                 <td>
@@ -362,4 +393,20 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElementsMenu(
+            'Diqqət?',
+            'Seçilmiş menyular silindikdə, bu menyular ilə bağlı olan bütün menyular silinəcək!<br>Buna əminsiniz?<br>Seçilmiş menyular.<br>',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.menu.allDeleteAjax') }}',
+            '{{ route('admin.menu.allDelete') }}',
+            '{{ route('admin.menu.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

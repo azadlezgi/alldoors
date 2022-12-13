@@ -34,7 +34,7 @@ class SlideController extends Controller
     {
 
 
-        $slides = Slide::with(array('slidesTranlations' => function ($query) {
+        $slides = Slide::with(array('slidesTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -93,7 +93,7 @@ class SlideController extends Controller
     {
         $id = $request->id;
         $slide = Slide::where('id', $id)
-            ->with('slidesTranlations')->first();
+            ->with('slidesTranslations')->first();
 
 
         return view('admin.slide.edit', compact('slide'));
@@ -232,6 +232,20 @@ class SlideController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Slide::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
 
     public function validateCheck($inputName, $text)

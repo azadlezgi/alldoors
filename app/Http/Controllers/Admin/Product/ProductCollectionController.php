@@ -106,7 +106,7 @@ class ProductCollectionController extends Controller
     {
         $id = $request->id;
         $productCollection = ProductCollection::where('id', $id)
-            ->with('productsCollectionsTranlations')->first();
+            ->with('productsCollectionsTranslations')->first();
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -300,6 +300,19 @@ class ProductCollectionController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            ProductCollection::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

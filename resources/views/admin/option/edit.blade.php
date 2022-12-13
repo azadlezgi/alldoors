@@ -84,7 +84,7 @@
                                                             @endif
 
 
-                                                            value="{{ $optionGroup->id }}">{{ $optionGroup->optionsGroupsTranlations[0]->name }}</option>
+                                                            value="{{ $optionGroup->id }}">{{ $optionGroup->optionsGroupsTranslations[0]->name }}</option>
                                                     @endforeach
 
                                                 </select>
@@ -137,7 +137,7 @@
                                                                     <input
                                                                         type="text"
                                                                         name="name[{{ $language->id }}]"
-                                                                        value="{{ old('name.'. $language->id,getTranslateData($option->optionsTranlations,$language->id,'name')) }}"
+                                                                        value="{{ old('name.'. $language->id,getTranslateData($option->optionsTranslations,$language->id,'name')) }}"
                                                                         class="form-control">
 
 
@@ -222,7 +222,7 @@
                                                                                                 <textarea class="form-control" form="submit-form"
                                                                                                           name="option_list[language][{{$keySort}}][]"
                                                                                                           placeholder="Text"
-                                                                                                >{{ getTranslateOptionData($optionValue[$keySort]->optionsValuesTranlations,$language->id,$sortValue->id,'text') }}</textarea>
+                                                                                                >{{ getTranslateOptionData($optionValue[$keySort]->optionsValuesTranslations,$language->id,$sortValue->id,'text') }}</textarea>
                                                                                                 <input type="hidden" name="option_list[language_id][{{$keySort}}][]" value="{{ $language->id }}">
                                                                                             </div>
 
@@ -426,7 +426,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($option->updated_at,$option->optionsTranlations) }}</div>
+                                        <div>{{ updateDate($option->updated_at,$option->optionsTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>

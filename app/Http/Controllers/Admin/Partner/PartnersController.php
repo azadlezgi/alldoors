@@ -33,7 +33,7 @@ class PartnersController extends Controller
     {
 
 
-        $partners = Partner::with(array('partnersTranlations' => function ($query) {
+        $partners = Partner::with(array('partnersTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -92,7 +92,7 @@ class PartnersController extends Controller
     {
         $id = $request->id;
         $partner = Partner::where('id', $id)
-            ->with('partnersTranlations')->first();
+            ->with('partnersTranslations')->first();
 
 
         return view('admin.partner.edit', compact('partner'));
@@ -225,6 +225,21 @@ class PartnersController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Partner::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
 
     public function validateCheck($inputName, $text)

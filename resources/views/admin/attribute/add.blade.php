@@ -78,7 +78,7 @@
                                                     @foreach($attributeGroups as $attributeGroup)
                                                     <option
                                                         {{ old('attribute_group_id') == $attributeGroup->id ? 'selected' : '' }}
-                                                        value="{{ $attributeGroup->id }}">{{ $attributeGroup->attributesGroupsTranlations[0]->name }}</option>
+                                                        value="{{ $attributeGroup->id }}">{{ $attributeGroup->attributesGroupsTranslations[0]->name }}</option>
                                                     @endforeach
 
                                                 </select>

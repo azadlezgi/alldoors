@@ -64,6 +64,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.product.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -74,6 +75,18 @@
                         </a>
 
 
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
+
                     </div>
                 </div>
 
@@ -82,9 +95,18 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($products->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th  data-breakpoints="xs">Şəkil</th>
                             <th>Ad</th>
+                            <th data-breakpoints="xs sm md" data-sortable="false">Əsas məhsul</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Kateqoriya</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Qiymət</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -95,6 +117,15 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr class="table-id-{{ $product->id }}" data-index="{{ $product->id }}" data-position="{{ $product->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $product->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                <!-- ID -->
                                 <td>{{$product->id}}</td>
 
@@ -114,11 +145,23 @@
                                 <!--  NAME  -->
                                 <td><a href="{{ route('admin.product.edit',$product->id) }}">{{ $product->name }}</a></td>
 
+                                <!--  PARENT  -->
+                                <td>
+                                    @if($product->parent != 0)
+                                        <a href="{{ route('admin.product.edit',$product->parent) }}">
+                                            {{ $product->children->name }}
+                                        </a>
+                                    @else
+                                        Əsas məhsul
+                                    @endif
+                                </td>
+
+
 
                                 <!--  Kateqoriyalar  -->
                                 <td>
                                     @foreach($product->productsCategories as $category)
-                                        <a href="{{ route('admin.product.categories',$category->category_id) }}">{{ \App\Services\CategoriesService::getCategoryProductName($category->category_id,$defaultLanguage)->name }}</a>
+                                        <a href="{{ route('admin.product.categories',$category->category_id) }}">{{  $category->name }}</a>
                                         @if (!$loop->last)
                                             ,
                                         @endif
@@ -127,7 +170,7 @@
                                 </td>
 
                                 <!--  PRİCE  -->
-                                <td>{{$product->price}}</td>
+                                <td>{!! product_price($product->price,$product->productSpecialPriceList != null ? $product->productSpecialPriceList['special_price']: '') !!}</td>
 
                                 <!--  Tarix  -->
                                 <td>{{ \Illuminate\Support\Carbon::parse($product->updated_at)->format('Y-m-d H:i') }}</td>
@@ -363,4 +406,17 @@
 
 
     </script>
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.product.allDeleteAjax') }}',
+            '{{ route('admin.product.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
 @endsection

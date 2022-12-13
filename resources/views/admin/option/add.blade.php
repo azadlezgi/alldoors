@@ -78,7 +78,7 @@
                                                     @foreach($optionGroups as $optionGroup)
                                                         <option
                                                             {{ old('option_group_id') == $optionGroup->id ? 'selected' : '' }}
-                                                            value="{{ $optionGroup->id }}">{{ $optionGroup->optionsGroupsTranlations[0]->name }}</option>
+                                                            value="{{ $optionGroup->id }}">{{ $optionGroup->optionsGroupsTranslations[0]->name }}</option>
                                                     @endforeach
 
                                                 </select>

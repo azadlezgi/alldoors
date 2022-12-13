@@ -5,7 +5,6 @@
 
 @section('content')
 
-
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -22,7 +21,10 @@
                             <a href="{{ route('admin.index') }}" class="text-muted">Panel</a>
                         </li>
                         <li class="breadcrumb-item">
-                            Atribut Qruplar
+                            <a href="{{ route('admin.attribute.group.index') }}" class="text-muted">Atribut Qruplar</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            Axtar
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -44,29 +46,41 @@
                         <h3 class="card-label">Atribut Qruplar Axtar</h3>
                     </div>
                     <div class="card-toolbar">
-                                                <div class="card-title">
-                                                    <form action="{{ route('admin.attribute.group.search') }}" method="GET">
-                                                        <div class="input-group">
-                                                            <input
-                                                                type="search"
-                                                                class="form-control"
-                                                                value="{{ request('search') }}"
-                                                                autocomplete="off"
-                                                                name="search"
-                                                                placeholder="Axtar...">
-                                                            <div class="input-group-append">
-                                                                <button type="submit" class="btn btn-success" type="button">Axtar</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                        <div class="card-title">
+                            <form action="{{ route('admin.attribute.group.search') }}" method="GET">
+                                <div class="input-group">
+                                    <input
+                                        type="search"
+                                        class="form-control"
+                                        value="{{ request('search') }}"
+                                        autocomplete="off"
+                                        name="search"
+                                        placeholder="Axtar...">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-success" type="button">Axtar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.attribute.group.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -79,10 +93,18 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($attributesGroups->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th>Sıra</th>
-                            <th data-breakpoints="xs sm md" >Say</th>
+                            <th data-breakpoints="xs sm md">Say</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Status</th>
                             <th width="40" data-breakpoints="xs sm md" data-sortable="false">Ayarlar</th>
@@ -90,24 +112,37 @@
                         </thead>
                         <tbody id="sortable">
                         @foreach($attributesGroups as $attributesGroup)
-                            <tr class="table-id-{{ $attributesGroup->id }}" data-index="{{ $attributesGroup->id }}" data-position="{{ $attributesGroup->sort }}">
+                            <tr class="table-id-{{ $attributesGroup->id }}" data-index="{{ $attributesGroup->id }}"
+                                data-position="{{ $attributesGroup->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $attributesGroup->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
                                 <!-- ID -->
                                 <td>{{$attributesGroup->id}}</td>
 
 
                                 <!--  NAME  -->
                                 <td>
-                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}">{{ $attributesGroup->attributesGroupsTranlations[0]->name }}</a>
+                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}">{{ $attributesGroup->attributesGroupsTranslations[0]->name }}</a>
                                 </td>
 
                                 <!-- SORT -->
                                 <td>{{$attributesGroup->sort}}</td>
 
                                 <!--  SAY  -->
-                                <td><a href="{{ route('admin.attribute.list',$attributesGroup->id) }}">{{ count($attributesGroup->getAttributesCount) }}</a></td>
+                                <td>
+                                    <a href="{{ route('admin.attribute.list',$attributesGroup->id) }}">{{ count($attributesGroup->getAttributesCount) }}</a>
+                                </td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($attributesGroup->updated_at,$attributesGroup->attributesGroupsTranlations) }}</td>
+                                <td>{{ updateDate($attributesGroup->updated_at,$attributesGroup->attributesGroupsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -148,7 +183,8 @@
 
                                                 <li
                                                     class="navi-item redakteEt">
-                                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}" class="navi-link text-center">
+                                                    <a href="{{ route('admin.attribute.group.edit',$attributesGroup->id) }}"
+                                                       class="navi-link text-center">
 																		<span class="navi-text">
 																			<span
                                                                                 class="label label-xl label-inline label-light-primary">Redaktə et</span>
@@ -338,15 +374,15 @@
                                 $.ajax({
                                     url: "{{ route('admin.attribute.group.delete') }}",
                                     type: 'POST',
-                                    data: {id:slideID},
+                                    data: {id: slideID},
                                     dataType: 'JSON',
                                     success: function (response) {
 
                                         if (response.success) {
-                                            $('.table-id-'+slideID).fadeOut(1000);
+                                            $('.table-id-' + slideID).fadeOut(1000);
                                             // $('.table-id-'+languageID).remove();
                                             var totalCount = $('.totalCount').text();
-                                            $('.totalCount').text(parseInt(totalCount)-1);
+                                            $('.totalCount').text(parseInt(totalCount) - 1);
 
                                         }
                                     }
@@ -373,4 +409,21 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElementsAttributeOrOptionsGroups(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Seçilmiş atribut qrupları arasında, atribut qrupuna aid atributlar mövcuddur! Bu sebebden atributları silmək mümkün olmadı!<br>',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.attribute.group.allDeleteAjax') }}',
+            '{{ route('admin.attribute.group.allDelete') }}',
+            '{{ route('admin.attribute.group.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

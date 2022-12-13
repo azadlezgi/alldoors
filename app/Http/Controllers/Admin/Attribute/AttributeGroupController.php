@@ -34,7 +34,7 @@ class AttributeGroupController extends Controller
     {
 
 
-        $attributesGroups = AttributeGroup::with(array('attributesGroupsTranlations' => function ($query) {
+        $attributesGroups = AttributeGroup::with(array('attributesGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -43,12 +43,8 @@ class AttributeGroupController extends Controller
             ->paginate(10);
 
 
-
-
-
         return view('admin.attribute.group.index', compact('attributesGroups'));
     }
-
 
 
     public function add(Request $request)
@@ -99,7 +95,7 @@ class AttributeGroupController extends Controller
     {
         $id = $request->id;
         $attributeGroup = AttributeGroup::where('id', $id)
-            ->with('attributesGroupsTranlations')->first();
+            ->with('attributesGroupsTranslations')->first();
 
 
         return view('admin.attribute.group.edit', compact('attributeGroup'));
@@ -149,7 +145,7 @@ class AttributeGroupController extends Controller
             $attributeGroupTranslation = AttributeGroupTranslation::where('attribute_group_id', $id)
                 ->where('language_id', $key)->first();
 
-            if(!$attributeGroupTranslation){
+            if (!$attributeGroupTranslation) {
                 AttributeGroupTranslation::create([
                     'name' => $name,
                     'attribute_group_id' => $id,
@@ -171,7 +167,7 @@ class AttributeGroupController extends Controller
 
         $attributesGroups = AttributeGroup::where('language_id', $this->defaultLanguage)
             ->where('name', 'like', '%' . $search . '%')
-            ->join('attributes_groups_translations','attributes_groups.id','=','attributes_groups_translations.attribute_group_id')
+            ->join('attributes_groups_translations', 'attributes_groups.id', '=', 'attributes_groups_translations.attribute_group_id')
             ->with('getAttributesCount')
             ->orderBy('sort', 'ASC')
             ->select(
@@ -181,12 +177,8 @@ class AttributeGroupController extends Controller
             ->paginate(10);
 
 
-
-
-
         return view('admin.attribute.group.search', compact('attributesGroups'));
     }
-
 
 
     public function statusAjax(Request $request)
@@ -238,16 +230,10 @@ class AttributeGroupController extends Controller
 
     public function deleteAjax(Request $request)
     {
-//        $id = $request->id;
-//        AttributeGroup::where('id', $id)
-//            ->first();
-
-//        return response()->json(['success' => true], 200);
-
 
 
         $id = $request->id;
-        $attributeGroup = Attribute::with(array('attributesGroupsTranlations' => function ($query) {
+        $attributeGroup = Attribute::with(array('attributesGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -256,14 +242,14 @@ class AttributeGroupController extends Controller
 
         $error = '';
         $name = '';
-        if(is_null($attributeGroup)){
+        if (is_null($attributeGroup)) {
             $error = null;
-        }else{
-            $name = $attributeGroup->attributesGroupsTranlations[0]->name;
+        } else {
+            $name = $attributeGroup->attributesGroupsTranslations[0]->name;
         }
 
 
-        return response()->json(['success' => true,'error' => $error,'name' => $name], 200);
+        return response()->json(['success' => true, 'error' => $error, 'name' => $name], 200);
 
 
     }
@@ -277,6 +263,56 @@ class AttributeGroupController extends Controller
         AttributeGroup::where('id', $id)->delete();
 
         return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDelete(Request $request)
+    {
+
+        $id = $request->IDs;
+
+        AttributeGroup::whereIn('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+
+        $ids = $request->IDs;
+
+        $attrNameArr = [];
+        $error = '';
+        foreach ($ids as $id):
+            $attributeGroup = Attribute::with(array('attributesGroupsTranslations' => function ($query) {
+                $query->where('language_id', $this->defaultLanguage);
+
+            }))
+                ->where('attribute_group_id', $id)
+                ->first();
+
+
+
+            if ($attributeGroup != null) {
+                $error = true;
+                $attrNameArr['name'][] = $attributeGroup->attributesGroupsTranslations[0]->name;
+            }else{
+                $attrNameArr['id'][] = $id;
+            }
+
+
+        endforeach;
+
+
+        return response()->json([
+            'success' => true,
+            'error' => $error,
+            'ids' => $ids,
+            'data' => $attrNameArr,
+        ], 200);
 
     }
 

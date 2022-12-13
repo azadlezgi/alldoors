@@ -70,12 +70,25 @@
 {{--                            </form>--}}
 {{--                        </div>--}}
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.slide.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -88,6 +101,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($slides->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -98,19 +119,30 @@
                         <tbody id="sortable">
                         @foreach($slides as $slide)
                             <tr class="table-id-{{ $slide->id }}" data-index="{{ $slide->id }}" data-position="{{ $slide->sort }}">
-                               <!-- ID -->
+
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $slide->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
+                                <!-- ID -->
                                 <td>{{$slide->id}}</td>
 
                                 <!--  IMAGE  -->
                                 <td class="sortableHandle">
                                     <span style="vertical-align: middle;" class="slideImage">
-                                        <img src="{{ $slide->slidesTranlations[0]->image }}" alt=""/>
+                                        <img src="{{ $slide->slidesTranslations[0]->image }}" alt=""/>
                                     </span>
                                 </td>
 
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($slide->updated_at,$slide->slidesTranlations) }}</td>
+                                <td>{{ updateDate($slide->updated_at,$slide->slidesTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -391,4 +423,20 @@
         /*   EDITOR END   */
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.slide.allDeleteAjax') }}',
+            '{{ route('admin.slide.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
+
 @endsection

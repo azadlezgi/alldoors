@@ -34,7 +34,7 @@ class OptionGroupController extends Controller
     {
 
 
-        $optionsGroups = OptionGroup::with(array('optionsGroupsTranlations' => function ($query) {
+        $optionsGroups = OptionGroup::with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -99,7 +99,7 @@ class OptionGroupController extends Controller
     {
         $id = $request->id;
         $optionGroup = OptionGroup::where('id', $id)
-            ->with('optionsGroupsTranlations')->first();
+            ->with('optionsGroupsTranslations')->first();
 
 
         return view('admin.option.group.edit', compact('optionGroup'));
@@ -247,7 +247,7 @@ class OptionGroupController extends Controller
 
 
         $id = $request->id;
-        $optionGroup = Option::with(array('optionsGroupsTranlations' => function ($query) {
+        $optionGroup = Option::with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -259,7 +259,7 @@ class OptionGroupController extends Controller
         if(is_null($optionGroup)){
             $error = null;
         }else{
-            $name = $optionGroup->optionsGroupsTranlations[0]->name;
+            $name = $optionGroup->optionsGroupsTranslations[0]->name;
         }
 
 
@@ -279,6 +279,58 @@ class OptionGroupController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+
+    public function allDelete(Request $request)
+    {
+
+        $id = $request->IDs;
+
+        OptionGroup::whereIn('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+
+        $ids = $request->IDs;
+
+        $optionNameArr = [];
+        $error = '';
+        foreach ($ids as $id):
+            $optionGroup = Option::with(array('optionsGroupsTranslations' => function ($query) {
+                $query->where('language_id', $this->defaultLanguage);
+
+            }))
+                ->where('option_group_id', $id)
+                ->first();
+
+
+
+            if ($optionGroup != null) {
+                $error = true;
+                $optionNameArr['name'][] = $optionGroup->optionsGroupsTranslations[0]->name;
+            }else{
+                $optionNameArr['id'][] = $id;
+            }
+
+
+        endforeach;
+
+
+        return response()->json([
+            'success' => true,
+            'error' => $error,
+            'ids' => $ids,
+            'data' => $optionNameArr,
+        ], 200);
+
+    }
+
 
 
     public function validateCheck($inputName, $text)

@@ -64,6 +64,8 @@
                             </form>
                         </div>
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.post.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -72,6 +74,17 @@
                                 <i class="flaticon-plus"></i>
                             </button>
                         </a>
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
 
 
                     </div>
@@ -82,6 +95,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($posts->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th  data-breakpoints="xs">Şəkil</th>
                             <th>Ad</th>
@@ -94,7 +115,17 @@
                         <tbody>
                         @foreach($posts as $post)
                             <tr class="table-id-{{ $post->id }}" data-index="{{ $post->id }}" data-position="{{ $post->sort }}">
-                               <!-- ID -->
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $post->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
+                                <!-- ID -->
                                 <td>{{$post->id}}</td>
 
                                 <!--  IMAGE  -->
@@ -360,4 +391,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.post.allDeleteAjax') }}',
+            '{{ route('admin.post.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

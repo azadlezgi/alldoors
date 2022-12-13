@@ -70,6 +70,7 @@
 {{--                            </form>--}}
 {{--                        </div>--}}
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.banner.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -80,6 +81,18 @@
                         </a>
 
 
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
+
                     </div>
                 </div>
 
@@ -88,6 +101,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($banners->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -98,19 +119,28 @@
                         <tbody id="sortable">
                         @foreach($banners as $banner)
                             <tr class="table-id-{{ $banner->id }}" data-index="{{ $banner->id }}" data-position="{{ $banner->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $banner->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                <!-- ID -->
                                 <td>{{$banner->id}}</td>
 
                                 <!--  IMAGE  -->
                                 <td class="sortableHandle">
                                     <span style="vertical-align: middle;" class="slideImage">
-                                        <img src="{{ $banner->bannersTranlations[0]->image }}" alt=""/>
+                                        <img src="{{ $banner->bannersTranslations[0]->image }}" alt=""/>
                                     </span>
                                 </td>
 
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($banner->updated_at,$banner->bannersTranlations) }}</td>
+                                <td>{{ updateDate($banner->updated_at,$banner->bannersTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -391,4 +421,20 @@
         /*   EDITOR END   */
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.banner.allDeleteAjax') }}',
+            '{{ route('admin.banner.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
+
 @endsection

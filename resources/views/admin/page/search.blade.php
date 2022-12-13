@@ -64,6 +64,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.page.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -74,6 +75,16 @@
                         </a>
 
 
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
                     </div>
                 </div>
 
@@ -82,6 +93,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($pages->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -92,6 +111,14 @@
                         <tbody>
                         @foreach($pages as $page)
                             <tr class="table-id-{{ $page->id }}" data-index="{{ $page->id }}" data-position="{{ $page->sort }}">
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $page->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                <!-- ID -->
                                 <td>{{$page->id}}</td>
 
@@ -332,4 +359,18 @@
 
 
     </script>
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.page.allDeleteAjax') }}',
+            '{{ route('admin.page.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

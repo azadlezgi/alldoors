@@ -70,6 +70,7 @@
 {{--                            </form>--}}
 {{--                        </div>--}}
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.partner.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -80,6 +81,16 @@
                         </a>
 
 
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
                     </div>
                 </div>
 
@@ -88,6 +99,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($partners->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th>Ad</th>
@@ -99,6 +118,15 @@
                         <tbody id="sortable">
                         @foreach($partners as $partner)
                             <tr class="table-id-{{ $partner->id }}" data-index="{{ $partner->id }}" data-position="{{ $partner->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $partner->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                <!-- ID -->
                                 <td>{{$partner->id}}</td>
 
@@ -110,10 +138,10 @@
                                 </td>
 
                                 <!--  NAME  -->
-                                <td>{{ $partner->partnersTranlations[0]->name }}</td>
+                                <td>{{ $partner->partnersTranslations[0]->name }}</td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($partner->updated_at,$partner->partnersTranlations) }}</td>
+                                <td>{{ updateDate($partner->updated_at,$partner->partnersTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -379,4 +407,18 @@
 
 
     </script>
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.partner.allDeleteAjax') }}',
+            '{{ route('admin.partner.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

@@ -449,4 +449,30 @@ class LanguageController extends Controller
 
     }
 
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Languages::where('id', $id)->delete();
+        endforeach;
+
+        
+        //BU dilleri keshden sildim frontda yeniden keshe yazsin deye
+//        Cache::forget('key-all-languages');
+        Artisan::call('optimize:clear');
+
+        //Aktiv dilleri aldim
+        Cache::rememberForever('key-all-languages', function () {
+            return Languages::where('status', 1)
+                ->orderBy('sort','ASC')
+                ->get();
+
+        });
+
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 }

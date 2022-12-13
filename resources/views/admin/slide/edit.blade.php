@@ -108,7 +108,7 @@
                                                                     <span class="span-dvidder">Title ({{ $language->code }})</span>
                                                                     <textarea
                                                                         name="title[{{ $language->id }}]"
-                                                                        class="tinymceEditor form-control">{{ old('title.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'title')) }}</textarea>
+                                                                        class="tinymceEditor form-control">{{ old('title.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'title')) }}</textarea>
                                                                     @error('title.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -120,7 +120,7 @@
                                                                     <span class="span-dvidder">Sub Title ({{ $language->code }})</span>
                                                                     <textarea
                                                                         name="sub_title[{{ $language->id }}]"
-                                                                        class="tinymceEditor form-control">{{ old('sub_title.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'sub_title')) }}</textarea>
+                                                                        class="tinymceEditor form-control">{{ old('sub_title.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'sub_title')) }}</textarea>
                                                                     @error('sub_title.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -134,7 +134,7 @@
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="button_name[{{ $language->id }}]"
-                                                                           value="{{ old('button_name.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'button_name')) }}">
+                                                                           value="{{ old('button_name.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'button_name')) }}">
                                                                     @error('button_name.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -145,7 +145,7 @@
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="button_url[{{ $language->id }}]"
-                                                                           value="{{ old('button_url.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'button_url')) }}">
+                                                                           value="{{ old('button_url.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'button_url')) }}">
                                                                     @error('button_url.'. $language->id )<span
                                                                         class="text-danger">{{ myError($message) }}</span> @enderror
                                                                 </div>
@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($slide->updated_at,$slide->slidesTranlations) }}</div>
+                                        <div>{{ updateDate($slide->updated_at,$slide->slidesTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
 
 
                                                         <div
-                                                            style="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'image')) == null?"display:none;":"display:flex;" }}"
+                                                            style="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'image')) == null?"display:none;":"display:flex;" }}"
                                                             data-languageID="{{ $language->id }}"
                                                             tooltip="Sil"
                                                             class="notPhotoPost notPhotoPost_{{ $language->id }}">
@@ -320,7 +320,7 @@
                                                         >
 
                                                             <img
-                                                                src="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'image')) == null?asset('storage/no-image.png'): old('image.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'image')) }}"
+                                                                src="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'image')) == null?asset('storage/no-image.png'): old('image.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'image')) }}"
                                                                 class="previewImage_{{ $language->id }}"
                                                             >
 
@@ -333,7 +333,7 @@
                                                     <input type="text"
                                                            id="image_label_{{ $language->id }}"
                                                            name="image[{{ $language->id }}]"
-                                                           value="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'image')) == null? '': old('image.'. $language->id,getTranslateData($slide->slidesTranlations,$language->id,'image')) }}"
+                                                           value="{{ old('image.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'image')) == null? '': old('image.'. $language->id,getTranslateData($slide->slidesTranslations,$language->id,'image')) }}"
 
                                                            form="submit-form"
                                                     >

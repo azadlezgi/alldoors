@@ -67,12 +67,25 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.product.collection.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -88,6 +101,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($productCollections->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs">Say</th>
@@ -100,13 +121,21 @@
                         @foreach($productCollections as $key => $productCollection)
 
                             <tr class="table-id-{{ $productCollection->id }}" data-index="{{ $productCollection->id }}" data-position="{{ $productCollection->sort }}">
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $productCollection->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <!-- ID -->
                                 <td>{{$productCollection->id}}</td>
 
                                 <!--  NAME  -->
                                 <td>
                                     {{ \App\Services\CollectionsService::getTreeProductIndex($defaultLanguage,$productCollection->id,$productCollection->parent) }}
-                                    {{--                                    <a href="{{ route('admin.product.collection.edit',$productCollection->id) }}">{{ $productCollection->productsCollectionsTranlations[0]->name }}</a>--}}
+                                    {{--                                    <a href="{{ route('admin.product.collection.edit',$productCollection->id) }}">{{ $productCollection->productsCollectionsTranslations[0]->name }}</a>--}}
                                 </td>
 
                                 <!--  SAY  -->
@@ -114,7 +143,7 @@
 
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($productCollection->updated_at,$productCollection->productsCollectionsTranlations) }}</td>
+                                <td>{{ updateDate($productCollection->updated_at,$productCollection->productsCollectionsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -371,4 +400,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.product.collection.allDeleteAjax') }}',
+            '{{ route('admin.product.collection.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

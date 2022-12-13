@@ -34,7 +34,7 @@ class BannerController extends Controller
     {
 
 
-        $banners = Banner::with(array('bannersTranlations' => function ($query) {
+        $banners = Banner::with(array('bannersTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -93,7 +93,7 @@ class BannerController extends Controller
     {
         $id = $request->id;
         $banner = Banner::where('id', $id)
-            ->with('bannersTranlations')->first();
+            ->with('bannersTranslations')->first();
 
 
         return view('admin.banner.edit', compact('banner'));
@@ -228,6 +228,18 @@ class BannerController extends Controller
         $id = intval($request->id);
 
         Banner::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Banner::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

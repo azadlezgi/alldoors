@@ -155,7 +155,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="name[{{ $language->id }}]"
-                                                                                value="{{ old('name.'. $language->id,getTranslateData($productCollection->productsCollectionsTranlations,$language->id,'name')) }}"
+                                                                                value="{{ old('name.'. $language->id,getTranslateData($productCollection->productsCollectionsTranslations,$language->id,'name')) }}"
                                                                                 class=" form-control">
                                                                             @error('name.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -169,7 +169,7 @@
                                                                             <textarea
                                                                                 type="text"
                                                                                 name="text[{{ $language->id }}]"
-                                                                                class="tinymceEditor form-control">{{ old('text.'. $language->id,getTranslateData($productCollection->productsCollectionsTranlations,$language->id,'text')) }}</textarea>
+                                                                                class="tinymceEditor form-control">{{ old('text.'. $language->id,getTranslateData($productCollection->productsCollectionsTranslations,$language->id,'text')) }}</textarea>
                                                                             @error('text.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -249,7 +249,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="title[{{ $language->id }}]"
-                                                                                value="{{ old('title.'. $language->id,getTranslateData($productCollection->productsCollectionsTranlations,$language->id,'title')) }}"
+                                                                                value="{{ old('title.'. $language->id,getTranslateData($productCollection->productsCollectionsTranslations,$language->id,'title')) }}"
                                                                                 class=" form-control">
                                                                             @error('title.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -263,7 +263,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="keyword[{{ $language->id }}]"
-                                                                                value="{{ old('keyword.'. $language->id,getTranslateData($productCollection->productsCollectionsTranlations,$language->id,'keyword')) }}"
+                                                                                value="{{ old('keyword.'. $language->id,getTranslateData($productCollection->productsCollectionsTranslations,$language->id,'keyword')) }}"
                                                                                 class=" form-control">
                                                                             @error('keyword.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
@@ -278,7 +278,7 @@
                                                                                 rows="6"
                                                                                 type="text"
                                                                                 name="description[{{ $language->id }}]"
-                                                                                class=" form-control">{{ old('description.'. $language->id,getTranslateData($productCollection->productsCollectionsTranlations,$language->id,'description')) }}</textarea>
+                                                                                class=" form-control">{{ old('description.'. $language->id,getTranslateData($productCollection->productsCollectionsTranslations,$language->id,'description')) }}</textarea>
                                                                             @error('description.'. $language->id )<span
                                                                                 class="text-danger">{{ myError($message) }}</span> @enderror
                                                                         </div>
@@ -391,7 +391,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($productCollection->updated_at,$productCollection->productsCollectionsTranlations) }}</div>
+                                        <div>{{ updateDate($productCollection->updated_at,$productCollection->productsCollectionsTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>

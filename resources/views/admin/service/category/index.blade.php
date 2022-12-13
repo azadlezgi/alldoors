@@ -61,12 +61,24 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.service.category.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -81,6 +93,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($serviceCategories->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs">Say</th>
@@ -94,6 +114,16 @@
 
                             <tr class="table-id-{{ $serviceCategory->id }}" data-index="{{ $serviceCategory->id }}"
                                 data-position="{{ $serviceCategory->sort }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $serviceCategory->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
                                 <!-- ID -->
                                 <td>{{$serviceCategory->id}}</td>
 
@@ -108,7 +138,7 @@
                                 </td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($serviceCategory->updated_at,$serviceCategory->servicesCategoriesTranlations) }}</td>
+                                <td>{{ updateDate($serviceCategory->updated_at,$serviceCategory->servicesCategoriesTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -360,4 +390,19 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.service.category.allDeleteAjax') }}',
+            '{{ route('admin.service.category.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

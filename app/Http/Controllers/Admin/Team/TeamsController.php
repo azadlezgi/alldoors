@@ -33,7 +33,7 @@ class TeamsController extends Controller
     {
 
 
-        $teams = Team::with(array('teamsTranlations' => function ($query) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -104,7 +104,7 @@ class TeamsController extends Controller
     {
         $id = $request->id;
         $team = Team::where('id', $id)
-            ->with('teamsTranlations')->first();
+            ->with('teamsTranslations')->first();
 
 
         return view('admin.team.edit', compact('team'));
@@ -256,6 +256,19 @@ class TeamsController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Team::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
 
     public function validateCheck($inputName, $text)

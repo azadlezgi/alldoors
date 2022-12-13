@@ -61,12 +61,25 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.product.model.add') }}">
                             <button
                                 tooltip="Əlavə et"
                                 flow="left"
                                 class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
+                            </button>
+                        </a>
+
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
                             </button>
                         </a>
 
@@ -82,6 +95,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($productModels->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs">Say</th>
@@ -94,7 +115,16 @@
                         @foreach($productModels as $key => $productModel)
 
                             <tr class="table-id-{{ $productModel->id }}" data-index="{{ $productModel->id }}" data-position="{{ $productModel->sort }}">
-                               <!-- ID -->
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $productModel->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
+                                <!-- ID -->
                                 <td>{{$productModel->id}}</td>
 
                                 <!--  NAME  -->
@@ -106,7 +136,7 @@
                                 <td><a href="{{ route('admin.product.models',$productModel->id) }}">{{ count($productModels[$key]->getProductsCount) }}</a></td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($productModel->updated_at,$productModel->productsModelsTranlations) }}</td>
+                                <td>{{ updateDate($productModel->updated_at,$productModel->productsModelsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -363,4 +393,18 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.product.model.allDeleteAjax') }}',
+            '{{ route('admin.product.model.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
 @endsection

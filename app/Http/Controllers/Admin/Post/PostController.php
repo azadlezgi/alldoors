@@ -33,7 +33,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
 
-        $posts = Post::with(array('postsTranlations' => function ($query) {
+        $posts = Post::with(array('postsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -52,7 +52,7 @@ class PostController extends Controller
 
         $id = $request->id;
 
-        $posts = Post::with(array('postsTranlations' => function ($query) {
+        $posts = Post::with(array('postsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('posts_categories_lists.category_id',$id)
@@ -147,7 +147,7 @@ class PostController extends Controller
     {
         $id = $request->id;
         $post = Post::where('id', $id)
-            ->with('postsTranlations')
+            ->with('postsTranslations')
             ->with('postsCategories')
             ->first();
 
@@ -328,6 +328,18 @@ class PostController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Post::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

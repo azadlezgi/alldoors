@@ -56,11 +56,15 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::with(array('productsTranlations' => function ($query) {
+        $products = Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
-            ->with('productsCategories')
+            ->with('productsCategories',function ($table){
+                $table->join('products_categories_translations', function($join) {
+                    $join->on('products_categories_translations.category_id', '=', 'products_categories_lists.category_id');
+                })->where('language_id',$this->defaultLanguage);
+            })
             ->with('productSpecialPriceList')
             ->where('parent', 0)
             ->orderBy('id', 'DESC')
@@ -70,11 +74,25 @@ class ProductController extends Controller
         $product2 = [];
         foreach ($products as $key => $product):
 
-            $product1 = Product::with(array('productsTranlations' => function ($query) {
+            $product1 = Product::with(array('productsTranslations' => function ($query) {
                 $query->where('language_id', $this->defaultLanguage);
 
             }))
-                ->with('productsCategories')
+                ->with('children',function ($table){
+                    $table->join('products_translations', function($join) {
+                        $join->on('products_translations.product_id', '=', 'products.id');
+                    })
+                        ->where('language_id',$this->defaultLanguage)
+                        ->select(
+                            'id',
+                            'name'
+                        );
+                })
+                ->with('productsCategories',function ($table){
+                    $table->join('products_categories_translations', function($join) {
+                        $join->on('products_categories_translations.category_id', '=', 'products_categories_lists.category_id');
+                    })->where('language_id',$this->defaultLanguage);
+                })
                 ->with('productSpecialPriceList')
                 ->where('parent', $product['id'])
                 ->orderBy('id', 'DESC')
@@ -90,8 +108,7 @@ class ProductController extends Controller
         endforeach;
 
 
-        $products = $this->paginate($product2,3);
-
+        $products = $this->paginate($product2,10);
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -105,13 +122,24 @@ class ProductController extends Controller
 
         $id = $request->id;
 
-        $products = Product::with(array('productsTranlations' => function ($query) {
+        $products = Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('products_categories_lists.category_id', $id)
             ->join('products_categories_lists', 'products_categories_lists.product_id', '=', 'products.id')
             ->orderBy('products.id', 'DESC')
             ->with('getProductModel')
+            ->with('productSpecialPriceList')
+            ->with('children',function ($table){
+                $table->join('products_translations', function($join) {
+                    $join->on('products_translations.product_id', '=', 'products.id');
+                })
+                    ->where('language_id',$this->defaultLanguage)
+                    ->select(
+                        'id',
+                        'name'
+                    );
+            })
             ->select('*', 'products.id as id')
             ->paginate(10);
 
@@ -133,7 +161,7 @@ class ProductController extends Controller
 
         $id = $request->id;
 
-        $products = Product::with(array('productsTranlations' => function ($query) {
+        $products = Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('products_collections_lists.collection_id', $id)
@@ -161,7 +189,7 @@ class ProductController extends Controller
 
         $id = $request->id;
 
-        $products = Product::with(array('productsTranlations' => function ($query) {
+        $products = Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('products_models_lists.model_id', $id)
@@ -190,7 +218,7 @@ class ProductController extends Controller
 
         $id = $request->id;
 
-        $products = Product::with(array('productsTranlations' => function ($query) {
+        $products = Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('products_manufacturers_lists.manufacturer_id', $id)
@@ -578,7 +606,7 @@ class ProductController extends Controller
 
 
         $product = Product::where('id', $id)
-            ->with('productsTranlations')
+            ->with('productsTranslations')
             ->with('productsCategories')
             ->with('productsCollections')
             ->with('getProductModel')
@@ -1092,12 +1120,28 @@ class ProductController extends Controller
         $products = Product::where('language_id', $this->defaultLanguage)
             ->where('name', 'like', '%' . $search . '%')
             ->join('products_translations', 'products.id', '=', 'products_translations.product_id')
-            ->orderBy('id', 'DESC')
-            ->with('productsCategories')
+            ->with('children',function ($table){
+                $table->join('products_translations', function($join) {
+                    $join->on('products_translations.product_id', '=', 'products.id');
+                })
+                    ->where('language_id',$this->defaultLanguage)
+                    ->select(
+                        'id',
+                        'name'
+                    );
+            })
+            ->with('productSpecialPriceList')
+            ->with('productsCategories',function ($table){
+                $table->join('products_categories_translations', function($join) {
+                    $join->on('products_categories_translations.category_id', '=', 'products_categories_lists.category_id');
+                })->where('language_id',$this->defaultLanguage);
+            })
             ->select(
                 '*',
                 'products.updated_at as updated_at',
             )
+            ->orderBy('id', 'DESC')
+
             ->paginate(10);
 
         $defaultLanguage = $this->defaultLanguage;
@@ -1152,6 +1196,17 @@ class ProductController extends Controller
         $id = intval($request->id);
 
         Product::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Product::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

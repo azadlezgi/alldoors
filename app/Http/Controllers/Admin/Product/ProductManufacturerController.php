@@ -102,7 +102,7 @@ class ProductManufacturerController extends Controller
     {
         $id = $request->id;
         $productManufacturer = ProductManufacturer::where('id', $id)
-            ->with('productsManufacturersTranlations')->first();
+            ->with('productsManufacturersTranslations')->first();
 
 
         $defaultLanguage = $this->defaultLanguage;
@@ -270,6 +270,18 @@ class ProductManufacturerController extends Controller
         $id = intval($request->id);
 
         ProductManufacturer::where('id', $id)->delete();
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            ProductManufacturer::where('id', $id)->delete();
+        endforeach;
 
         return response()->json(['success' => true], 200);
 

@@ -64,6 +64,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.service.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -74,6 +75,19 @@
                         </a>
 
 
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
+
                     </div>
                 </div>
 
@@ -82,6 +96,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($services->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th  data-breakpoints="xs">Şəkil</th>
                             <th>Ad</th>
@@ -94,7 +116,17 @@
                         <tbody>
                         @foreach($services as $service)
                             <tr class="table-id-{{ $service->id }}" data-index="{{ $service->id }}" data-position="{{ $service->sort }}">
-                               <!-- ID -->
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $service->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+
+                                <!-- ID -->
                                 <td>{{$service->id}}</td>
 
                                 <!--  IMAGE  -->
@@ -360,4 +392,20 @@
 
 
     </script>
+
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.service.allDeleteAjax') }}',
+            '{{ route('admin.service.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

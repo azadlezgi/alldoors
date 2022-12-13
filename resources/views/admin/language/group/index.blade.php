@@ -70,6 +70,7 @@
                             </form>
                         </div>
 
+                        <!--  ADD BUTTON  -->
                         <button
                             tooltip="Əlavə et"
                             flow="left"
@@ -78,6 +79,18 @@
                             class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                             <i class="flaticon-plus"></i>
                         </button>
+
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
 
                         <!--Elave et Modal START-->
                         <div class="modal fade" id="addDataModalButton" tabindex="-1" role="dialog"
@@ -220,6 +233,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($languageGroups->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Ad</th>
                             <th data-breakpoints="xs sm md">Açiqlama</th>
@@ -230,6 +251,15 @@
                         <tbody>
                         @foreach($languageGroups as $languageGroup)
                             <tr class="table-id-{{ $languageGroup->id }}">
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $languageGroup->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
                                 <td>{{ $languageGroup->id }}</td>
                                 <td><a href="{{ route('admin.languageGroup.detail',$languageGroup->id) }}">{{ $languageGroup->name }}</a></td>
                                 <td>{{ $languageGroup->description }}</td>
@@ -523,4 +553,20 @@
 
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElementsLanguageGroup(
+            'Diqqət?',
+            'Seçilmiş dil qrupları silindikdə, bu dil qrupları ilə bağlı olan bütün ifadələr silinəcək!<br>Buna əminsiniz?<br>Seçilmiş dil qrupları.<br>',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.languageGroup.allDeleteAjax') }}',
+            '{{ route('admin.languageGroup.allDelete') }}',
+            '{{ route('admin.languageGroup.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
 @endsection

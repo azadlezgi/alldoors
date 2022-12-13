@@ -70,6 +70,8 @@
 {{--                            </form>--}}
 {{--                        </div>--}}
 
+
+                        <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.onlineCatalog.add') }}">
                             <button
                                 tooltip="Əlavə et"
@@ -80,6 +82,20 @@
                         </a>
 
 
+
+                        <!--  DELETE BUTTON  -->
+                        <a class="select-btn-action" href="#">
+                            <button
+                                tooltip="Sil"
+                                flow="left"
+                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </a>
+
+
+
+
                     </div>
                 </div>
 
@@ -88,6 +104,14 @@
                     <table class="table table-hover table-striped" data-sorting="true">
                         <thead class="thead-light">
                         <tr>
+                            @if($onlineCatalogs->count() != 0)
+                                <th width="10" data-sortable="false">
+                                    <label class="checkbox checkbox-success select-all-btn">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </th>
+                            @endif
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th>Şəkil</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -98,19 +122,28 @@
                         <tbody id="sortable">
                         @foreach($onlineCatalogs as $onlineCatalog)
                             <tr class="table-id-{{ $onlineCatalog->id }}" data-index="{{ $onlineCatalog->id }}" data-position="{{ $onlineCatalog->sort }}">
-                               <!-- ID -->
+
+                                <!-- SELECT ALL -->
+                                <td>
+                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $onlineCatalog->id }}">
+                                        <input type="checkbox"   />
+                                        <span></span>
+                                    </label>
+                                </td>
+
+                                <!-- ID -->
                                 <td>{{$onlineCatalog->id}}</td>
 
                                 <!--  IMAGE  -->
                                 <td class="sortableHandle">
                                     <span style="vertical-align: middle;" class="slideImage">
-                                        <img src="{{ $onlineCatalog->onlineCatalogsTranlations[0]->image }}" alt=""/>
+                                        <img src="{{ $onlineCatalog->onlineCatalogsTranslations[0]->image }}" alt=""/>
                                     </span>
                                 </td>
 
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($onlineCatalog->updated_at,$onlineCatalog->onlineCatalogsTranlations) }}</td>
+                                <td>{{ updateDate($onlineCatalog->updated_at,$onlineCatalog->onlineCatalogsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->
@@ -391,4 +424,20 @@
         /*   EDITOR END   */
 
     </script>
+
+
+    <!--  DELETE ALL ELEMENTS (SELECTED) START  -->
+    <script>
+        deleteALlSelectedElements(
+            'Diqqət?',
+            'Seçilmişləri silmək istədiyinizə əminsiniz?',
+            'Sil!',
+            'Xeyir',
+            '{{ route('admin.onlineCatalog.allDeleteAjax') }}',
+            '{{ route('admin.onlineCatalog.index') }}'
+        );
+    </script>
+    <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
+
+
 @endsection

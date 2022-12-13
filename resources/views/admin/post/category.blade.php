@@ -115,11 +115,11 @@
                                 </td>
 
                                 <!--  NAME  -->
-                                <td><a href="{{ route('admin.post.edit',$post->id) }}">{{ $post->postsTranlations[0]->name }}</a></td>
+                                <td><a href="{{ route('admin.post.edit',$post->id) }}">{{ $post->postsTranslations[0]->name }}</a></td>
                                 <td>{{ $category->name }}</td>
 
                                 <!--  Tarix  -->
-                                <td>{{ updateDate($post->updated_at,$post->postsTranlations) }}</td>
+                                <td>{{ updateDate($post->updated_at,$post->postsTranslations) }}</td>
 
 
                                 <!--  STATUS  -->

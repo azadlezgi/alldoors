@@ -36,10 +36,10 @@ class OptionController extends Controller
     {
 
 
-        $options = Option::with(array('optionsTranlations' => function ($query) {
+        $options = Option::with(array('optionsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
-        }))->with(array('optionsGroupsTranlations' => function ($query) {
+        }))->with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -54,15 +54,16 @@ class OptionController extends Controller
     {
         $id = $request->id;
 
-        $options = Option::with(array('optionsTranlations' => function ($query) {
+        $options = Option::with(array('optionsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
+            ->where('option_group_id',$id)
             ->orderBy('sort', 'ASC')
             ->paginate(10);
 
 
-        $optionGroup = OptionGroup::with(array('optionsGroupsTranlations' => function ($query) {
+        $optionGroup = OptionGroup::with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))->where('id', $id)
@@ -75,7 +76,7 @@ class OptionController extends Controller
     public function add(Request $request)
     {
 
-        $optionGroups = OptionGroup::with(array('optionsGroupsTranlations' => function ($query) {
+        $optionGroups = OptionGroup::with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -204,9 +205,9 @@ class OptionController extends Controller
     {
         $id = $request->id;
         $option = Option::where('id', $id)
-            ->with('optionsTranlations')->first();
+            ->with('optionsTranslations')->first();
 
-        $optionGroups = OptionGroup::with(array('optionsGroupsTranlations' => function ($query) {
+        $optionGroups = OptionGroup::with(array('optionsGroupsTranslations' => function ($query) {
             $query->where('language_id', $this->defaultLanguage);
 
         }))
@@ -214,7 +215,7 @@ class OptionController extends Controller
             ->get();
 
 
-        $optionValue = OptionValue::with('optionsValuesTranlations')
+        $optionValue = OptionValue::with('optionsValuesTranslations')
             ->where('option_id', $id)
             ->get();
 
@@ -365,7 +366,7 @@ class OptionController extends Controller
         $search = $request->search;
 
         $options = Option::where('language_id', $this->defaultLanguage)
-            ->with(array('optionsGroupsTranlations' => function ($query) {
+            ->with(array('optionsGroupsTranslations' => function ($query) {
                 $query->where('language_id', $this->defaultLanguage);
 
             }))
@@ -457,6 +458,19 @@ class OptionController extends Controller
         return response()->json(['success' => true], 200);
 
     }
+
+
+    public function allDeleteAjax(Request $request)
+    {
+        $ids = $request->IDs;
+        foreach ($ids as $id):
+            Option::where('id', $id)->delete();
+        endforeach;
+
+        return response()->json(['success' => true], 200);
+
+    }
+
 
     public function validateCheck($inputName, $text)
     {

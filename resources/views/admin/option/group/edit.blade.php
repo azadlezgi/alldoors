@@ -110,7 +110,7 @@
                                                                             <input
                                                                                 type="text"
                                                                                 name="name[{{ $language->id }}]"
-                                                                                value="{{ old('name.'. $language->id,getTranslateData($optionGroup->optionsGroupsTranlations,$language->id,'name')) }}"
+                                                                                value="{{ old('name.'. $language->id,getTranslateData($optionGroup->optionsGroupsTranslations,$language->id,'name')) }}"
                                                                                 class="form-control">
 
 
@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="save-tools-item">
                                         <div>Tarix yenilənmə:</div>
-                                        <div>{{ updateDate($optionGroup->updated_at,$optionGroup->optionsGroupsTranlations) }}</div>
+                                        <div>{{ updateDate($optionGroup->updated_at,$optionGroup->optionsGroupsTranslations) }}</div>
                                     </div>
                                 </div>
                             </div>
