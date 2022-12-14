@@ -14,7 +14,7 @@ class Service extends Model
     protected $guarded = [];
 
 
-    public function servicesTranlations()
+    public function servicesTranslations()
     {
         return $this->hasMany('App\Models\Service\ServiceTranslation','service_id','id');
     }

@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
 
 
-                $posts = Post::with(array('postsTranlations' => function ($query) use($request) {
+                $posts = Post::with(array('postsTranslations' => function ($query) use($request) {
                     $query->where('language_id', $request->languageID);
 
                 })) ->with('postsCategoriesCheck')
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         $slug = $lastSlug;
         $post = Post::where('slug', $slug)
             ->where('status', 1)
-            ->with(['postsTranlations' => function ($query) use ($request) {
+            ->with(['postsTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('postsCategoriesCheck')

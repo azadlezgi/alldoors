@@ -9,42 +9,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link href="{{ asset('frontend/assets/plugins/fontawesome/css/fontawesome-all.min.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('frontend/assets/plugins/OwlCarousel/css/owl.carousel.min.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('frontend/assets/plugins/OwlCarousel/css/owl.theme.default.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.carousel.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.theme.default.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/animate/animate.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/main.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/layout.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/components.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('assets/plugins/socicon/css/socicon.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/style.css') }}" type="text/css" rel="stylesheet"/>
     @yield('CSS')
 </head>
 
 <body>
-{{--<div id="panel"></div>--}}
+
 <div id="app" data-server-rendered="true" class="layout">
     <header class="header header--fixed">
         <div class="container">
             <div class="header__top-line">
                 <div class="logo">
-                    <span class="logo__link">
-                        <img src="{{ asset('storage') }}/{{ setting('logo') }}" alt="{{ language('general.title') }}"
-                             width="225" height="70">
-                        <div></div>
-                    </span>
+                    <a href="{{ route('frontend.home.index') }}" class="logo__link">
+                        <img src="{{ asset('storage') }}/{{ setting('logo') }}" alt="{{ language('general.title') }}">
+                    </a>
                 </div>
-
-                {{--                <div class="phone header__phone header__phone--line header__phone--tablet">--}}
-                {{--                    <a itemprop="telephone" href="tel:+78126067551" class="phone__link">+7 (812) 606-75-51</a>--}}
-                {{--                </div>--}}
 
                 <div class="header__search header__search_desktop search search_shown" style="">
                     <form action="/search/" class="search__form">
                         <input type="search" name="q" placeholder="{{ language('general.search') }}"
                                class="input input_search search__input">
                         <label class="label">{{ language('general.search') }}</label>
-                        {{--                        <button type="button" class="btn search__close"></button>--}}
-                        {{--                        <button rel="nofollow" class="btn btn_accent search__btn-search">Найти</button>--}}
                         <button type="submit" class="btn search__link">
                             <i>
                                 <svg class="icon">
@@ -58,7 +51,6 @@
                 <div itemscope="itemscope" itemtype="http://schema.org/Organization"
                      class="salon header__salon header__salon--line header__salon--desktop">
                     <meta itemprop="name" content="{{ language('general.title') }}">
-                    {{--                    <span class="salon__title">Unvan:</span>--}}
                     <span itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"
                           class="salon__address">
                         <span itemprop="streetAddress">
@@ -105,11 +97,7 @@
                         </div>
                     </li>
                 </ul>
-                <button
-                        type="button"
-                        class="btn header__burger header__burger--mobile"
-                        type="button"
-                >
+                <button type="button" class="btn header__burger header__burger--mobile" type="button">
                     <span>{{ language('general.menu') }}</span>
                 </button>
             </div>
@@ -117,11 +105,7 @@
         <div class="header__menu-line">
             <div class="container">
                 <div class="header__menu-wrapper">
-                    <button
-                            type="button"
-                            class="btn header__burger header__burger--tablet"
-                            type="button"
-                    >
+                    <button type="button" class="btn header__burger header__burger--tablet" type="button">
                         <span>{{ language('general.menu') }}</span>
                     </button>
                     <div class="slide-menu" style="display: none;">
@@ -150,7 +134,7 @@
                             @php
                                 $params = [
                                     'li_class' => "header-menu__item",
-                                    'a_class' => "header-menu__link"
+                                    'a_class' => "header-menu__link text-uppercase"
                                 ];
                             @endphp
                             {!! \App\Services\MenuServices::getMenu($HTTP_HOST,$languageID,1,0,[], $params) !!}

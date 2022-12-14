@@ -2077,7 +2077,7 @@
 
 .mainscreen__text {
     padding: 0 24px;
-    height: 100vh;
+    /*height: 100vh;*/
     position: relative;
 }
 
@@ -5617,7 +5617,7 @@
     .mainscreen__controls {
         position: absolute;
         left: 0;
-        bottom: -40px;
+        bottom: 0;
         z-index: 1;
         margin-bottom: 0
     }

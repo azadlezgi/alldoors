@@ -209,7 +209,7 @@
                     </div>
 
                     <!--  POSITION  -->
-                    <div class="card card-custom gutter-b">
+                    <div class="card card-custom gutter-b" style="display: none">
                         <div class="card-header">
                             <div class="card-title">
                                 <h3 class="card-label">Position</h3>

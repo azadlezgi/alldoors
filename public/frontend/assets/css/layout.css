@@ -485,10 +485,11 @@
 }
 
 .socials__item {
-    position: relative
+    position: relative;
 }
 
 .socials__item .icon {
+    color: #848388;
     fill: #848388;
     transition: fill .3s
 }
@@ -1290,6 +1291,15 @@
     align-items: center;
     height: 100%;
     margin-right: 14.4px
+}
+.header-menu__item:not(:last-child):after {
+    content: "";
+    margin: 0 0 0 15px;
+    width: 1px;
+    height: 24px;
+    background-color: #848388;
+    -webkit-transform: rotate(26deg);
+    transform: rotate(26deg);
 }
 
 .header-menu__link {
@@ -2324,7 +2334,7 @@
 
     .logo {
         width: 152px;
-        margin-right: 32px
+        margin-right: 52px
     }
 
     .metalux {

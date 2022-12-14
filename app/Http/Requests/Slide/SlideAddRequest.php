@@ -21,7 +21,7 @@ class SlideAddRequest extends FormRequest
             'title.*' => 'max:255',
 
             /*  SUB TITLE   */
-            'sub_title.*' => 'max:255',
+//            'sub_title.*' => 'max:255',
 
             /*   IMAGE   */
             'image.*' => 'required',

@@ -163,7 +163,7 @@ class ServicesService
     public static function getServices($languageID,$limit)
     {
 
-        return Service::with(array('servicesTranlations' => function ($query) use ($languageID) {
+        return Service::with(array('servicesTranslations' => function ($query) use ($languageID) {
             $query->where('language_id', $languageID);
 
         }))

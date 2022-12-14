@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = Product::with(array('productsTranlations' => function ($query) use ($request) {
+        $products = Product::with(array('productsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -104,7 +104,7 @@ class ProductController extends Controller
         $slug = $request->slug;
         $product = Product::where('slug', $slug)
             ->where('status', 1)
-            ->with(['productsTranlations' => function ($query) use ($request) {
+            ->with(['productsTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('productsCategoriesCheck')

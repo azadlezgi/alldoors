@@ -14,7 +14,7 @@ class Banner extends Model
     protected $guarded = [];
 
 
-    public function bannersTranlations()
+    public function bannersTranslations()
     {
         return $this->hasMany('App\Models\Banner\BannerTranslation','banner_id','id');
     }

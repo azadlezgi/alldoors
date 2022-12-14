@@ -159,7 +159,7 @@ class PostsService
     public static function getPosts($languageID,$limit)
     {
 
-        return Post::with(array('postsTranlations' => function ($query) use ($languageID) {
+        return Post::with(array('postsTranslations' => function ($query) use ($languageID) {
             $query->where('language_id', $languageID);
 
         }))

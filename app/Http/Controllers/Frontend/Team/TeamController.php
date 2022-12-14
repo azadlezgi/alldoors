@@ -16,7 +16,7 @@ class TeamController extends Controller
 
     public function index(Request $request)
     {
-        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)
@@ -42,7 +42,7 @@ class TeamController extends Controller
         $slug = $request->slug;
         $team = Team::where('slug', $slug)
             ->where('status', 1)
-            ->with(['teamsTranlations' => function ($query) use ($request) {
+            ->with(['teamsTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->first();
@@ -51,7 +51,7 @@ class TeamController extends Controller
             abort(404);
         }
 
-        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))

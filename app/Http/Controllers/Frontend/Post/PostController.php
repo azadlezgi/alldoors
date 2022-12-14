@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -71,7 +71,7 @@ class PostController extends Controller
         $slug = $request->slug;
         $post = Post::where('slug', $slug)
             ->where('status', 1)
-            ->with(['postsTranlations' => function ($query) use ($request) {
+            ->with(['postsTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('postsCategoriesCheck')
@@ -87,7 +87,7 @@ class PostController extends Controller
             ->orderBy('sort', 'ASC')
             ->get();
 
-        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))

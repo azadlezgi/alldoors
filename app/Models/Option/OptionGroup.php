@@ -15,7 +15,7 @@ class OptionGroup extends Model
 
 
 
-    public function optionsGroupsTranlations()
+    public function optionsGroupsTranslations()
     {
         return $this->hasMany('App\Models\Option\OptionGroupTranslation','option_group_id','id');
     }
@@ -31,7 +31,7 @@ class OptionGroup extends Model
     }
 
 
-    public function optionsTranlations()
+    public function optionsTranslations()
     {
         return $this->hasMany('App\Models\Option\OptionTranslation','option_id','id');
     }

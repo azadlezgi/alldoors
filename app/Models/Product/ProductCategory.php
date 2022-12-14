@@ -15,7 +15,7 @@ class ProductCategory extends Model
     protected $guarded = [];
 
 
-    public function productsCategoriesTranlations()
+    public function productsCategoriesTranslations()
     {
         return $this->hasMany('App\Models\Product\ProductCategoryTranslation','category_id','id');
     }

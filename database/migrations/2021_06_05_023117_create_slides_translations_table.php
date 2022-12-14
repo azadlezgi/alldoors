@@ -17,7 +17,7 @@ class CreateSlidesTranslationsTable extends Migration
             $table->bigInteger('slide_id')->unsigned();
             $table->bigInteger('language_id')->unsigned();
             $table->string('title')->nullable();
-            $table->string('sub_title')->nullable();
+            $table->text('sub_title')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
 

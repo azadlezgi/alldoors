@@ -231,7 +231,8 @@
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/jquery/jquery-3.6.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/jquery/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('frontend/assets/plugins/OwlCarousel/js/owl.carousel.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('frontend/assets/plugins/OwlCarousel/js/owl.carousel.js') }}"></script>--}}
+<script type="text/javascript" src="{{ asset('frontend/assets/plugins/owl/owl.carousel.min.js') }}"></script>
 
 {{--<script type="text/javascript" src="{{ asset('frontend/assets/js/bundle.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('frontend/assets/js/svgxuse.min.js') }}"></script>

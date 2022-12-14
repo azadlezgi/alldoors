@@ -31,7 +31,7 @@ class PageController extends Controller
 
 
 
-        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)

@@ -14,7 +14,7 @@ class ServiceCategory extends Model
     protected $guarded = [];
 
 
-    public function servicesCategoriesTranlations()
+    public function servicesCategoriesTranslations()
     {
         return $this->hasMany('App\Models\Service\ServiceCategoryTranslation','category_id','id');
     }

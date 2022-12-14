@@ -15,13 +15,13 @@ class Attribute extends Model
 
 
 
-    public function attributesTranlations()
+    public function attributesTranslations()
     {
         return $this->hasMany('App\Models\Attribute\AttributeTranslation','attribute_id','id');
     }
 
 
-    public function attributesGroupsTranlations()
+    public function attributesGroupsTranslations()
     {
         return $this->hasMany('App\Models\Attribute\AttributeGroupTranslation','attribute_group_id','attribute_group_id');
     }

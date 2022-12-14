@@ -10,7 +10,7 @@ class ProductService
     public static function getProductCategory($categoryID,$limit = 3)
     {
 
-        return Product::with(array('productsTranlations' => function ($query) {
+        return Product::with(array('productsTranslations' => function ($query) {
             $query->where('language_id', cache('language-defaultID'));
 
         }))
@@ -37,6 +37,17 @@ class ProductService
             ->limit($limit)
             ->get();
 
+    }
+
+
+
+    public static function getParent($parentID)
+    {
+        return Product::with(array('productsTranslations' => function ($query) {
+            $query->where('language_id', cache('language-defaultID'));
+        }))
+            ->where('id',$parentID)
+            ->first();
     }
 
 

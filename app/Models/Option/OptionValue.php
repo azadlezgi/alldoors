@@ -15,7 +15,7 @@ class OptionValue extends Model
 
 
 
-    public function optionsValuesTranlations()
+    public function optionsValuesTranslations()
     {
         return $this->hasMany('App\Models\Option\OptionValueTranslation','option_value_id','id');
     }

@@ -15,7 +15,7 @@ class ProductCollection extends Model
     protected $guarded = [];
 
 
-    public function productsCollectionsTranlations()
+    public function productsCollectionsTranslations()
     {
         return $this->hasMany('App\Models\Product\ProductCollectionTranslation','collection_id','id');
     }

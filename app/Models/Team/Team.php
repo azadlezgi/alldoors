@@ -15,7 +15,7 @@ class Team extends Model
 
 
 
-    public function teamsTranlations()
+    public function teamsTranslations()
     {
         return $this->hasMany('App\Models\Team\TeamTranslation','team_id','id');
     }

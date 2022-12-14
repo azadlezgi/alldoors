@@ -14,7 +14,7 @@ class Slide extends Model
     protected $guarded = [];
 
 
-    public function slidesTranlations()
+    public function slidesTranslations()
     {
         return $this->hasMany('App\Models\Slide\SlideTranslation','slide_id','id');
     }

@@ -5,7 +5,6 @@
 
 @section('content')
 
-
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -53,41 +52,40 @@
                         <h3 class="card-label">Slaydlar</h3>
                     </div>
                     <div class="card-toolbar">
-{{--                        <div class="card-title">--}}
-{{--                            <form action="{{ route('admin.language.search') }}" method="GET">--}}
-{{--                                <div class="input-group">--}}
-{{--                                    <input--}}
-{{--                                        type="search"--}}
-{{--                                        class="form-control"--}}
-{{--                                        value="@isset($searchText){{ $searchText }}@endisset"--}}
-{{--                                        autocomplete="off"--}}
-{{--                                        name="search"--}}
-{{--                                        placeholder="Axtar...">--}}
-{{--                                    <div class="input-group-append">--}}
-{{--                                        <button type="submit" class="btn btn-success" type="button">Axtar</button>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="card-title">--}}
+                        {{--                            <form action="{{ route('admin.language.search') }}" method="GET">--}}
+                        {{--                                <div class="input-group">--}}
+                        {{--                                    <input--}}
+                        {{--                                        type="search"--}}
+                        {{--                                        class="form-control"--}}
+                        {{--                                        value="@isset($searchText){{ $searchText }}@endisset"--}}
+                        {{--                                        autocomplete="off"--}}
+                        {{--                                        name="search"--}}
+                        {{--                                        placeholder="Axtar...">--}}
+                        {{--                                    <div class="input-group-append">--}}
+                        {{--                                        <button type="submit" class="btn btn-success" type="button">Axtar</button>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </form>--}}
+                        {{--                        </div>--}}
 
                         <!--  ADD BUTTON  -->
                         <a href="{{ route('admin.slide.add') }}">
                             <button
-                                tooltip="Əlavə et"
-                                flow="left"
-                                class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
+                                    tooltip="Əlavə et"
+                                    flow="left"
+                                    class="btn addDataModalButton btn-icon btn-success btn-circle btn-lg">
                                 <i class="flaticon-plus"></i>
                             </button>
                         </a>
 
 
-
                         <!--  DELETE BUTTON  -->
                         <a class="select-btn-action" href="#">
                             <button
-                                tooltip="Sil"
-                                flow="left"
-                                class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
+                                    tooltip="Sil"
+                                    flow="left"
+                                    class="btn btn-icon btn-danger btn-circle btn-lg ml-2">
                                 <i class="flaticon-delete"></i>
                             </button>
                         </a>
@@ -104,7 +102,7 @@
                             @if($slides->count() != 0)
                                 <th width="10" data-sortable="false">
                                     <label class="checkbox checkbox-success select-all-btn">
-                                        <input type="checkbox"   />
+                                        <input type="checkbox"/>
                                         <span></span>
                                     </label>
                                 </th>
@@ -118,13 +116,15 @@
                         </thead>
                         <tbody id="sortable">
                         @foreach($slides as $slide)
-                            <tr class="table-id-{{ $slide->id }}" data-index="{{ $slide->id }}" data-position="{{ $slide->sort }}">
+                            <tr class="table-id-{{ $slide->id }}" data-index="{{ $slide->id }}"
+                                data-position="{{ $slide->sort }}">
 
 
                                 <!-- SELECT ALL -->
                                 <td>
-                                    <label class="checkbox checkbox-success select-element-btn" data-id="{{ $slide->id }}">
-                                        <input type="checkbox"   />
+                                    <label class="checkbox checkbox-success select-element-btn"
+                                           data-id="{{ $slide->id }}">
+                                        <input type="checkbox"/>
                                         <span></span>
                                     </label>
                                 </td>
@@ -151,11 +151,11 @@
                                         <span class="switch switch-outline switch-icon switch-success">
                                         <label>
                                             <input
-                                                class="statusActive"
-                                                data-id="{{ $slide->id }}"
-                                                type="checkbox"
-                                                {{ $slide->status == 1? 'checked="checked"':"" }}
-                                                name="select">
+                                                    class="statusActive"
+                                                    data-id="{{ $slide->id }}"
+                                                    type="checkbox"
+                                                    {{ $slide->status == 1? 'checked="checked"':"" }}
+                                                    name="select">
                                             <span></span>
                                         </label>
 									</span>
@@ -182,23 +182,24 @@
                                                 <li class="navi-separator mb-3 opacity-70"></li>
 
                                                 <li
-                                                    class="navi-item redakteEt">
-                                                    <a href="{{ route('admin.slide.edit',$slide->id) }}" class="navi-link text-center">
+                                                        class="navi-item redakteEt">
+                                                    <a href="{{ route('admin.slide.edit',$slide->id) }}"
+                                                       class="navi-link text-center">
 																		<span class="navi-text">
 																			<span
-                                                                                class="label label-xl label-inline label-light-primary">Redaktə et</span>
+                                                                                    class="label label-xl label-inline label-light-primary">Redaktə et</span>
 																		</span>
                                                     </a>
                                                 </li>
 
                                                 <li
-                                                    class="navi-item deleteButton"
-                                                    data-id="{{ $slide->id }}"
+                                                        class="navi-item deleteButton"
+                                                        data-id="{{ $slide->id }}"
                                                 >
                                                     <a href="#" class="navi-link text-center">
 																		<span class="navi-text">
 																			<span
-                                                                                class="label  label-xl label-inline label-light-danger">Sil</span>
+                                                                                    class="label  label-xl label-inline label-light-danger">Sil</span>
 																		</span>
                                                     </a>
                                                 </li>
@@ -374,15 +375,15 @@
                                 $.ajax({
                                     url: "{{ route('admin.slide.delete') }}",
                                     type: 'POST',
-                                    data: {id:slideID},
+                                    data: {id: slideID},
                                     dataType: 'JSON',
                                     success: function (response) {
 
                                         if (response.success) {
-                                            $('.table-id-'+slideID).fadeOut(1000);
+                                            $('.table-id-' + slideID).fadeOut(1000);
                                             // $('.table-id-'+languageID).remove();
                                             var totalCount = $('.totalCount').text();
-                                            $('.totalCount').text(parseInt(totalCount)-1);
+                                            $('.totalCount').text(parseInt(totalCount) - 1);
 
                                         }
                                     }
@@ -437,6 +438,5 @@
         );
     </script>
     <!--  DELETE ALL ELEMENTS (SELECTED) END  -->
-
 
 @endsection

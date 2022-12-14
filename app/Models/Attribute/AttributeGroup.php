@@ -15,7 +15,7 @@ class AttributeGroup extends Model
 
 
 
-    public function attributesGroupsTranlations()
+    public function attributesGroupsTranslations()
     {
         return $this->hasMany('App\Models\Attribute\AttributeGroupTranslation','attribute_group_id','id');
     }
@@ -31,7 +31,7 @@ class AttributeGroup extends Model
     }
 
 
-    public function attributesTranlations()
+    public function attributesTranslations()
     {
         return $this->hasMany('App\Models\Attribute\AttributeTranslation','attribute_id','id');
     }

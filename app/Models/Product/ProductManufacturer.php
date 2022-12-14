@@ -15,7 +15,7 @@ class ProductManufacturer extends Model
     protected $guarded = [];
 
 
-    public function productsManufacturersTranlations()
+    public function productsManufacturersTranslations()
     {
         return $this->hasMany('App\Models\Product\ProductManufacturerTranslation','manufacturer_id','id');
     }

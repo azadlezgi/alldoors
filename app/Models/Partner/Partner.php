@@ -15,7 +15,7 @@ class Partner extends Model
 
 
 
-    public function partnersTranlations()
+    public function partnersTranslations()
     {
         return $this->hasMany('App\Models\Partner\PartnerTranslation','partner_id','id');
     }

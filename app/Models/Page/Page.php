@@ -14,7 +14,7 @@ class Page extends Model
     protected $guarded = [];
 
 
-    public function pagesTranlations()
+    public function pagesTranslations()
     {
         return $this->hasMany('App\Models\Page\PageTranslation','page_id','id');
     }

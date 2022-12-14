@@ -15,7 +15,7 @@ class SitemapController extends Controller
     {
 
         ///Services
-        $services = Service::with(array('servicesTranlations' => function ($query) use ($request) {
+        $services = Service::with(array('servicesTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -42,7 +42,7 @@ class SitemapController extends Controller
 
 
         //Posts
-        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -66,7 +66,7 @@ class SitemapController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)
@@ -77,7 +77,7 @@ class SitemapController extends Controller
 
 
 
-        $pages = Page::with(array('pagesTranlations' => function ($query)  use ($request) {
+        $pages = Page::with(array('pagesTranslations' => function ($query)  use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)
@@ -100,7 +100,7 @@ class SitemapController extends Controller
     {
 //
 //        ///Services
-//        $services = Service::with(array('servicesTranlations' => function ($query) use ($request) {
+//        $services = Service::with(array('servicesTranslations' => function ($query) use ($request) {
 //            $query->where('language_id', $request->languageID);
 //
 //        }))
@@ -127,7 +127,7 @@ class SitemapController extends Controller
 //
 //
 //        //Posts
-//        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+//        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
 //            $query->where('language_id', $request->languageID);
 //
 //        }))
@@ -151,7 +151,7 @@ class SitemapController extends Controller
 //            ->orderBy('id', 'DESC')
 //            ->get();
 //
-//        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+//        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
 //            $query->where('language_id', $request->languageID);
 //
 //        }))->where('status', 1)
@@ -162,7 +162,7 @@ class SitemapController extends Controller
 //
 //
 //
-//        $pages = Page::with(array('pagesTranlations' => function ($query)  use ($request) {
+//        $pages = Page::with(array('pagesTranslations' => function ($query)  use ($request) {
 //            $query->where('language_id', $request->languageID);
 //
 //        }))->where('status', 1)

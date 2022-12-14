@@ -14,7 +14,7 @@ class Post extends Model
     protected $guarded = [];
 
 
-    public function postsTranlations()
+    public function postsTranslations()
     {
         return $this->hasMany('App\Models\Post\PostTranslation','post_id','id');
     }

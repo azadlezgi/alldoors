@@ -15,7 +15,7 @@ class Review extends Model
 
 
 
-    public function reviewsTranlations()
+    public function reviewsTranslations()
     {
         return $this->hasMany('App\Models\Review\ReviewTranslation','review_id','id');
     }

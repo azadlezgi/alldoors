@@ -14,7 +14,7 @@ class PostCategory extends Model
     protected $guarded = [];
 
 
-    public function postsCategoriesTranlations()
+    public function postsCategoriesTranslations()
     {
         return $this->hasMany('App\Models\Post\PostCategoryTranslation','category_id','id');
     }

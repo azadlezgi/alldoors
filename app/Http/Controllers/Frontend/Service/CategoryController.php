@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
 
 
-                $services = Service::with(array('servicesTranlations' => function ($query) use($request) {
+                $services = Service::with(array('servicesTranslations' => function ($query) use($request) {
                     $query->where('language_id', $request->languageID);
 
                 })) ->with('servicesCategoriesCheck')
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         $slug = $lastSlug;
         $service = Service::where('slug', $slug)
             ->where('status', 1)
-            ->with(['servicesTranlations' => function ($query) use ($request) {
+            ->with(['servicesTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('servicesCategoriesCheck')

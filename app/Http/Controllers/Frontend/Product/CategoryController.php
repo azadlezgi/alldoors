@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
 
 
-                $products = Product::with(array('productsTranlations' => function ($query) use($request) {
+                $products = Product::with(array('productsTranslations' => function ($query) use($request) {
                     $query->where('language_id', $request->languageID);
 
                 })) ->with('productsCategoriesCheck')
@@ -106,7 +106,7 @@ class CategoryController extends Controller
         $slug = $lastSlug;
         $product = Product::where('slug', $slug)
             ->where('status', 1)
-            ->with(['productsTranlations' => function ($query) use ($request) {
+            ->with(['productsTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('productsCategoriesCheck')

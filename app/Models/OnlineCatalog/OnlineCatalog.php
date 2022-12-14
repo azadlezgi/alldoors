@@ -14,7 +14,7 @@ class OnlineCatalog extends Model
     protected $guarded = [];
 
 
-    public function onlineCatalogsTranlations()
+    public function onlineCatalogsTranslations()
     {
         return $this->hasMany('App\Models\OnlineCatalog\OnlineCatalogTranslation','online_catalog_id','id');
     }

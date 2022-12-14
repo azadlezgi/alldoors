@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
 
 
-                $galleries = Gallery::with(array('galleriesTranlations' => function ($query) use($request) {
+                $galleries = Gallery::with(array('galleriesTranslations' => function ($query) use($request) {
                     $query->where('language_id', $request->languageID);
 
                 })) ->with('galleriesCategoriesCheck')
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         $slug = $lastSlug;
         $gallery = Gallery::where('slug', $slug)
             ->where('status', 1)
-            ->with(['galleriesTranlations' => function ($query) use ($request) {
+            ->with(['galleriesTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('galleriesCategoriesCheck')

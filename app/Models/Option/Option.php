@@ -15,13 +15,13 @@ class Option extends Model
 
 
 
-    public function optionsTranlations()
+    public function optionsTranslations()
     {
         return $this->hasMany('App\Models\Option\OptionTranslation','option_id','id');
     }
 
 
-    public function optionsGroupsTranlations()
+    public function optionsGroupsTranslations()
     {
         return $this->hasMany('App\Models\Option\OptionGroupTranslation','option_group_id','option_group_id');
     }

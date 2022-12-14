@@ -37,6 +37,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/update', 'LanguageController@update')->name('admin.language.update');
                 Route::post('/delete', 'LanguageController@delete')->name('admin.language.delete');
                 Route::post('/delete-ajax', 'LanguageController@deleteAjax')->name('admin.language.deleteAjax');
+                Route::post('/all-delete-ajax', 'LanguageController@allDeleteAjax')->name('admin.language.allDeleteAjax');
                 Route::post('/edit-ajax', 'LanguageController@editAjax')->name('admin.language.editAjax');
                 Route::post('/default-status', 'LanguageController@defaultStatus')->name('admin.language.defaultStatus');
                 Route::post('/sort-ajax', 'LanguageController@sortAjax')->name('admin.language.sortAjax');
@@ -51,6 +52,8 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/update', 'LanguageGroupController@groupUpdate')->name('admin.languageGroup.update');
                 Route::post('/delete', 'LanguageGroupController@groupDelete')->name('admin.languageGroup.delete');
                 Route::post('/delete-ajax', 'LanguageGroupController@deleteAjax')->name('admin.languageGroup.deleteAjax');
+                Route::post('/all-delete-ajax', 'LanguageGroupController@allDeleteAjax')->name('admin.languageGroup.allDeleteAjax');
+                Route::post('/all-delete', 'LanguageGroupController@allDelete')->name('admin.languageGroup.allDelete');
                 Route::post('/edit-ajax', 'LanguageGroupController@groupEditAjax')->name('admin.languageGroup.editAjax');
                 Route::get('/search/{text?}', 'LanguageGroupController@groupSearch')->name('admin.languageGroup.search');
                 /*   Language Group Detail   */
@@ -73,6 +76,7 @@ Route::namespace('Admin')->group(function () {
                 Route::get('/search/{text?}', 'LanguagePhraseController@search')->name('admin.languagePhrase.search');
                 Route::post('/delete', 'LanguagePhraseController@delete')->name('admin.languagePhrase.delete');
                 Route::post('/delete-ajax', 'LanguagePhraseController@deleteAjax')->name('admin.languagePhrase.deleteAjax');
+                Route::post('/all-delete-ajax', 'LanguagePhraseController@allDeleteAjax')->name('admin.languagePhrase.allDeleteAjax');
             });
 
         });
@@ -89,6 +93,8 @@ Route::namespace('Admin')->group(function () {
                 Route::get('/edit/{id}', 'MenuController@edit')->name('admin.menu.edit');
                 Route::post('/position-add', 'MenuController@positionAdd')->name('admin.menu.positionAdd');
                 Route::post('/position-delete-ajax', 'MenuController@positionDeletAjax')->name('admin.menu.position.delete.ajax');
+                Route::post('/all-delete-ajax', 'MenuController@allDeleteAjax')->name('admin.menu.allDeleteAjax');
+                Route::post('/all-delete', 'MenuController@allDelete')->name('admin.menu.allDelete');
                 Route::post('/edit-ajax', 'MenuController@editAjax')->name('admin.menu.edit.ajax');
                 Route::post('/store-ajax', 'MenuController@storeAjax')->name('admin.menu.store.ajax');
                 Route::post('/change-ajax', 'MenuController@changeAjax')->name('admin.menu.change.ajax');
@@ -112,6 +118,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'UserController@statusAjax')->name('admin.user.statusAjax');
                 Route::post('/delete-ajax', 'UserController@deleteAjax')->name('admin.user.deleteAjax');
                 Route::post('/delete', 'UserController@delete')->name('admin.user.delete');
+                Route::post('/all-delete-ajax', 'UserController@allDeleteAjax')->name('admin.user.allDeleteAjax');
 
             });
 
@@ -148,6 +155,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'SlideController@statusAjax')->name('admin.slide.statusAjax');
                 Route::post('/delete', 'SlideController@delete')->name('admin.slide.delete');
                 Route::post('/delete-ajax', 'SlideController@deleteAjax')->name('admin.slide.deleteAjax');
+                Route::post('/all-delete-ajax', 'SlideController@allDeleteAjax')->name('admin.slide.allDeleteAjax');
 
             });
         });
@@ -166,6 +174,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'OnlineCatalogController@statusAjax')->name('admin.onlineCatalog.statusAjax');
                 Route::post('/delete', 'OnlineCatalogController@delete')->name('admin.onlineCatalog.delete');
                 Route::post('/delete-ajax', 'OnlineCatalogController@deleteAjax')->name('admin.onlineCatalog.deleteAjax');
+                Route::post('/all-delete-ajax', 'OnlineCatalogController@allDeleteAjax')->name('admin.onlineCatalog.allDeleteAjax');
 
             });
         });
@@ -185,6 +194,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'BannerController@statusAjax')->name('admin.banner.statusAjax');
                 Route::post('/delete', 'BannerController@delete')->name('admin.banner.delete');
                 Route::post('/delete-ajax', 'BannerController@deleteAjax')->name('admin.banner.deleteAjax');
+                Route::post('/all-delete-ajax', 'BannerController@allDeleteAjax')->name('admin.banner.allDeleteAjax');
 
             });
         });
@@ -205,6 +215,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'PartnersController@statusAjax')->name('admin.partner.statusAjax');
                 Route::post('/delete', 'PartnersController@delete')->name('admin.partner.delete');
                 Route::post('/delete-ajax', 'PartnersController@deleteAjax')->name('admin.partner.deleteAjax');
+                Route::post('/all-delete-ajax', 'PartnersController@allDeleteAjax')->name('admin.partner.allDeleteAjax');
 
             });
         });
@@ -224,6 +235,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ReviewsController@statusAjax')->name('admin.review.statusAjax');
                 Route::post('/delete', 'ReviewsController@delete')->name('admin.review.delete');
                 Route::post('/delete-ajax', 'ReviewsController@deleteAjax')->name('admin.review.deleteAjax');
+                Route::post('/all-delete-ajax', 'ReviewsController@allDeleteAjax')->name('admin.review.allDeleteAjax');
 
             });
         });
@@ -244,6 +256,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'TeamsController@statusAjax')->name('admin.team.statusAjax');
                 Route::post('/delete', 'TeamsController@delete')->name('admin.team.delete');
                 Route::post('/delete-ajax', 'TeamsController@deleteAjax')->name('admin.team.deleteAjax');
+                Route::post('/all-delete-ajax', 'TeamsController@allDeleteAjax')->name('admin.team.allDeleteAjax');
 
             });
         });
@@ -263,6 +276,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'PageController@statusAjax')->name('admin.page.statusAjax');
                 Route::post('/delete', 'PageController@delete')->name('admin.page.delete');
                 Route::post('/delete-ajax', 'PageController@deleteAjax')->name('admin.page.deleteAjax');
+                Route::post('/all-delete-ajax', 'PageController@allDeleteAjax')->name('admin.page.allDeleteAjax');
                 Route::get('/search', 'PageController@search')->name('admin.page.search');
 
             });
@@ -283,6 +297,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'PostController@statusAjax')->name('admin.post.statusAjax');
                 Route::post('/delete', 'PostController@delete')->name('admin.post.delete');
                 Route::post('/delete-ajax', 'PostController@deleteAjax')->name('admin.post.deleteAjax');
+                Route::post('/all-delete-ajax', 'PostController@allDeleteAjax')->name('admin.post.allDeleteAjax');
                 Route::get('/search', 'PostController@search')->name('admin.post.search');
                 Route::get('/categories/{id}', 'PostController@categories')->name('admin.post.categories');
 
@@ -304,6 +319,7 @@ Route::namespace('Admin')->group(function () {
 //                Route::post('/status-ajax', 'PostCategoryController@statusAjax')->name('admin.post.category.statusAjax');
 //                Route::post('/delete', 'PostCategoryController@delete')->name('admin.post.category.delete');
 //                Route::post('/delete-ajax', 'PostCategoryController@deleteAjax')->name('admin.post.category.deleteAjax');
+//                Route::post('/all-delete-ajax', 'PostCategoryController@allDeleteAjax')->name('admin.post.category.allDeleteAjax');
 //                Route::get('/search', 'PostCategoryController@search')->name('admin.post.category.search');
 //
 //            });
@@ -324,6 +340,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'GalleryController@statusAjax')->name('admin.gallery.statusAjax');
                 Route::post('/delete', 'GalleryController@delete')->name('admin.gallery.delete');
                 Route::post('/delete-ajax', 'GalleryController@deleteAjax')->name('admin.gallery.deleteAjax');
+                Route::post('/all-delete-ajax', 'GalleryController@allDeleteAjax')->name('admin.gallery.allDeleteAjax');
                 Route::get('/search', 'GalleryController@search')->name('admin.gallery.search');
                 Route::get('/categories/{id}', 'GalleryController@categories')->name('admin.gallery.categories');
 
@@ -345,6 +362,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'GalleryCategoryController@statusAjax')->name('admin.gallery.category.statusAjax');
                 Route::post('/delete', 'GalleryCategoryController@delete')->name('admin.gallery.category.delete');
                 Route::post('/delete-ajax', 'GalleryCategoryController@deleteAjax')->name('admin.gallery.category.deleteAjax');
+                Route::post('/all-delete-ajax', 'GalleryCategoryController@allDeleteAjax')->name('admin.gallery.category.allDeleteAjax');
                 Route::get('/search', 'GalleryCategoryController@search')->name('admin.gallery.category.search');
 
             });
@@ -365,6 +383,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ServiceController@statusAjax')->name('admin.service.statusAjax');
                 Route::post('/delete', 'ServiceController@delete')->name('admin.service.delete');
                 Route::post('/delete-ajax', 'ServiceController@deleteAjax')->name('admin.service.deleteAjax');
+                Route::post('/all-delete-ajax', 'ServiceController@allDeleteAjax')->name('admin.service.allDeleteAjax');
                 Route::post('/sort-ajax', 'ServiceController@sortAjax')->name('admin.service.sortAjax');
                 Route::get('/search', 'ServiceController@search')->name('admin.service.search');
                 Route::get('/categories/{id}', 'ServiceController@categories')->name('admin.service.categories');
@@ -387,6 +406,7 @@ Route::namespace('Admin')->group(function () {
 //                Route::post('/status-ajax', 'ServiceCategoryController@statusAjax')->name('admin.service.category.statusAjax');
 //                Route::post('/delete', 'ServiceCategoryController@delete')->name('admin.service.category.delete');
 //                Route::post('/delete-ajax', 'ServiceCategoryController@deleteAjax')->name('admin.service.category.deleteAjax');
+//                Route::post('/all-delete-ajax', 'ServiceCategoryController@allDeleteAjax')->name('admin.service.category.allDeleteAjax');
 //                Route::get('/search', 'ServiceCategoryController@search')->name('admin.service.category.search');
 //
 //            });
@@ -408,6 +428,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ProductController@statusAjax')->name('admin.product.statusAjax');
                 Route::post('/delete', 'ProductController@delete')->name('admin.product.delete');
                 Route::post('/delete-ajax', 'ProductController@deleteAjax')->name('admin.product.deleteAjax');
+                Route::post('/all-delete-ajax', 'ProductController@allDeleteAjax')->name('admin.product.allDeleteAjax');
                 Route::get('/search', 'ProductController@search')->name('admin.product.search');
                 Route::get('/categories/{id}', 'ProductController@categories')->name('admin.product.categories');
                 Route::get('/collections/{id}', 'ProductController@collections')->name('admin.product.collections');
@@ -438,6 +459,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ProductCategoryController@statusAjax')->name('admin.product.category.statusAjax');
                 Route::post('/delete', 'ProductCategoryController@delete')->name('admin.product.category.delete');
                 Route::post('/delete-ajax', 'ProductCategoryController@deleteAjax')->name('admin.product.category.deleteAjax');
+                Route::post('/all-delete-ajax', 'ProductCategoryController@allDeleteAjax')->name('admin.product.category.allDeleteAjax');
                 Route::get('/search', 'ProductCategoryController@search')->name('admin.product.category.search');
 
             });
@@ -457,6 +479,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ProductCollectionController@statusAjax')->name('admin.product.collection.statusAjax');
                 Route::post('/delete', 'ProductCollectionController@delete')->name('admin.product.collection.delete');
                 Route::post('/delete-ajax', 'ProductCollectionController@deleteAjax')->name('admin.product.collection.deleteAjax');
+                Route::post('/all-delete-ajax', 'ProductCollectionController@allDeleteAjax')->name('admin.product.collection.allDeleteAjax');
                 Route::get('/search', 'ProductCollectionController@search')->name('admin.product.collection.search');
 
             });
@@ -476,6 +499,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ProductModelController@statusAjax')->name('admin.product.model.statusAjax');
                 Route::post('/delete', 'ProductModelController@delete')->name('admin.product.model.delete');
                 Route::post('/delete-ajax', 'ProductModelController@deleteAjax')->name('admin.product.model.deleteAjax');
+                Route::post('/all-delete-ajax', 'ProductModelController@allDeleteAjax')->name('admin.product.model.allDeleteAjax');
                 Route::get('/search', 'ProductModelController@search')->name('admin.product.model.search');
 
             });
@@ -496,6 +520,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'ProductManufacturerController@statusAjax')->name('admin.product.manufacturer.statusAjax');
                 Route::post('/delete', 'ProductManufacturerController@delete')->name('admin.product.manufacturer.delete');
                 Route::post('/delete-ajax', 'ProductManufacturerController@deleteAjax')->name('admin.product.manufacturer.deleteAjax');
+                Route::post('/all-delete-ajax', 'ProductManufacturerController@allDeleteAjax')->name('admin.product.manufacturer.allDeleteAjax');
                 Route::get('/search', 'ProductManufacturerController@search')->name('admin.product.manufacturer.search');
 
             });
@@ -516,11 +541,13 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'AttributeGroupController@statusAjax')->name('admin.attribute.group.statusAjax');
                 Route::post('/delete', 'AttributeGroupController@delete')->name('admin.attribute.group.delete');
                 Route::post('/delete-ajax', 'AttributeGroupController@deleteAjax')->name('admin.attribute.group.deleteAjax');
+                Route::post('/all-delete', 'AttributeGroupController@allDelete')->name('admin.attribute.group.allDelete');
+                Route::post('/all-delete-ajax', 'AttributeGroupController@allDeleteAjax')->name('admin.attribute.group.allDeleteAjax');
                 Route::get('/search', 'AttributeGroupController@search')->name('admin.attribute.group.search');
 
             });
         });
-        /*   ATTRIBUTE GROU END   */
+        /*   ATTRIBUTE GROUP END   */
 
 
         /*   ATTRIBUTE  START   */
@@ -535,6 +562,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'AttributeController@statusAjax')->name('admin.attribute.statusAjax');
                 Route::post('/delete', 'AttributeController@delete')->name('admin.attribute.delete');
                 Route::post('/delete-ajax', 'AttributeController@deleteAjax')->name('admin.attribute.deleteAjax');
+                Route::post('/all-delete-ajax', 'AttributeController@allDeleteAjax')->name('admin.attribute.allDeleteAjax');
                 Route::get('/search', 'AttributeController@search')->name('admin.attribute.search');
                 Route::get('/list/{id}', 'AttributeController@list')->name('admin.attribute.list');
 
@@ -557,6 +585,8 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'OptionGroupController@statusAjax')->name('admin.option.group.statusAjax');
                 Route::post('/delete', 'OptionGroupController@delete')->name('admin.option.group.delete');
                 Route::post('/delete-ajax', 'OptionGroupController@deleteAjax')->name('admin.option.group.deleteAjax');
+                Route::post('/all-delete', 'OptionGroupController@allDelete')->name('admin.option.group.allDelete');
+                Route::post('/all-delete-ajax', 'OptionGroupController@allDeleteAjax')->name('admin.option.group.allDeleteAjax');
                 Route::get('/search', 'OptionGroupController@search')->name('admin.option.group.search');
 
             });
@@ -576,6 +606,7 @@ Route::namespace('Admin')->group(function () {
                 Route::post('/status-ajax', 'OptionController@statusAjax')->name('admin.option.statusAjax');
                 Route::post('/delete', 'OptionController@delete')->name('admin.option.delete');
                 Route::post('/delete-ajax', 'OptionController@deleteAjax')->name('admin.option.deleteAjax');
+                Route::post('/all-delete-ajax', 'OptionController@allDeleteAjax')->name('admin.option.allDeleteAjax');
                 Route::get('/search', 'OptionController@search')->name('admin.option.search');
                 Route::get('/list/{id}', 'OptionController@list')->name('admin.option.list');
                 Route::post('/option-add-ajax', 'OptionController@getOptionAddAjax')->name('admin.option.getOptionAddAjax');

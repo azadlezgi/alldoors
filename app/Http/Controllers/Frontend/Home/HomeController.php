@@ -43,7 +43,7 @@ class HomeController extends Controller
 
 
 
-        $services = Service::with(array('servicesTranlations' => function ($query) use ($request) {
+        $services = Service::with(array('servicesTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -69,7 +69,7 @@ class HomeController extends Controller
             ->get();
 
 
-        $teams = Team::with(array('teamsTranlations' => function ($query) use ($request) {
+        $teams = Team::with(array('teamsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)
@@ -78,7 +78,7 @@ class HomeController extends Controller
             ->get();
 
 
-        $reviews = Review::with(array('reviewsTranlations' => function ($query) use ($request) {
+        $reviews = Review::with(array('reviewsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))->where('status', 1)
@@ -86,7 +86,7 @@ class HomeController extends Controller
             ->get();
 
 
-        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))

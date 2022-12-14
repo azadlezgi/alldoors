@@ -14,7 +14,7 @@ class GalleryCategory extends Model
     protected $guarded = [];
 
 
-    public function galleriesCategoriesTranlations()
+    public function galleriesCategoriesTranslations()
     {
         return $this->hasMany('App\Models\Gallery\GalleryCategoryTranslation','category_id','id');
     }

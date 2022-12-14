@@ -14,8 +14,8 @@ class AttributeService
     {
         if(isset($attributeID)){
             $attribute = Attribute::where('id', $attributeID)
-                ->with('attributesTranlations')->first();
-            return $attribute->attributesTranlations[0]->name;
+                ->with('attributesTranslations')->first();
+            return $attribute->attributesTranslations[0]->name;
         }
 
 

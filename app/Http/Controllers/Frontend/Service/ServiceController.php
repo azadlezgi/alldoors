@@ -17,7 +17,7 @@ class ServiceController extends Controller
 
     public function index(Request $request)
     {
-        $services = Service::with(array('servicesTranlations' => function ($query) use ($request) {
+        $services = Service::with(array('servicesTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -71,7 +71,7 @@ class ServiceController extends Controller
         $slug = $request->slug;
         $service = Service::where('slug', $slug)
             ->where('status', 1)
-            ->with(['servicesTranlations' => function ($query) use ($request) {
+            ->with(['servicesTranslations' => function ($query) use ($request) {
                 $query->where('language_id', $request->languageID);
             }])
             ->with('servicesCategoriesCheck')
@@ -90,7 +90,7 @@ class ServiceController extends Controller
             ->get();
 
 
-        $services = Service::with(array('servicesTranlations' => function ($query) use ($request) {
+        $services = Service::with(array('servicesTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))
@@ -118,7 +118,7 @@ class ServiceController extends Controller
 
 
 
-        $posts = Post::with(array('postsTranlations' => function ($query) use ($request) {
+        $posts = Post::with(array('postsTranslations' => function ($query) use ($request) {
             $query->where('language_id', $request->languageID);
 
         }))

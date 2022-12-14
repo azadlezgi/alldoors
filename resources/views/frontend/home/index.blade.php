@@ -12,152 +12,92 @@
                 <div class="container mainscreen__container">
 
                     @if($slides)
-                    <div class="swiper-slider">
-                        <div class="mainscreen__wrapper owl-carousel owl-theme">
-                            @foreach($slides as $slide)
-                            <div class="mainscreen__item item">
-                                <div class="mainscreen__image">
-                                    <img src="{{  \App\Services\ImageService::customImageSize($slide->image,632,422,80) }}" alt="{{ $slide->title }}">
-                                </div>
-                                <div class="mainscreen__text">
-                                    @if($slide->title)
-                                    <div class="h1 mainscreen__title">{{ $slide->title }}</div>
-                                    @endif
-                                    @if($slide->sub_title)
-                                    <div class="mainscreen__desc">
-                                        {!! $slide->sub_title !!}
-                                    </div>
-                                    @endif
-                                    @if($slide->button_name || $slide->button_url)
-                                    <div class="mainscreen__btn">
-                                        <a href="{{ $slide->button_url }}" class="btn btn_block btn_accent">
-                                            @if($slide->button_name)
-                                            {{ $slide->button_name }}
-                                            @else
-                                            {{ language('frontend.general.more') }}
+                        <div class="swiper-slider">
+                            <div class="mainscreen__wrapper owl-carousel owl-theme">
+                                @foreach($slides as $slide)
+                                    <div class="mainscreen__item item">
+                                        <div class="mainscreen__image">
+                                            <img
+                                                src="{{  \App\Services\ImageService::customImageSize($slide->image,632,422,80) }}"
+                                                alt="{{ $slide->title }}">
+                                        </div>
+                                        <div class="mainscreen__text">
+                                            @if($slide->title)
+                                                <div class="h1 mainscreen__title">{{ $slide->title }}</div>
                                             @endif
-                                        </a>
+                                            @if($slide->sub_title)
+                                                <div class="mainscreen__desc">
+                                                    {!! $slide->sub_title !!}
+                                                </div>
+                                            @endif
+                                            @if($slide->button_name || $slide->button_url)
+                                                <div class="mainscreen__btn">
+                                                    <a href="{{ $slide->button_url }}" class="btn btn_block btn_accent">
+                                                        @if($slide->button_name)
+                                                            {{ $slide->button_name }}
+                                                        @else
+                                                            {{ language('frontend.general.more') }}
+                                                        @endif
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                    @endif
-                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
+                            <div class="mainscreen__controls">
+                                <div class="slider-dots swiper-pagination-clickable swiper-pagination-bullets"></div>
+                                <div class="slider-arrows"></div>
+                            </div>
                         </div>
-                    </div>
                     @endif
 
-                    <div class="socials"><span class="socials__desc">Мы в соцсетях:</span> <a rel="nofollow"
-                                                                                              target="_blank"
-                                                                                              href="https://vk.com/dveri_velldoris"
-                                                                                              class="socials__item socials__item_vk"><i>
-                                <svg class="icon">
-                                    <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_vk"></use>
-                                </svg>
-                            </i>
-                            <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                                <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                    <stop stop-color="#fdf497" offset="0"></stop>
-                                    <stop stop-color="#fdf497" offset="0.05"></stop>
-                                    <stop stop-color="#fd5949" offset="0.45"></stop>
-                                    <stop stop-color="#d6249f" offset="0.6"></stop>
-                                    <stop stop-color="#285AEB" offset="0.9"></stop>
-                                </radialGradient>
-                            </svg>
-                        </a><a rel="nofollow" target="_blank" href="https://t.me/velldoris_official"
-                               class="socials__item socials__item_telegram"><i>
-                                <svg class="icon">
-                                    <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_telegram"></use>
-                                </svg>
-                            </i>
-                            <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                                <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                    <stop stop-color="#fdf497" offset="0"></stop>
-                                    <stop stop-color="#fdf497" offset="0.05"></stop>
-                                    <stop stop-color="#fd5949" offset="0.45"></stop>
-                                    <stop stop-color="#d6249f" offset="0.6"></stop>
-                                    <stop stop-color="#285AEB" offset="0.9"></stop>
-                                </radialGradient>
-                            </svg>
-                        </a><a rel="nofollow" target="_blank"
-                               href="https://www.youtube.com/channel/UCKSYBNpsYNPNqH6ijDRTsZw"
-                               class="socials__item socials__item_yt"><i>
-                                <svg class="icon">
-                                    <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_yt"></use>
-                                </svg>
-                            </i>
-                            <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                                <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                    <stop stop-color="#fdf497" offset="0"></stop>
-                                    <stop stop-color="#fdf497" offset="0.05"></stop>
-                                    <stop stop-color="#fd5949" offset="0.45"></stop>
-                                    <stop stop-color="#d6249f" offset="0.6"></stop>
-                                    <stop stop-color="#285AEB" offset="0.9"></stop>
-                                </radialGradient>
-                            </svg>
-                        </a><a rel="nofollow" target="_blank" href="https://zen.yandex.ru/id/5ffc38c061dbd60faf5a82ae"
-                               class="socials__item socials__item_yazen"><i>
-                                <svg class="icon">
-                                    <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_yazen"></use>
-                                </svg>
-                            </i>
-                            <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                                <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                    <stop stop-color="#fdf497" offset="0"></stop>
-                                    <stop stop-color="#fdf497" offset="0.05"></stop>
-                                    <stop stop-color="#fd5949" offset="0.45"></stop>
-                                    <stop stop-color="#d6249f" offset="0.6"></stop>
-                                    <stop stop-color="#285AEB" offset="0.9"></stop>
-                                </radialGradient>
-                            </svg>
-                        </a><a rel="nofollow" target="_blank" href="https://ok.ru/group/68895085494316"
-                               class="socials__item socials__item_ok"><i>
-                                <svg class="icon">
-                                    <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_ok"></use>
-                                </svg>
-                            </i>
-                            <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                                <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                    <stop stop-color="#fdf497" offset="0"></stop>
-                                    <stop stop-color="#fdf497" offset="0.05"></stop>
-                                    <stop stop-color="#fd5949" offset="0.45"></stop>
-                                    <stop stop-color="#d6249f" offset="0.6"></stop>
-                                    <stop stop-color="#285AEB" offset="0.9"></stop>
-                                </radialGradient>
-                            </svg>
-                        </a></div>
+                    @if(!empty(json_decode(setting('social'))))
+                        <div class="socials">
+                            <span class="socials__desc">{{ language('genereal.we_social') }}</span>
+                            @foreach(json_decode(setting('social')) as $key => $value)
+                                <a
+                                    rel="nofollow"
+                                    target="_blank"
+                                    href="{{ $value->link }}"
+                                    class="socials__item socials__item_{{ $value->name }}"
+                                >
+                                    <i class="icon socicon-{{ $value->name }}"></i>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="container">
-                <div class="promovideoslider">
-                    <div class="h1 promovideoslider__title">Видео</div> <!----></div>
-            </div>
-            <div class="catalog" style="min-height:600px;">
+{{--            <div class="container">--}}
+{{--                <div class="promovideoslider">--}}
+{{--                    <div class="h1 promovideoslider__title">Видео</div> <!----></div>--}}
+{{--            </div>--}}
+            <div class="catalog">
                 <div class="catalog__wrapper container">
                     <div class="h1">Каталог</div>
-                    <div class="catalog-slider" style="display:none;"><!----></div>
                     <ul class="catalog-sections">
-                        <li class="catalog-sections__item"><a href="catalog/mezhkomnatnye-dveri/index.html"
-                                                              class="catalog-sections__link">
+                        <li class="catalog-sections__item">
+                            <a href="catalog/mezhkomnatnye-dveri/index.html" class="catalog-sections__link">
                                 <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/2ff/900_600_1/2ff55539df4e4196103f64eaf2960c48.jpg"
-                                                         alt="Межкомнатные двери" class="base-img"></figure>
+                                    <figure>
+                                        <img loading="lazy" src="https://www.velldoris.net/upload/resize_cache/iblock/2ff/900_600_1/2ff55539df4e4196103f64eaf2960c48.jpg" alt="Межкомнатные двери" class="base-img">
+                                    </figure>
                                 </div>
                                 <div class="h3 catalog-sections__item-title">Межкомнатные двери</div>
                             </a></li>
-                        <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-pod-pokrasku/index.html"
-                                    class="catalog-sections__link">
+                        <li class="catalog-sections__item">
+                            <a href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-pod-pokrasku/index.html" class="catalog-sections__link">
                                 <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/765/900_600_1/765b332b0d60e331e2622802aa01492f.jpg"
-                                                         alt="Скрытые двери" class="base-img"></figure>
+                                    <figure>
+                                        <img loading="lazy" src="https://www.velldoris.net/upload/resize_cache/iblock/765/900_600_1/765b332b0d60e331e2622802aa01492f.jpg" alt="Скрытые двери" class="base-img">
+                                    </figure>
                                 </div>
                                 <div class="h3 catalog-sections__item-title">Скрытые двери</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-emal/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-emal/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/435/900_600_1/435797370df4c9f14d40f123110c78f8.jpg"
@@ -201,8 +141,8 @@
                     <div class="catalog-slider" style="display:none;"><!----></div>
                     <ul class="catalog-sections">
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/ledo/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/ledo/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/5b7/831_600_1/5b73209eb3f3f8b1f56c9bab0a34454a.jpg"
@@ -211,8 +151,8 @@
                                 <div class="h3 catalog-sections__item-title">Ledo</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/alto/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/alto/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/2b0/900_600_1/2b0310a2452010d43d309f30b1ef6a0f.jpg"
@@ -221,8 +161,8 @@
                                 <div class="h3 catalog-sections__item-title">Alto</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/fly/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/fly/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/8c5/831_600_1/8c513b165c035fd31c9236702b45e61b.jpg"
@@ -231,8 +171,8 @@
                                 <div class="h3 catalog-sections__item-title">Fly</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/invisible/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/invisible/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/345/900_600_1/345f131816fbe6d7b27028c960e5607b.jpg"
@@ -241,8 +181,8 @@
                                 <div class="h3 catalog-sections__item-title">Invisible</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/scandi/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/scandi/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/4c2/900_600_1/4c2a9fd0482387841aaee737fb85e81f.jpg"
@@ -251,8 +191,8 @@
                                 <div class="h3 catalog-sections__item-title">Scandi</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/scandi-neo/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/scandi-neo/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/0f9/831_600_1/0f94b686cd1c7dab964bbcb9f687936b.jpg"
@@ -261,8 +201,8 @@
                                 <div class="h3 catalog-sections__item-title">Scandi Neo</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/xline/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/xline/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/1ad/900_600_1/1ad2f10bedfc132b407b583f14d403e1.jpg"
@@ -271,8 +211,8 @@
                                 <div class="h3 catalog-sections__item-title">Xline</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/techno/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/techno/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/722/900_600_1/7226df909981481895b1a082788c9aa6.jpg"
@@ -281,8 +221,8 @@
                                 <div class="h3 catalog-sections__item-title">Techno</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/villa/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/villa/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/301/900_600_1/3017dcc6b57f0f5a993ac7fe98aef9bb.jpg"
@@ -291,8 +231,8 @@
                                 <div class="h3 catalog-sections__item-title">Villa</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/premier/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/premier/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/db6/900_600_1/db645e9ecfc0efb01348f391cf8492ef.jpg"
@@ -301,8 +241,8 @@
                                 <div class="h3 catalog-sections__item-title">Premier</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/smart-z/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/smart-z/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/10c/900_600_1/10cb90c0c3389d01e4868ccd17cc7e98.jpg"
@@ -311,8 +251,8 @@
                                 <div class="h3 catalog-sections__item-title">Smart Z</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/duplex/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/duplex/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/585/900_600_1/585d06400bba05b338488a04ac521578.jpg"
@@ -321,8 +261,8 @@
                                 <div class="h3 catalog-sections__item-title">Duplex</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/next/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/next/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/0de/900_600_1/0de68fa1923e84e0196864a8060e0051.jpg"
@@ -331,8 +271,8 @@
                                 <div class="h3 catalog-sections__item-title">Next</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/linea/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/linea/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/9f3/900_600_1/9f3f78ede7494b604331969e3cc858ac.jpg"
@@ -341,8 +281,8 @@
                                 <div class="h3 catalog-sections__item-title">Linea</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/unica/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/unica/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/c01/900_600_1/c01df29f9143ccbdd817c42272db5a6e.jpg"
@@ -351,8 +291,8 @@
                                 <div class="h3 catalog-sections__item-title">Unica</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/trend/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/trend/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/6ce/900_600_1/6ce2b21e3f47db5eb8f5abe402613282.jpg"
@@ -361,8 +301,8 @@
                                 <div class="h3 catalog-sections__item-title">Trend</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/city/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/city/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/8f0/900_600_1/8f06ada7cd9cd9a29b0342bd91c7532a.jpg"
@@ -371,8 +311,8 @@
                                 <div class="h3 catalog-sections__item-title">City</div>
                             </a></li>
                         <li class="catalog-sections__item"><a
-                                    href="catalog/mezhkomnatnye-dveri/collections/loft/index.html"
-                                    class="catalog-sections__link">
+                                href="catalog/mezhkomnatnye-dveri/collections/loft/index.html"
+                                class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure><!----> <img loading="lazy"
                                                          src="https://www.velldoris.net/upload/resize_cache/iblock/06d/900_600_1/06dba2caa74634882c1055b4ec35abd7.jpg"
@@ -421,8 +361,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">20</span> <span
-                                                        class="about-card__title-text">лет опыта</span></div>
+                                                    class="about-card__title-special">20</span> <span
+                                                    class="about-card__title-text">лет опыта</span></div>
                                             <div class="about-card__text about-card__text_tablet">Многолетний опыт
                                                 работы, постоянный контроль качества и технологий, позволяют нам
                                                 эффективно взаимодействовать с нашими партнерами и постоянно развиваться
@@ -445,8 +385,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">3000</span> <span
-                                                        class="about-card__title-text">точек продаж</span></div>
+                                                    class="about-card__title-special">3000</span> <span
+                                                    class="about-card__title-text">точек продаж</span></div>
                                             <div class="about-card__text about-card__text_tablet">В ассортимент входят
                                                 как стандартные дверные полотна, так и многофункциональные двери
                                                 специального назначения: усиленные, усиленные звукоизоляционные
@@ -479,8 +419,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">1000</span> <span
-                                                        class="about-card__title-text">опытных сотрудников</span></div>
+                                                    class="about-card__title-special">1000</span> <span
+                                                    class="about-card__title-text">опытных сотрудников</span></div>
                                             <div class="about-card__text about-card__text_tablet">Наши дизайнеры и
                                                 технологи посещают выставки в Италии и Германии, тщательно изучают
                                                 тенденции дизайна не только дверных блоков, но и деревообрабатывающей и
@@ -509,8 +449,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">3</span> <span
-                                                        class="about-card__title-text">завода в группе</span></div>
+                                                    class="about-card__title-special">3</span> <span
+                                                    class="about-card__title-text">завода в группе</span></div>
                                             <div class="about-card__text about-card__text_tablet">Завод по производству
                                                 дверей VellDoris оснащен самыми современными автоматизированными
                                                 деревоoбрабатывающими линиями от ведущих производителей Италии и
@@ -536,8 +476,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">20</span> <span
-                                                        class="about-card__title-text">лет опыта</span></div>
+                                                    class="about-card__title-special">20</span> <span
+                                                    class="about-card__title-text">лет опыта</span></div>
                                             <div class="about-card__text about-card__text_tablet">Многолетний опыт
                                                 работы, постоянный контроль качества и технологий, позволяют нам
                                                 эффективно взаимодействовать с нашими партнерами и постоянно развиваться
@@ -560,8 +500,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">3000</span> <span
-                                                        class="about-card__title-text">точек продаж</span></div>
+                                                    class="about-card__title-special">3000</span> <span
+                                                    class="about-card__title-text">точек продаж</span></div>
                                             <div class="about-card__text about-card__text_tablet">В ассортимент входят
                                                 как стандартные дверные полотна, так и многофункциональные двери
                                                 специального назначения: усиленные, усиленные звукоизоляционные
@@ -595,8 +535,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">1000</span> <span
-                                                        class="about-card__title-text">опытных сотрудников</span></div>
+                                                    class="about-card__title-special">1000</span> <span
+                                                    class="about-card__title-text">опытных сотрудников</span></div>
                                             <div class="about-card__text about-card__text_tablet">Наши дизайнеры и
                                                 технологи посещают выставки в Италии и Германии, тщательно изучают
                                                 тенденции дизайна не только дверных блоков, но и деревообрабатывающей и
@@ -625,8 +565,8 @@
                                         </div>
                                         <div class="about-card__content">
                                             <div class="about-card__title"><span
-                                                        class="about-card__title-special">3</span> <span
-                                                        class="about-card__title-text">завода в группе</span></div>
+                                                    class="about-card__title-special">3</span> <span
+                                                    class="about-card__title-text">завода в группе</span></div>
                                             <div class="about-card__text about-card__text_tablet">Завод по производству
                                                 дверей VellDoris оснащен самыми современными автоматизированными
                                                 деревоoбрабатывающими линиями от ведущих производителей Италии и
@@ -670,13 +610,20 @@
 @section("JS")
 
     <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            nav: true,
-            items: 1,
-            autoplay: true,
-            autoplayTimeout: 3000,
-        })
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                nav: true,
+                dots: true,
+                items: 1,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                margin: 30,
+                navContainer: '.mainscreen__controls .slider-arrows',
+                dotsContainer: '.mainscreen__controls .slider-dots',
+            });
+        });
     </script>
 
 @endsection
