@@ -597,56 +597,395 @@ if(checkRightSidebar == '1' && checkLeftSidebar == '1'){
 
 
 
-if (getWindowWidth <= 1200) {
-    $('.right-sidebar-status-right-container').hide();
-    $('.right-sidebar-status-left-container').hide();
-} else {
-    $('.right-sidebar-status-left-container').hide();
-    $('.right-sidebar-status-right-container').css('display','flex');
-}
-
-
-
-$(window).resize(function () {
-    $('.select2-container').css('width','100%');
-    getWindowWidth = $(window).width();
     if (getWindowWidth <= 1200) {
         $('.right-sidebar-status-right-container').hide();
         $('.right-sidebar-status-left-container').hide();
-        $('.container-fluid .row .col-my-lg-4').show();
     } else {
-        let rightSidebarStatus = $('.right-sidebar-status-left-container').attr('right-sidebar-status');
-        if(rightSidebarStatus == '1'){
-            $('.container-fluid .row .col-my-lg-4').hide();
-            $('.container-fluid .row .col-my-lg-8').css('flex','0 0 100%').css('max-width','100%');
-            $('.right-sidebar-status-right-container').hide();
-            $('.right-sidebar-status-left-container').css('display','flex');
-        }else {
-            $('.container-fluid .row .col-my-lg-4').show();
-            $('.container-fluid .row .col-my-lg-8').removeAttr('style');
-            $('.right-sidebar-status-right-container').css('display','flex');
-            $('.right-sidebar-status-left-container').hide();
-        }
+        $('.right-sidebar-status-left-container').hide();
+        $('.right-sidebar-status-right-container').css('display','flex');
     }
-});
-
-$(document).on('click','.right-sidebar-status-right-container',function (){
-    $('.right-sidebar-status-left-container').attr('right-sidebar-status','1');
-    $('.right-sidebar-status-left-container').css('display','flex');
-    $(this).hide();
-    $('.container-fluid .row .col-my-lg-4').hide();
-    $('.container-fluid .row .col-my-lg-8').css('flex','0 0 100%').css('max-width','100%');
-});
 
 
-$(document).on('click','.right-sidebar-status-left-container',function (){
-    $(this).attr('right-sidebar-status','0');
-    $('.container-fluid .row .col-my-lg-4').show();
-    $('.container-fluid .row .col-my-lg-8').removeAttr('style');
-    $('.right-sidebar-status-left-container').hide();
-    $('.right-sidebar-status-right-container').css('display','flex');
-});
+
+    $(window).resize(function () {
+        $('.select2-container').css('width','100%');
+        getWindowWidth = $(window).width();
+        if (getWindowWidth <= 1200) {
+            $('.right-sidebar-status-right-container').hide();
+            $('.right-sidebar-status-left-container').hide();
+            $('.container-fluid .row .col-my-lg-4').show();
+        } else {
+            let rightSidebarStatus = $('.right-sidebar-status-left-container').attr('right-sidebar-status');
+            if(rightSidebarStatus == '1'){
+                $('.container-fluid .row .col-my-lg-4').hide();
+                $('.container-fluid .row .col-my-lg-8').css('flex','0 0 100%').css('max-width','100%');
+                $('.right-sidebar-status-right-container').hide();
+                $('.right-sidebar-status-left-container').css('display','flex');
+            }else {
+                $('.container-fluid .row .col-my-lg-4').show();
+                $('.container-fluid .row .col-my-lg-8').removeAttr('style');
+                $('.right-sidebar-status-right-container').css('display','flex');
+                $('.right-sidebar-status-left-container').hide();
+            }
+        }
+    });
+
+    $(document).on('click','.right-sidebar-status-right-container',function (){
+        $('.right-sidebar-status-left-container').attr('right-sidebar-status','1');
+        $('.right-sidebar-status-left-container').css('display','flex');
+        $(this).hide();
+        $('.container-fluid .row .col-my-lg-4').hide();
+        $('.container-fluid .row .col-my-lg-8').css('flex','0 0 100%').css('max-width','100%');
+    });
+
+
+    $(document).on('click','.right-sidebar-status-left-container',function (){
+        $(this).attr('right-sidebar-status','0');
+        $('.container-fluid .row .col-my-lg-4').show();
+        $('.container-fluid .row .col-my-lg-8').removeAttr('style');
+        $('.right-sidebar-status-left-container').hide();
+        $('.right-sidebar-status-right-container').css('display','flex');
+    });
 }
 
 
-    /*   RIGHT SIDEBAR STAUS HIDE OR SHOW END   */
+/*   RIGHT SIDEBAR STAUS HIDE OR SHOW END   */
+
+
+/*   SELECT ALL BTN START   */
+$(document).on('change','.select-all-btn',function (){
+
+    let selectAllBtnStatus = $(this).find('input').is(':checked')
+    let selectElementBtn = $('.select-element-btn');
+    if(selectAllBtnStatus){
+        selectElementBtn.each(function (){
+            let element = $(this);
+            element.find('input').prop('checked','checked');
+            $('.select-btn-action').show();
+        })
+    }else {
+        selectElementBtn.each(function (){
+            let element = $(this);
+            element.find('input').prop('checked','');
+            $('.select-btn-action').hide();
+
+        })
+    }
+});
+/*   SELECT ALL BTN END   */
+
+/*   SELECT ELEMENT BTN START   */
+$(document).on('change','.select-element-btn',function (){
+    let selectElementBtn = $('.select-element-btn').find('input').is(':checked');
+
+    if(!selectElementBtn){
+        $('.select-all-btn').find('input').prop('checked','');
+        $('.select-btn-action').hide();
+    }else {
+        $('.select-all-btn').find('input').prop('checked','checked');
+        $('.select-btn-action').show();
+    }
+
+});
+/*   SELECT ELEMENT BTN END   */
+
+/*   DELETE ALL SELECTED ELEMENTS START   */
+function deleteALlSelectedElements(title,text,yes,no,routeDelete,routeIndex){
+    $(document).on('click','.select-btn-action',function (e){
+        e.preventDefault();
+        Swal.fire({
+            title: `${title}`,
+            html: `${text}`,
+            icon: "error",
+            showCancelButton: true,
+            confirmButtonText: `${yes}`,
+            cancelButtonText: `${no}`,
+            customClass: {
+                confirmButton: "btn btn-light-danger font-weight-bold",
+                cancelButton: 'btn btn-light-primary font-weight-bold',
+            }
+        }).then(function (result) {
+            if (result.value) {
+                let selectElementBtn = $('.select-element-btn');
+
+                let dataIDs = [];
+                selectElementBtn.each(function (){
+                    let element = $(this);
+                    let elementIsTrue = element.find('input').is(':checked');
+                    if(elementIsTrue){
+                        let dataID = element.find('input').closest('.select-element-btn').attr('data-id');
+                        dataIDs.push(dataID);
+                    }
+                })
+
+                $.ajax({
+                    url: `${routeDelete}`,
+                    type: 'POST',
+                    data: {IDs:dataIDs},
+                    dataType: 'JSON',
+                    success: function (response) {
+                        if (response.success) {
+                            // location.reload();
+                            location.href = `${routeIndex}`;
+                        }
+                    }
+                });
+
+
+            }
+        });
+    });
+}
+
+
+function deleteALlSelectedElementsAttributeOrOptionsGroups(title,text,errorText,yes,no,routeDeleteAjax,routeDelete,routeIndex){
+    $(document).on('click','.select-btn-action',function (e){
+        e.preventDefault();
+
+
+        Swal.fire({
+            title: `${title}`,
+            html: `${text}`,
+            icon: "error",
+            showCancelButton: true,
+            confirmButtonText: `${yes}`,
+            cancelButtonText: `${no}`,
+            customClass: {
+                confirmButton: "btn btn-light-danger font-weight-bold",
+                cancelButton: 'btn btn-light-primary font-weight-bold',
+            }
+        }).then(function (result) {
+            if (result.value) {
+
+
+                let selectElementBtn = $('.select-element-btn');
+                let dataIDs = [];
+                selectElementBtn.each(function (){
+                    let element = $(this);
+                    let elementIsTrue = element.find('input').is(':checked');
+                    if(elementIsTrue){
+                        let dataID = element.find('input').closest('.select-element-btn').attr('data-id');
+                        dataIDs.push(dataID);
+                    }
+                })
+
+
+                $.ajax({
+                    url: `${routeDeleteAjax}`,
+                    type: 'POST',
+                    data: {IDs:dataIDs},
+                    dataType: 'JSON',
+                    success: function (response) {
+                        if (response.success) {
+
+                            if (response.error) {
+
+                                let attributeGroupName = '';
+
+
+                                response.data.name.forEach(function(data, index, array){
+                                    if (index === array.length - 1){
+                                        attributeGroupName += data;
+                                    }else {
+                                        attributeGroupName += data+',';
+                                    }
+                                });
+
+
+                                Swal.fire({
+                                    title: "Diqqət!",
+                                    html: `${errorText} <b>${attributeGroupName}</b>`,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "ok!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }else {
+
+                                let ids = response.data.id;
+
+                                $.ajax({
+                                    url: `${routeDelete}`,
+                                    type: 'POST',
+                                    data: {IDs:ids},
+                                    dataType: 'JSON',
+                                    success: function (response) {
+                                        if (response.success) {
+                                            location.href = `${routeIndex}`;
+                                        }
+
+                                    }
+                                });
+                            }
+
+
+                        }
+                    }
+                });
+
+            }
+        });
+    });
+}
+
+
+function deleteALlSelectedElementsMenu(title,errorText,yes,no,routeDeleteAjax,routeDelete,routeIndex){
+    $(document).on('click','.select-btn-action',function (e){
+        e.preventDefault();
+
+
+        let selectElementBtn = $('.select-element-btn');
+        let dataIDs = [];
+        selectElementBtn.each(function (){
+            let element = $(this);
+            let elementIsTrue = element.find('input').is(':checked');
+            if(elementIsTrue){
+                let dataID = element.find('input').closest('.select-element-btn').attr('data-id');
+                dataIDs.push(dataID);
+            }
+        })
+
+
+        $.ajax({
+            url: `${routeDeleteAjax}`,
+            type: 'POST',
+            data: {IDs:dataIDs},
+            dataType: 'JSON',
+            success: function (response) {
+                if (response.success) {
+
+                    let positionName = '';
+
+
+                    response.data.name.forEach(function(data, index, array){
+                        if (index === array.length - 1){
+                            positionName += data;
+                        }else {
+                            positionName += data+',';
+                        }
+                    });
+
+
+                    Swal.fire({
+                        title: `${title}`,
+                        html: `${errorText} <b>${positionName}</b>`,
+                        icon: "error",
+                        showCancelButton: true,
+                        confirmButtonText: `${yes}`,
+                        cancelButtonText: `${no}`,
+                        customClass: {
+                            confirmButton: "btn btn-light-danger font-weight-bold",
+                            cancelButton: 'btn btn-light-primary font-weight-bold',
+                        }
+                    }).then(function (result) {
+                        if (result.value) {
+                            let ids = response.ids;
+                            console.log(ids);
+
+                            $.ajax({
+                                url: `${routeDelete}`,
+                                type: 'POST',
+                                data: {IDs:ids},
+                                dataType: 'JSON',
+                                success: function (response) {
+                                    if (response.success) {
+                                        location.href = `${routeIndex}`;
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+
+
+
+                }
+            }
+        });
+
+
+    });
+}
+
+
+function deleteALlSelectedElementsLanguageGroup(title,errorText,yes,no,routeDeleteAjax,routeDelete,routeIndex){
+    $(document).on('click','.select-btn-action',function (e){
+        e.preventDefault();
+
+
+        let selectElementBtn = $('.select-element-btn');
+        let dataIDs = [];
+        selectElementBtn.each(function (){
+            let element = $(this);
+            let elementIsTrue = element.find('input').is(':checked');
+            if(elementIsTrue){
+                let dataID = element.find('input').closest('.select-element-btn').attr('data-id');
+                dataIDs.push(dataID);
+            }
+        })
+
+
+        $.ajax({
+            url: `${routeDeleteAjax}`,
+            type: 'POST',
+            data: {IDs:dataIDs},
+            dataType: 'JSON',
+            success: function (response) {
+                if (response.success) {
+
+                    let positionName = '';
+
+
+                    response.data.name.forEach(function(data, index, array){
+                        if (index === array.length - 1){
+                            positionName += data;
+                        }else {
+                            positionName += data+',';
+                        }
+                    });
+
+
+                    Swal.fire({
+                        title: `${title}`,
+                        html: `${errorText} <b>${positionName}</b>`,
+                        icon: "error",
+                        showCancelButton: true,
+                        confirmButtonText: `${yes}`,
+                        cancelButtonText: `${no}`,
+                        customClass: {
+                            confirmButton: "btn btn-light-danger font-weight-bold",
+                            cancelButton: 'btn btn-light-primary font-weight-bold',
+                        }
+                    }).then(function (result) {
+                        if (result.value) {
+                            let ids = response.ids;
+                            console.log(ids);
+
+                            $.ajax({
+                                url: `${routeDelete}`,
+                                type: 'POST',
+                                data: {IDs:ids},
+                                dataType: 'JSON',
+                                success: function (response) {
+                                    if (response.success) {
+                                        location.href = `${routeIndex}`;
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+
+
+
+                }
+            }
+        });
+
+
+    });
+}
+
+/*   DELETE ALL SELECTED ELEMENTS END   */

@@ -19,6 +19,9 @@ use App\Models\Product\ProductAttributeList;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductCategoryList;
 use App\Models\Product\ProductCategoryTranslation;
+use App\Models\Product\ProductCollection;
+use App\Models\Product\ProductCollectionList;
+use App\Models\Product\ProductCollectionTranslation;
 use App\Models\Product\ProductManufacturer;
 use App\Models\Product\ProductManufacturerList;
 use App\Models\Product\ProductManufacturerTranslation;
@@ -400,7 +403,7 @@ class HomeController extends Controller
                         $detailLabelPicture = "";
                     }
 
-                    if($labelPicture != "" || $detailLabelPicture != "" || $option_type == 1) {
+                    if ($labelPicture != "" || $detailLabelPicture != "" || $option_type == 1) {
                         $option_type = 1;
                     }
 
@@ -602,7 +605,7 @@ class HomeController extends Controller
                                 'product_id' => $product_insert->id,
                                 'attribute_id' => $product_param_id,
                                 'language_id' => $language->id,
-                                'name' => $param['value'] . ($param['unit'] ? " ". $param['unit'] : "")
+                                'name' => $param['value'] . ($param['unit'] ? " " . $param['unit'] : "")
                             ]);
                         }
 
@@ -617,7 +620,6 @@ class HomeController extends Controller
 
                         $product_filter_query = OptionTranslation::where('name', $product_filter_name)->first();
                         if ($product_filter_query == null) {
-
 
 
                             $product_product_filter_insert = Option::create([
@@ -647,7 +649,55 @@ class HomeController extends Controller
                         if ($filter['values']) {
                             foreach ($filter['values'] as $filter_value_index => $filter_value) {
 
+
                                 $product_filter_value_name = $filter_value['name'];
+
+                                if (!empty($filter_value['labelPicture'])) {
+                                    $option_value_image = $filter_value['labelPicture'];
+                                } elseif (!empty($filter_value['detailLabelPicture'])) {
+                                    $option_value_image = $filter_value['detailLabelPicture'];
+                                } elseif (!empty($filter_value['iconPicture'])) {
+                                    $option_value_image = $filter_value['iconPicture'];
+                                } else {
+                                    $option_value_image = "";
+                                }
+
+
+                                if ($product_filter_name == "Коллекции") {
+                                    $product_collection_query = ProductCollectionTranslation::where('name', $product_filter_value_name)->first();
+                                    if ($product_collection_query == null) {
+
+                                        $product_collection_slug = uniqueSlug($product_filter_value_name, '\App\Models\Product\ProductCollection');
+
+                                        $product_product_collection_insert = ProductCollection::create([
+                                            'image' => $option_value_image,
+                                            'slug' => $product_collection_slug,
+                                            'status' => 1,
+                                        ]);
+
+                                        if ($product_product_collection_insert) {
+                                            foreach (cache('key-all-languages') as $key => $language) {
+
+                                                $product_product_collection_translation_insert = ProductCollectionTranslation::create([
+                                                    'collection_id' => $product_product_collection_insert->id,
+                                                    'language_id' => $language->id,
+                                                    'name' => $product_filter_value_name
+                                                ]);
+
+                                            }
+                                        }
+                                        $product_collection_id = $product_product_collection_insert->id;
+                                    } else {
+                                        $product_collection_id = $product_collection_query->collection_id;
+                                    }
+
+
+                                    $product_collection_list_insert = ProductCollectionList::create([
+                                        'product_id' => $product_insert->id,
+                                        'collection_id' => $product_collection_id
+                                    ]);
+                                } // if name Коллекции
+
 
                                 $product_filter_value_query = OptionValue::leftJoin('options_values_translations', 'options_values_translations.option_value_id', '=', 'options_values.id')
                                     ->where('option_id', $product_filter_id)
@@ -655,15 +705,6 @@ class HomeController extends Controller
                                     ->first();
                                 if ($product_filter_value_query == null) {
 
-                                    if (!empty($filter_value['labelPicture'])) {
-                                        $option_value_image = $filter_value['labelPicture'];
-                                    } elseif (!empty($filter_value['detailLabelPicture'])) {
-                                        $option_value_image = $filter_value['detailLabelPicture'];
-                                    } elseif (!empty($filter_value['iconPicture'])) {
-                                        $option_value_image = $filter_value['iconPicture'];
-                                    } else {
-                                        $option_value_image = "";
-                                    }
 
                                     $product_product_filter_value_insert = OptionValue::create([
                                         'option_id' => $product_filter_id,
