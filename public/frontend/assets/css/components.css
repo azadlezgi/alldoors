@@ -1720,7 +1720,8 @@
 }
 
 .catalog-sections {
-    margin-bottom: 32px
+    margin-bottom: 32px;
+    padding-left: 0;
 }
 
 .catalog-sections__item {
@@ -1729,7 +1730,8 @@
 }
 
 .catalog-sections__link, .catalog-sections__link:hover {
-    transition: .3s
+    transition: .3s;
+    text-decoration: none;
 }
 
 .catalog-sections__link:hover .catalog-sections__item-title {

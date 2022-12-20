@@ -1,6 +1,6 @@
 @extends('admin.layouts.index')
 @section('title')
-    Dizayn ({{ $model->name }})
+    Model ({{ $model->name }})
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Dizayn</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Model</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -25,7 +25,7 @@
                             <a href="{{ route('admin.product.index') }}" class="text-muted">Məhsullar</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.product.model.index') }}" class="text-muted">Dizaynlar</a>
+                            <a href="{{ route('admin.product.model.index') }}" class="text-muted">Modellar</a>
                         </li>
                         <li class="breadcrumb-item">
                             {{ $model->name }}
@@ -47,7 +47,7 @@
             <div class="card card-custom gutter-b">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Dizayn ({{ $model->name }})</h3>
+                        <h3 class="card-label">Model ({{ $model->name }})</h3>
                     </div>
                     <div class="card-toolbar">
                         <div class="card-title">
@@ -107,7 +107,7 @@
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th  data-breakpoints="xs">Şəkil</th>
                             <th>Ad</th>
-                            <th data-breakpoints="xs sm md">Dizayn</th>
+                            <th data-breakpoints="xs sm md">Model</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Kateqoriya</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Qiymət</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>

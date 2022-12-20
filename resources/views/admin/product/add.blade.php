@@ -841,11 +841,11 @@
 
                     </div>
 
-                    <!--  Dizayn  -->
+                    <!--  Model  -->
                     <div class="card card-custom gutter-b">
                         <div class="card-header">
                             <div class="card-title">
-                                <h3 class="card-label">Dizayn</h3>
+                                <h3 class="card-label">Model</h3>
                             </div>
 
 

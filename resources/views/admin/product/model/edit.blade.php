@@ -26,7 +26,7 @@
                         </li>
 
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.product.model.index') }}" class="text-muted">Dizaynlar</a>
+                            <a href="{{ route('admin.product.model.index') }}" class="text-muted">Modellər</a>
                         </li>
 
                         <li class="breadcrumb-item">

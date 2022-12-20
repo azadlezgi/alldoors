@@ -1,6 +1,6 @@
 @extends('admin.layouts.index')
 @section('title')
-    Məhsullar Dizaynlar
+    Məhsullar Modellər
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Məhsullar Dizaynlar</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Məhsullar Modellər</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -22,7 +22,7 @@
                             <a href="{{ route('admin.index') }}" class="text-muted">Panel</a>
                         </li>
                         <li class="breadcrumb-item">
-                            Məhsullar Dizaynlar
+                            Məhsullar Modellər
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -41,7 +41,7 @@
             <div class="card card-custom gutter-b">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Məhsullar Dizaynlar</h3>
+                        <h3 class="card-label">Məhsullar Modellər</h3>
                     </div>
                     <div class="card-toolbar">
                         <div class="card-title">
@@ -322,7 +322,7 @@
 
                             Swal.fire({
                                 title: "Diqqət?",
-                                html: "Dizaynı silmək istədiyinizə əminsiniz?",
+                                html: "Modeli silmək istədiyinizə əminsiniz?",
                                 icon: "error",
                                 showCancelButton: true,
                                 confirmButtonText: "Sil!",

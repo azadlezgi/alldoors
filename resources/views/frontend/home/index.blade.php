@@ -73,68 +73,31 @@
 {{--                <div class="promovideoslider">--}}
 {{--                    <div class="h1 promovideoslider__title">Видео</div> <!----></div>--}}
 {{--            </div>--}}
+
+            @if($products_categories)
             <div class="catalog">
                 <div class="catalog__wrapper container">
-                    <div class="h1">Каталог</div>
+                    <div class="h1">{{ language('frontend.home.catalog') }}</div>
                     <ul class="catalog-sections">
+
+                        @foreach($products_categories as $products_category)
                         <li class="catalog-sections__item">
-                            <a href="catalog/mezhkomnatnye-dveri/index.html" class="catalog-sections__link">
+                            <a href="{{ route('frontend.product.category.detail', $products_category->slug) }}" class="catalog-sections__link">
                                 <div class="catalog-sections__image">
                                     <figure>
-                                        <img loading="lazy" src="https://www.velldoris.net/upload/resize_cache/iblock/2ff/900_600_1/2ff55539df4e4196103f64eaf2960c48.jpg" alt="Межкомнатные двери" class="base-img">
+                                        <img loading="lazy" src="{{ $products_category->image }}" alt="{{ $products_category->name }}" class="base-img">
                                     </figure>
                                 </div>
-                                <div class="h3 catalog-sections__item-title">Межкомнатные двери</div>
-                            </a></li>
-                        <li class="catalog-sections__item">
-                            <a href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-pod-pokrasku/index.html" class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure>
-                                        <img loading="lazy" src="https://www.velldoris.net/upload/resize_cache/iblock/765/900_600_1/765b332b0d60e331e2622802aa01492f.jpg" alt="Скрытые двери" class="base-img">
-                                    </figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Скрытые двери</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/pokrytie/pokrytie-emal/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/435/900_600_1/435797370df4c9f14d40f123110c78f8.jpg"
-                                                         alt="Двери в эмали" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Двери в эмали</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a href="catalog/pogonazh/index.html"
-                                                              class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/c12/831_600_1/c12fa59cb1bb53eaad4c0f2ec573dca5.jpg"
-                                                         alt="Погонаж" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Погонаж</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a href="catalog/furnitura/index.html"
-                                                              class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/ceb/831_600_1/ceb15c0a6fef60d1936567525d7d6bd1.jpg"
-                                                         alt="Фурнитура" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Фурнитура</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a href="catalog/plintus/index.html"
-                                                              class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/f38/831_600_1/f38d955b9fbe8c02b0554a14f456e1b9.jpg"
-                                                         alt="Плинтус" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Плинтус</div>
-                            </a></li>
+                                <div class="h3 catalog-sections__item-title">{{ $products_category->name }}</div>
+                            </a>
+                        </li>
+                        @endforeach
+
                     </ul>
                 </div>
             </div>
+            @endif
+
             <div class="catalog" style="min-height:600px;">
                 <div class="catalog__wrapper container">
                     <div class="h1">Коллекции</div>

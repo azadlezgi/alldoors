@@ -687,14 +687,14 @@ Route::group(
 
             /*   PRODUCTS START   */
             /*   PRODUCT START   */
-//            Route::get('/products', 'Product\ProductController@index')->name('frontend.product.index');
-//            Route::get('/product/{slug}', 'Product\ProductController@detail')->name('frontend.product.detail');
-//            Route::get('/products/search/{search?}', 'Product\ProductController@search')->name('frontend.product.search');
+            Route::get('/products', 'Product\ProductController@index')->name('frontend.product.index');
+            Route::get('/product/{slug}', 'Product\ProductController@detail')->name('frontend.product.detail');
+            Route::get('/products/search/{search?}', 'Product\ProductController@search')->name('frontend.product.search');
             /*   PRODUCT END   */
 
             /*  PRODUCT CATEGORIES START   */
-//            Route::get('/products/categories/{any?}', 'Product\CategoryController@index')->where('any', '.*')->name('frontend.product.category.index');
-//            Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
+            Route::get('/products/categories/{any?}', 'Product\CategoryController@index')->where('any', '.*')->name('frontend.product.category.index');
+            Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
             /*  PRODUCT CATEGORIES END   */
             /*   PRODUCTS END   */
 
@@ -733,6 +733,7 @@ Route::group(
 
 
             //TEST UCUN OLAN HOME CONTROLLER START
+            Route::get('/pars', 'Home\HomeController@pars');
 //            Route::get('/home2', 'Home\HomeController@indexWelcome');
 //            Route::get('/mail', 'Mail\SendMailController@send');
             //TEST UCUN OLAN HOME CONTROLLER END
