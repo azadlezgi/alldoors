@@ -696,6 +696,11 @@ Route::group(
             Route::get('/products/categories/{any?}', 'Product\CategoryController@index')->where('any', '.*')->name('frontend.product.category.index');
             Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
             /*  PRODUCT CATEGORIES END   */
+
+            /*  PRODUCT COLLECTIONS START   */
+            Route::get('/products/collections/{any?}', 'Product\CollectionController@index')->where('any', '.*')->name('frontend.product.collection.index');
+            Route::get('/product/collections/{any?}', 'Product\CollectionController@detail')->where('any', '.*')->name('frontend.product.collection.detail');
+            /*  PRODUCT COLLECTIONS END   */
             /*   PRODUCTS END   */
 
 

@@ -33,21 +33,21 @@
     margin-bottom: 8px
 }
 
-.about-card_opened .about-card__opened-block {
-    padding: 24px 0;
+.about-card_opened .about-card__opened-block, .about-card__opened-block.collapse {
+    padding: 0;
     visibility: visible;
     opacity: 1;
     height: auto;
     margin-top: 0
 }
 
-.about-card_opened .about-card__toggle-btn:after {
-    content: "";
-    display: block;
-    width: 14px;
-    height: 3px;
-    margin-left: auto;
-    background-color: currentColor
+.about-card__toggle-btn.collapsed:after {
+    content: "+";
+    position: relative;
+    width: 16px;
+    height: 16px;
+    top: -15px;
+    background-color: transparent;
 }
 
 .about-card__opened-block {
@@ -59,7 +59,8 @@
 }
 
 .about-card__opened-block .about-card__text {
-    margin: 0
+    margin: 0;
+    padding: 24px 0;
 }
 
 .about-card__opened-block .about-card__text, .about-card__opened-block .about-card__text > * {
@@ -161,11 +162,12 @@
 }
 
 .about-card__toggle-btn:after {
-    content: "+";
-    position: relative;
-    width: 16px;
-    height: 16px;
-    top: 0
+    content: "";
+    display: block;
+    width: 14px;
+    height: 3px;
+    margin-left: auto;
+    background-color: currentColor
 }
 
 .about-card__toggle-btn_open:after {
@@ -2020,6 +2022,9 @@
 .about-index__cards {
     margin-bottom: 32px
 }
+.about-index__cards .about__cards-column {
+    padding: 0;
+}
 
 .about-index__content {
     max-width: 100%;
@@ -2126,7 +2131,7 @@
     position: absolute;
     z-index: 1;
     left: 0;
-    top: 2px;
+    top: 5px;
     width: 16px;
     height: 16px;
     background-repeat: no-repeat;
@@ -2152,11 +2157,18 @@
 }
 
 .index-map__info_phone {
-    margin-bottom: 24px
+    margin-bottom: 24px;
+}
+.index-map__info_phone a {
+    text-decoration: none;
 }
 
 .index-map__info_phone:before {
     background-image: url(../img/ico_phone_accent.svg)
+}
+
+.index-map__info_email:before {
+    background-image: url(../img/ico_email_accent.png)
 }
 
 .index-map__balloon {
@@ -2314,7 +2326,8 @@
 }
 
 .promotions-item__title {
-    text-transform: uppercase
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 .promotions-slider__controls {
@@ -7646,7 +7659,7 @@
     }
 
     .index-map {
-        margin-bottom: 144px
+        margin-bottom: 34px
     }
 
     .index-map .h2, .index-map h2 {

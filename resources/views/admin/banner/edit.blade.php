@@ -129,7 +129,7 @@
                                                                 <div class="hr-dvidder"></div>
 
                                                                 <!--  Button Name  -->
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="display: none">
                                                                     <span class="span-dvidder">Button Ad ({{ $language->code }})</span>
                                                                     <input type="text"
                                                                            class="form-control"
@@ -227,7 +227,7 @@
                     </div>
 
                     <!--  POSITION  -->
-                    <div class="card card-custom gutter-b">
+                    <div class="card card-custom gutter-b" style="display: none">
                         <div class="card-header">
                             <div class="card-title">
                                 <h3 class="card-label">Position</h3>

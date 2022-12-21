@@ -69,503 +69,254 @@
                     @endif
                 </div>
             </div>
-{{--            <div class="container">--}}
-{{--                <div class="promovideoslider">--}}
-{{--                    <div class="h1 promovideoslider__title">Видео</div> <!----></div>--}}
-{{--            </div>--}}
+            {{--            <div class="container">--}}
+            {{--                <div class="promovideoslider">--}}
+            {{--                    <div class="h1 promovideoslider__title">Видео</div> <!----></div>--}}
+            {{--            </div>--}}
 
             @if($products_categories)
-            <div class="catalog">
-                <div class="catalog__wrapper container">
-                    <div class="h1">{{ language('frontend.home.catalog') }}</div>
-                    <ul class="catalog-sections">
+                <div class="catalog">
+                    <div class="catalog__wrapper container">
+                        <div class="h1">{{ language('frontend.home.catalog') }}</div>
+                        <ul class="catalog-sections">
 
-                        @foreach($products_categories as $products_category)
-                        <li class="catalog-sections__item">
-                            <a href="{{ route('frontend.product.category.detail', $products_category->slug) }}" class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure>
-                                        <img loading="lazy" src="{{ $products_category->image }}" alt="{{ $products_category->name }}" class="base-img">
-                                    </figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">{{ $products_category->name }}</div>
-                            </a>
-                        </li>
-                        @endforeach
+                            @foreach($products_categories as $products_category)
+                                <li class="catalog-sections__item">
+                                    <a href="{{ route('frontend.product.category.detail', $products_category->slug) }}"
+                                       class="catalog-sections__link">
+                                        <div class="catalog-sections__image">
+                                            <figure>
+                                                <img loading="lazy" src="{{ $products_category->image }}"
+                                                     alt="{{ $products_category->name }}" class="base-img">
+                                            </figure>
+                                        </div>
+                                        <div
+                                            class="h3 catalog-sections__item-title">{{ $products_category->name }}</div>
+                                    </a>
+                                </li>
+                            @endforeach
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             @endif
 
-            <div class="catalog" style="min-height:600px;">
-                <div class="catalog__wrapper container">
-                    <div class="h1">Коллекции</div>
-                    <div class="catalog-slider" style="display:none;"><!----></div>
-                    <ul class="catalog-sections">
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/ledo/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/5b7/831_600_1/5b73209eb3f3f8b1f56c9bab0a34454a.jpg"
-                                                         alt="Ledo" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Ledo</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/alto/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/2b0/900_600_1/2b0310a2452010d43d309f30b1ef6a0f.jpg"
-                                                         alt="Alto" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Alto</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/fly/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/8c5/831_600_1/8c513b165c035fd31c9236702b45e61b.jpg"
-                                                         alt="Fly" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Fly</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/invisible/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/345/900_600_1/345f131816fbe6d7b27028c960e5607b.jpg"
-                                                         alt="Invisible" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Invisible</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/scandi/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/4c2/900_600_1/4c2a9fd0482387841aaee737fb85e81f.jpg"
-                                                         alt="Scandi" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Scandi</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/scandi-neo/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/0f9/831_600_1/0f94b686cd1c7dab964bbcb9f687936b.jpg"
-                                                         alt="Scandi Neo" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Scandi Neo</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/xline/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/1ad/900_600_1/1ad2f10bedfc132b407b583f14d403e1.jpg"
-                                                         alt="Xline" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Xline</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/techno/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/722/900_600_1/7226df909981481895b1a082788c9aa6.jpg"
-                                                         alt="Techno" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Techno</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/villa/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/301/900_600_1/3017dcc6b57f0f5a993ac7fe98aef9bb.jpg"
-                                                         alt="Villa" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Villa</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/premier/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/db6/900_600_1/db645e9ecfc0efb01348f391cf8492ef.jpg"
-                                                         alt="Premier" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Premier</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/smart-z/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/10c/900_600_1/10cb90c0c3389d01e4868ccd17cc7e98.jpg"
-                                                         alt="Smart Z" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Smart Z</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/duplex/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/585/900_600_1/585d06400bba05b338488a04ac521578.jpg"
-                                                         alt="Duplex" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Duplex</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/next/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/0de/900_600_1/0de68fa1923e84e0196864a8060e0051.jpg"
-                                                         alt="Next" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Next</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/linea/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/9f3/900_600_1/9f3f78ede7494b604331969e3cc858ac.jpg"
-                                                         alt="Linea" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Linea</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/unica/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/c01/900_600_1/c01df29f9143ccbdd817c42272db5a6e.jpg"
-                                                         alt="Unica" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Unica</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/trend/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/6ce/900_600_1/6ce2b21e3f47db5eb8f5abe402613282.jpg"
-                                                         alt="Trend" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Trend</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/city/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/8f0/900_600_1/8f06ada7cd9cd9a29b0342bd91c7532a.jpg"
-                                                         alt="City" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">City</div>
-                            </a></li>
-                        <li class="catalog-sections__item"><a
-                                href="catalog/mezhkomnatnye-dveri/collections/loft/index.html"
-                                class="catalog-sections__link">
-                                <div class="catalog-sections__image">
-                                    <figure><!----> <img loading="lazy"
-                                                         src="https://www.velldoris.net/upload/resize_cache/iblock/06d/900_600_1/06dba2caa74634882c1055b4ec35abd7.jpg"
-                                                         alt="Loft" class="base-img"></figure>
-                                </div>
-                                <div class="h3 catalog-sections__item-title">Loft</div>
-                            </a></li>
-                    </ul>
+
+            @if($products_collections)
+                <div class="catalog">
+                    <div class="catalog__wrapper container">
+                        <div class="h1">{{ language('frontend.home.collection') }}</div>
+                        <ul class="catalog-sections">
+
+                            @foreach($products_collections as $products_collection)
+                                <li class="catalog-sections__item">
+                                    <a href="{{ route('frontend.product.collection.detail', $products_collection->slug) }}"
+                                       class="catalog-sections__link">
+                                        <div class="catalog-sections__image">
+                                            <figure>
+                                                <img loading="lazy" src="{{ $products_collection->image }}"
+                                                     alt="{{ $products_collection->name }}" class="base-img">
+                                            </figure>
+                                        </div>
+                                        <div
+                                            class="h3 catalog-sections__item-title">{{ $products_collection->name }}</div>
+                                    </a>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="promotions">
-                    <div class="h1 promotions__title">Новости и акции</div> <!----></div>
-            </div>
+            @endif
+
+
+            @if($posts)
+                <div class="container">
+                    <div class="promotions">
+                        <div class="h1 promotions__title">{{ language('frontend.home.news') }}</div>
+                        <div class="swiper-slider promotions__slider slider">
+                            <div class="promotions-slider__wrapper">
+                                <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                                    <div class="swiper-wrapper1 row">
+                                        @foreach($posts as $post)
+                                            <div class="swiper-slide swiper-slide-active col-md-4">
+                                                <div class="promotions-item">
+                                                    <a href="{{ route('frontend.post.detail', $post->slug) }}"
+                                                       class="promotions-item__image">
+                                                        <figure>
+                                                            <img src="{{ $post->image }}" alt="{{ $post->name }}"
+                                                                 class="base-img">
+                                                        </figure>
+                                                    </a>
+                                                    <div
+                                                        class="promotions-item__date additional-text">{{ $post->date }}</div>
+                                                    <a href="{{ route('frontend.post.detail', $post->slug) }}"
+                                                       class="promotions-item__title h4">{{ $post->name }}</a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                            </div>
+                            <div class="promotions-slider__controls">
+                                <div class="slider-controls">
+                                    <div data-dots="0"
+                                         class="slider-dots swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-lock">
+                                        <button class="slider-dots__item slider-dots__item_active" type="button"
+                                                tabindex="0" role="button" aria-label="Go to slide 1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <section class="index-map">
                 <div class="container">
                     <div class="index-map__wrapper">
                         <div class="index-map__text">
-                            <div class="h2">Салоны в Санкт-Петербурге</div>
-                            <address class="index-map__info index-map__info_address">
-                                пр. Маршала Жукова, д. 41
-                                <span>
-                        Фирменный салон
-                    </span></address>
-                            <div class="index-map__info index-map__info_phone"><span>+7 (812) 606-75-51</span></div>
-                            <!----></div>
+                            <div class="h2">{{ language('frontend.home.contact_us') }}</div>
+                            @if(!empty(setting('address',true)))
+                                <address
+                                    class="index-map__info index-map__info_address">{!! setting('address',true) !!}</address>
+                            @endif
+                            @if(!empty(json_decode(setting('tel'))))
+                                <div class="index-map__info index-map__info_phone">
+                                    @foreach(json_decode(setting('tel')) as $key => $value)
+                                        {{--                                    @if($loop->first)--}}
+                                        <span>
+                                            <a href="tel:{{ \App\Services\CommonService::telText( $value->tel )[0] }}"
+                                               style="color: #0c0e1a">{{ \App\Services\CommonService::telText( $value->tel )[1] }}</a>
+                                        </span>
+                                        {{--                                    @endif--}}
+                                    @endforeach
+                                </div>
+                            @endif
+                            @if(!empty(setting('email')))
+                                <div class="index-map__info index-map__info_email">{!! setting('email') !!}</div>
+                            @endif
+                        </div>
                         <div class="index-map__map-wrapper">
-                            <div><!----></div>
+                            @if(!empty(setting('map')))
+                                <div>
+                                    {!! setting('map') !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    <a href="salons/index.html" class="btn btn_block btn_accent index-map__btn">
-                        еще 14 салонов
-                    </a></div>
+                    <a href="{{ route('frontend.home.contact') }}" class="btn btn_block btn_accent index-map__btn">
+                        {{ language('frontend.home.contact_us') }}
+                    </a>
+                </div>
             </section>
-            <div class="about-index"><h1 class="visually-hidden">Межкомнатные двери от VELLDORIS</h1>
+
+            <section class="about-index">
+                <h1 class="visually-hidden">Межкомнатные двери от VELLDORIS</h1>
                 <div class="container">
                     <div class="about-index__wrapper">
                         <div class="about__cards about-index__cards">
-                            <ul class="about__cards-column about__cards-column_mobile">
-                                <li tabindex="0" class="about__card about-card">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/ca7/ca71341bc4b295cf86ebcf5efef34810.jpg"
-                                                                 alt="20" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">20</span> <span
-                                                    class="about-card__title-text">лет опыта</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Многолетний опыт
-                                                работы, постоянный контроль качества и технологий, позволяют нам
-                                                эффективно взаимодействовать с нашими партнерами и постоянно развиваться
-                                                в сфере дверного производства.
+                            @if($banners)
+                                <ul class="about__cards-column about__cards-column_mobile">
+                                    @foreach($banners as $banner)
+                                        <li tabindex="0" class="about__card about-card">
+                                            <div class="about-card__main">
+                                                <div class="about-card__bg">
+                                                    <figure>
+                                                        <img src="{{ $banner->image }}" alt="" class="base-img">
+                                                    </figure>
+                                                </div>
+                                                <div class="about-card__content">
+                                                    <div class="about-card__title">
+                                                        {!! $banner->title !!}
+                                                    </div>
+                                                    <div class="about-card__text about-card__text_tablet">
+                                                        {!! $banner->sub_title !!}
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="about-card__toggle-btn collapsed"
+                                                        data-bs-toggle="collapse"
+                                                        href="#collapseAboutMobile{{ $banner->id }}"
+                                                        role="button"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapseAboutMobile{{ $banner->id }}"
+                                                    ></button>
+                                                </div>
                                             </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Многолетний опыт
-                                            работы, постоянный контроль качества и технологий, позволяют нам эффективно
-                                            взаимодействовать с нашими партнерами и постоянно развиваться в сфере
-                                            дверного производства.</p></div>
-                                </li>
-                                <li tabindex="0" class="about__card about-card">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/8a9/8a94e4e9b2b88cfa5bfe0df3e523e93f.jpg"
-                                                                 alt="3000" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">3000</span> <span
-                                                    class="about-card__title-text">точек продаж</span></div>
-                                            <div class="about-card__text about-card__text_tablet">В ассортимент входят
-                                                как стандартные дверные полотна, так и многофункциональные двери
-                                                специального назначения: усиленные, усиленные звукоизоляционные
-                                                (30,32,42 Db), огнестойкие (EI 30,45,60), маятниковые двери, а также
-                                                двери с повышенной износостойкостью. Широкий выбор вариантов покрытия:
-                                                окраска в любой цвет по системе Ral или NCS, меламиновые пленки
-                                                (ламинат), Экошпон, пластик CPL или HPL, позволяет комплектовать любые
-                                                объекты и создавать индивидуальные проектные решения в сотрудничестве с
-                                                дизайнерами и архитекторами.
+                                            <div class="about-card__opened-block collapse"
+                                                 id="collapseAboutMobile{{ $banner->id }}">
+                                                <p class="about-card__text">{!! $banner->sub_title !!}</p>
                                             </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">В ассортимент
-                                            входят как стандартные дверные полотна, так и многофункциональные двери
-                                            специального назначения: усиленные, усиленные звукоизоляционные (30,32,42
-                                            Db), огнестойкие (EI 30,45,60), маятниковые двери, а также двери с
-                                            повышенной износостойкостью. Широкий выбор вариантов покрытия: окраска в
-                                            любой цвет по системе Ral или NCS, меламиновые пленки (ламинат), Экошпон,
-                                            пластик CPL или HPL, позволяет комплектовать любые объекты и создавать
-                                            индивидуальные проектные решения в сотрудничестве с дизайнерами и
-                                            архитекторами.</p></div>
-                                </li>
-                                <li tabindex="0" class="about__card about-card">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/36f/36f38535576466e0db3153487dc8e384.jpg"
-                                                                 alt="1000" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">1000</span> <span
-                                                    class="about-card__title-text">опытных сотрудников</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Наши дизайнеры и
-                                                технологи посещают выставки в Италии и Германии, тщательно изучают
-                                                тенденции дизайна не только дверных блоков, но и деревообрабатывающей и
-                                                мебельной отрасли.
-                                                Наши технологи постоянно работают над возможностью технологических
-                                                усовершенствований качества продукции (как в области новых материалов
-                                                покрытий, так и в сфере оборудования).
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Наши дизайнеры и
-                                            технологи посещают выставки в Италии и Германии, тщательно изучают тенденции
-                                            дизайна не только дверных блоков, но и деревообрабатывающей и мебельной
-                                            отрасли.
-                                            Наши технологи постоянно работают над возможностью технологических
-                                            усовершенствований качества продукции (как в области новых материалов
-                                            покрытий, так и в сфере оборудования).</p></div>
-                                </li>
-                                <li tabindex="0" class="about__card about-card">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/d63/d631c160648d4c8d386faa8b2b821413.jpg"
-                                                                 alt="3" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">3</span> <span
-                                                    class="about-card__title-text">завода в группе</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Завод по производству
-                                                дверей VellDoris оснащен самыми современными автоматизированными
-                                                деревоoбрабатывающими линиями от ведущих производителей Италии и
-                                                Германии, что является залогом стабильности качества продукции.
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Завод по
-                                            производству дверей VellDoris оснащен самыми современными
-                                            автоматизированными деревоoбрабатывающими линиями от ведущих производителей
-                                            Италии и Германии, что является залогом стабильности качества продукции.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="about__cards-column about__cards-column_tablet">
-                                <li tabindex="0" class="about__card about-card about-card_opened">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/ca7/ca71341bc4b295cf86ebcf5efef34810.jpg"
-                                                                 alt="20" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">20</span> <span
-                                                    class="about-card__title-text">лет опыта</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Многолетний опыт
-                                                работы, постоянный контроль качества и технологий, позволяют нам
-                                                эффективно взаимодействовать с нашими партнерами и постоянно развиваться
-                                                в сфере дверного производства.
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Многолетний опыт
-                                            работы, постоянный контроль качества и технологий, позволяют нам эффективно
-                                            взаимодействовать с нашими партнерами и постоянно развиваться в сфере
-                                            дверного производства.</p></div>
-                                </li>
-                                <li tabindex="0" class="about__card about-card about-card_opened">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/8a9/8a94e4e9b2b88cfa5bfe0df3e523e93f.jpg"
-                                                                 alt="3000" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">3000</span> <span
-                                                    class="about-card__title-text">точек продаж</span></div>
-                                            <div class="about-card__text about-card__text_tablet">В ассортимент входят
-                                                как стандартные дверные полотна, так и многофункциональные двери
-                                                специального назначения: усиленные, усиленные звукоизоляционные
-                                                (30,32,42 Db), огнестойкие (EI 30,45,60), маятниковые двери, а также
-                                                двери с повышенной износостойкостью. Широкий выбор вариантов покрытия:
-                                                окраска в любой цвет по системе Ral или NCS, меламиновые пленки
-                                                (ламинат), Экошпон, пластик CPL или HPL, позволяет комплектовать любые
-                                                объекты и создавать индивидуальные проектные решения в сотрудничестве с
-                                                дизайнерами и архитекторами.
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">В ассортимент
-                                            входят как стандартные дверные полотна, так и многофункциональные двери
-                                            специального назначения: усиленные, усиленные звукоизоляционные (30,32,42
-                                            Db), огнестойкие (EI 30,45,60), маятниковые двери, а также двери с
-                                            повышенной износостойкостью. Широкий выбор вариантов покрытия: окраска в
-                                            любой цвет по системе Ral или NCS, меламиновые пленки (ламинат), Экошпон,
-                                            пластик CPL или HPL, позволяет комплектовать любые объекты и создавать
-                                            индивидуальные проектные решения в сотрудничестве с дизайнерами и
-                                            архитекторами.</p></div>
-                                </li><!----><!----></ul>
-                            <ul class="about__cards-column about__cards-column_tablet"><!----><!---->
-                                <li tabindex="0" class="about__card about-card about-card_opened">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/36f/36f38535576466e0db3153487dc8e384.jpg"
-                                                                 alt="1000" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">1000</span> <span
-                                                    class="about-card__title-text">опытных сотрудников</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Наши дизайнеры и
-                                                технологи посещают выставки в Италии и Германии, тщательно изучают
-                                                тенденции дизайна не только дверных блоков, но и деревообрабатывающей и
-                                                мебельной отрасли.
-                                                Наши технологи постоянно работают над возможностью технологических
-                                                усовершенствований качества продукции (как в области новых материалов
-                                                покрытий, так и в сфере оборудования).
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Наши дизайнеры и
-                                            технологи посещают выставки в Италии и Германии, тщательно изучают тенденции
-                                            дизайна не только дверных блоков, но и деревообрабатывающей и мебельной
-                                            отрасли.
-                                            Наши технологи постоянно работают над возможностью технологических
-                                            усовершенствований качества продукции (как в области новых материалов
-                                            покрытий, так и в сфере оборудования).</p></div>
-                                </li>
-                                <li tabindex="0" class="about__card about-card about-card_opened">
-                                    <div class="about-card__main">
-                                        <div class="about-card__bg">
-                                            <figure><!----> <img loading="lazy"
-                                                                 src="https://www.velldoris.net/upload/iblock/d63/d631c160648d4c8d386faa8b2b821413.jpg"
-                                                                 alt="3" class="base-img"></figure>
-                                        </div>
-                                        <div class="about-card__content">
-                                            <div class="about-card__title"><span
-                                                    class="about-card__title-special">3</span> <span
-                                                    class="about-card__title-text">завода в группе</span></div>
-                                            <div class="about-card__text about-card__text_tablet">Завод по производству
-                                                дверей VellDoris оснащен самыми современными автоматизированными
-                                                деревоoбрабатывающими линиями от ведущих производителей Италии и
-                                                Германии, что является залогом стабильности качества продукции.
-                                            </div>
-                                            <button type="button" class="about-card__toggle-btn"></button>
-                                        </div>
-                                    </div>
-                                    <div class="about-card__opened-block"><p class="about-card__text">Завод по
-                                            производству дверей VellDoris оснащен самыми современными
-                                            автоматизированными деревоoбрабатывающими линиями от ведущих производителей
-                                            Италии и Германии, что является залогом стабильности качества продукции.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <ul class="about__cards-column about__cards-column_tablet">
+                                    @foreach($banners as $banner)
+                                        @if($loop->index <= 4)
+                                            <li tabindex="0" class="about__card about-card about-card_opened">
+                                                <div class="about-card__main">
+                                                    <div class="about-card__bg">
+                                                        <figure><
+                                                            <img src="{{ $banner->image }}" alt="" class="base-img">
+                                                        </figure>
+                                                    </div>
+                                                    <div class="about-card__content">
+                                                        <div class="about-card__title">
+                                                            {!! $banner->title !!}
+                                                        </div>
+                                                        <div class="about-card__text about-card__text_tablet">
+                                                            {!! $banner->sub_title !!}
+                                                        </div>
+                                                        <button type="button" class="about-card__toggle-btn"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="about-card__opened-block">
+                                                    <p class="about-card__text">{!! $banner->sub_title !!}</p>
+                                                </div>
+                                            </li>
+
+                                            @if($loop->index == 1)
+                                            </ul>
+                                            <ul class="about__cards-column about__cards-column_tablet">
+                                            @endif
+
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
                         <div class="about-index__content">
                             <div class="h1 about-index__title">О компании</div>
-                            <div class="about-index__desc"><p>История Петербургской фабрики дверей Velldoris началась в
+                            <div class="about-index__desc"><p>История Петербургской фабрики дверей Velldoris
+                                    началась в
                                     2001 году с небольшого производства дверей по индивидуальным заказам. Постоянное
                                     развитие технической базы и поиск новых идей, профессиональный рост коллектива и
                                     востребованность нашей продукции на рынке позволили нам с 2013 года многократно
-                                    увеличить масштаб деятельности. Была проведена глубокая модернизация оборудования,
-                                    открыты новые производственные цеха и логистические комплексы, качественно пополнены
+                                    увеличить масштаб деятельности. Была проведена глубокая модернизация
+                                    оборудования,
+                                    открыты новые производственные цеха и логистические комплексы, качественно
+                                    пополнены
                                     кадровые ресурсы.</p>
                                 <p>Современная компания Velldoris – это крупный производственный холдинг, занимающий
-                                    достойное место в ТОП-5 ведущих дверных фабрик России. Ежемесячно выпускается более
+                                    достойное место в ТОП-5 ведущих дверных фабрик России. Ежемесячно выпускается
+                                    более
                                     100 000 дверных блоков.</p>
-                                <p>В структуру предприятия входят три крупные площадки в разных районах Ленинградской
+                                <p>В структуру предприятия входят три крупные площадки в разных районах
+                                    Ленинградской
                                     области и производственная площадка в Новосибирске. Для хранения и распределения
                                     готовой продукции в Ленобласти построен Логистический центр.</p></div>
-                            <a href="about/index.html" class="about-index__btn btn btn_block btn_additional">Подробнее о
-                                нас</a></div>
+                            <a href="about/index.html" class="about-index__btn btn btn_block btn_additional">Подробнее
+                                о
+                                нас</a>
+                        </div>
+
                     </div>
                 </div>
-            </div> <!----></div>
+            </section>
+        </div>
     </main>
 
 @endsection

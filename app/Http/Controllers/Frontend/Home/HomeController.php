@@ -7,6 +7,7 @@ use App\Http\Requests\Slide\ContactSendRequest;
 use App\Mail\Frontend\SendMail;
 use App\Models\Attribute\Attribute;
 use App\Models\Attribute\AttributeTranslation;
+use App\Models\Banner\Banner;
 use App\Models\Option\Option;
 use App\Models\Option\OptionTranslation;
 use App\Models\Option\OptionValue;
@@ -37,6 +38,7 @@ use App\Models\Slide\Slide;
 use App\Models\Team\Team;
 use App\Services\ImageService;
 use App\Services\ProductService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -71,6 +73,57 @@ class HomeController extends Controller
                 $products_categories[] = $products_category;
             }
         }
+
+
+        $products_collections = [];
+        $products_collections_query = ProductCollection::where('language_id', $request->languageID)
+            ->where('status', 1)
+            ->join('products_collections_translations', 'products_collections.id', '=', 'products_collections_translations.collection_id')
+            ->orderBy('id', 'DESC')
+            ->limit(8)
+            ->get();
+        if ($products_collections_query) {
+            foreach ($products_collections_query as $products_collection) {
+                $products_collection->image = $products_collection->image ? $products_collection->image : '/storage/no-image.png';
+                $products_collection->image = ImageService::customImageSize($products_collection->image, 300, 220, 100);
+                $products_collections[] = $products_collection;
+            }
+        }
+
+        $posts = [];
+        $posts_query = Post::where('language_id', $request->languageID)
+            ->where('status', 1)
+            ->join('posts_translations', 'posts.id', '=', 'posts_translations.post_id')
+            ->orderBy('id', 'DESC')
+            ->limit(3)
+            ->get();
+        if ($posts_query) {
+            foreach ($posts_query as $post) {
+                $post->image = $post->image ? $post->image : '/storage/no-image.png';
+                $post->image = ImageService::customImageSize($post->image, 416, 277, 100);
+                $post->date = Carbon::parse($post->created_at)->format('d.m.Y');
+                $posts[] = $post;
+            }
+        }
+
+
+
+        $banners = [];
+        $banners_query = Banner::where('language_id', $request->languageID)
+            ->where('status', 1)
+            ->join('banners_translations', 'banners.id', '=', 'banners_translations.banner_id')
+            ->orderBy('sort', 'ASC')
+            ->limit(4)
+            ->get();
+        if ($banners_query) {
+            foreach ($banners_query as $banner) {
+                $banner->image = $banner->image ? $banner->image : '/storage/no-image.png';
+                $banner->image = ImageService::customImageSize($banner->image, 360, 415, 100);
+                $banners[] = $banner;
+            }
+        }
+
+//        dd($banners);
 
 
 //        {{  \App\Services\ImageService::customImageSize($products_category->image ? $products_category->image : 'storage/no-image.png',300,220,100) }}
@@ -154,7 +207,10 @@ class HomeController extends Controller
 
         return view('frontend.home.index', compact(
             'slides',
-            'products_categories'
+            'products_categories',
+            'products_collections',
+            'posts',
+            'banners'
 
         ));
     }
