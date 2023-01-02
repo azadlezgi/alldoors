@@ -2034,7 +2034,14 @@
 }
 
 .about-index__btn {
+    color: #fff;
+    background-color: #f88b3b;
+    border-color: #f88b3b;
     margin-top: 24px
+}
+.about-index__btn:hover {
+    color: #fff;
+    background-color: #f9791a;
 }
 
 .mainscreen {
@@ -7588,7 +7595,7 @@
 
     .about-index__btn {
         max-width: 100%;
-        margin-top: 80px
+        margin-top: 50px
     }
 
     .mainscreen {

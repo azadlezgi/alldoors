@@ -12245,13 +12245,15 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin: 16px 0
+    margin: 16px 0;
+    padding: 0;
 }
 
 .breadcrumbs__item a {
     font-size: 13px;
     line-height: 20px;
-    color: #848388
+    color: #848388;
+    text-decoration: none;
 }
 
 .breadcrumbs__item a[href] {

@@ -1,107 +1,91 @@
 @extends('frontend.layouts.index')
 
-@section('title',language('frontend.blog.seo.title'))
-@section('keywords', language('frontend.blog.seo.keyword') )
-@section('description', language('frontend.blog.seo.description') )
+@section('title',language('frontend.blog.title'))
+@section('keywords', language('frontend.blog.keywords') )
+@section('description', language('frontend.blog.description') )
 
 
 
 @section('breadcrumb')
-    <!-- breadcumb-area-start -->
-    <div class="breadcumb-area bg-with-black">
+
+    <main class="main main--mt">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcumb">
-                        <h1 class="name">{!! language('frontend.post.name') !!}</h1>
-                        <ul class="links" itemscope itemtype="https://schema.org/BreadcrumbList">
-                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a href="{{ route('frontend.home.index') }}" title="{{ language('genereal.home') }}" itemprop="item">
-                                    <span itemprop="name">{{ language('genereal.home') }}</span>
-                                    <meta itemprop="position" content="0">
-                                </a>
-                            </li>
-                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <a href="{{ route('frontend.post.index') }}" title="{{ language('frontend.post.name') }}" itemprop="item">
-                                    <span itemprop="name">{{ language('frontend.post.name') }}</span>
-                                    <meta itemprop="position" content="1">
-                                </a>
-                            </li>
-                        </ul>
+            <ul itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList" class="breadcrumbs">
+                <li>
+                    <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
+                         class="breadcrumbs__item">
+                        <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
+                           href="{{ route('frontend.home.index') }}">
+                            <span itemprop="name">{{ language('genereal.home_page') }}</span>
+                        </a>
+                        <meta itemprop="position" content="1">
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- breadcumb-area-end -->
-@endsection
-
-@section('content')
-
-
-    <!-- page-blog-area-start -->
-    <div class="page-blog-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-blog-two-column page-blog">
-                        <div class="row">
-                            @foreach($posts as $post)
-                                <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-0 col-sm-8 offset-sm-2 col-12">
-                                    <div class="single-page-blog">
-                                        <div class="bimg">
-                                            <a href="{{ route('frontend.post.detail',$post->slug) }}">
-                                                @if(empty($post->image))
-                                                    <img style="object-fit: contain" src="{{ asset('storage/no-image.png') }}"
-                                                         alt="{{$post->postsTranlations[0]->name }}">
-                                                @else
-                                                    <img src="{{  \App\Services\ImageService::resizeImageSize($post->image,'medium',80) }}"
-                                                         alt="{{$post->postsTranlations[0]->name }}">
-                                                @endif
-                                                <span class="icon"><i class="fas fa-link"></i></span>
-                                            </a>
-                                            <p class="type">{{ \Illuminate\Support\Carbon::parse($post->created_at)->format('d.m.Y') }}</p>
-                                        </div>
-                                        <div class="content">
-                                            <a class="h4 title" href="{{ route('frontend.post.detail',$post->slug) }}">{{ str_limit($post->postsTranlations[0]->name,50)  }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                </li>
+                <li>
+                    <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
+                         class="breadcrumbs__item">
+                        <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
+                           href="{{ route('frontend.post.index') }}">
+                            <span itemprop="name">{{ language('frontend.post.name') }}</span>
+                        </a>
+                        <meta itemprop="position" content="2">
                     </div>
-                </div>
-            </div>
-        </div>
-        <!--  Paginate START -->
-        <div class="my-pagination">
-            <ul class="pagination">
-                {{ $posts->appends(['search' => isset($searchText) ? $searchText : null])
-                           ->render('vendor.pagination.frontend.my-pagination') }}
-
+                </li>
             </ul>
         </div>
-    </div>
-    <!-- page-blog-area-end -->
 
-    <!-- brands-area-start -->
-    <div class="brands-area">
-        <div class="container">
-            <div class="brand-carousel owl-carousel">
+        @endsection
+
+        @section('content')
+
+            <div class="container">
+                <h1>{{ language('frontend.post.name') }}</h1>
+            </div>
 
 
-                @foreach($partners as $partner)
-                    <div class="single-brand">
-                        <img src="{{ $partner->image }}" alt="{{ $partner->name }}">
+            <div class="container">
+                @if($posts)
+                    <div class="cards-grid">
+
+                        @foreach($posts as $post)
+                            <div class="cards-grid__item">
+                                <a href="{{ route('frontend.post.detail',$post->slug) }}" class="cards-grid__card-img">
+                                    <figure>
+                                        <img
+                                            loading="lazy"
+                                            src="{{ $post->image }}"
+                                            alt="{{$post->name }}"
+                                            class="base-img"
+                                            data-src="{{ $post->image }}"
+                                            lazy="loaded"
+                                        >
+                                    </figure>
+                                </a>
+                                <div class="cards-grid__card-content">
+                                    <div class="cards-grid__card-date additional-text">{{$post->date }}</div>
+                                    <a href="{{ route('frontend.post.detail',$post->slug) }}"
+                                       class="cards-grid__card-title h4">{{$post->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+
+
                     </div>
-                @endforeach
 
+                    <div class="my-pagination">
+                        <ul class="pagination">
+                            {{ $posts->appends(['search' => isset($searchText) ? $searchText : null])
+                                       ->render('vendor.pagination.frontend.my-pagination') }}
+
+                        </ul>
+                    </div>
+                @else
+                    No Result
+                @endif
 
             </div>
-        </div>
-    </div>
-    <!-- brands-area-end -->
 
+    </main>
 
 @endsection
 

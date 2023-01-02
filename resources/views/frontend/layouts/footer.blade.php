@@ -2,183 +2,45 @@
     <div class="container">
         <div class="footer-inner">
             <div class="footer__top-line">
-                <div class="logo footer__logo"><span class="logo__link">
-                        <img
-{{--                                src="{{ asset('storage') }}/{{ setting('logo') }}"--}}
-                        {{--                                alt="{{ language('general.title') }}" width="225" height="70">--}}
-                        <div></div>
+                <div class="logo footer__logo">
+                    <span class="logo__link">
+                        <img src="{{ asset('storage') }}/{{ setting('logo') }}" alt="{{ language('general.title') }}"
+                             width="225" height="70">
                     </span>
                 </div>
-                <div class="socials footer__socials"><span class="socials__desc">Мы в соцсетях:</span> <a
-                            rel="nofollow" target="_blank" href="https://vk.com/dveri_velldoris"
-                            class="socials__item socials__item_vk"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_vk"></use>--}}
-                            </svg>
-                        </i>
-                        <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                            <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                <stop stop-color="#fdf497" offset="0"></stop>
-                                <stop stop-color="#fdf497" offset="0.05"></stop>
-                                <stop stop-color="#fd5949" offset="0.45"></stop>
-                                <stop stop-color="#d6249f" offset="0.6"></stop>
-                                <stop stop-color="#285AEB" offset="0.9"></stop>
-                            </radialGradient>
-                        </svg>
-                    </a><a rel="nofollow" target="_blank" href="https://t.me/velldoris_official"
-                           class="socials__item socials__item_telegram"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_telegram"></use>--}}
-                            </svg>
-                        </i>
-                        <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                            <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                <stop stop-color="#fdf497" offset="0"></stop>
-                                <stop stop-color="#fdf497" offset="0.05"></stop>
-                                <stop stop-color="#fd5949" offset="0.45"></stop>
-                                <stop stop-color="#d6249f" offset="0.6"></stop>
-                                <stop stop-color="#285AEB" offset="0.9"></stop>
-                            </radialGradient>
-                        </svg>
-                    </a><a rel="nofollow" target="_blank"
-                           href="https://www.youtube.com/channel/UCKSYBNpsYNPNqH6ijDRTsZw"
-                           class="socials__item socials__item_yt"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_yt"></use>--}}
-                            </svg>
-                        </i>
-                        <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                            <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                <stop stop-color="#fdf497" offset="0"></stop>
-                                <stop stop-color="#fdf497" offset="0.05"></stop>
-                                <stop stop-color="#fd5949" offset="0.45"></stop>
-                                <stop stop-color="#d6249f" offset="0.6"></stop>
-                                <stop stop-color="#285AEB" offset="0.9"></stop>
-                            </radialGradient>
-                        </svg>
-                    </a><a rel="nofollow" target="_blank" href="https://zen.yandex.ru/id/5ffc38c061dbd60faf5a82ae"
-                           class="socials__item socials__item_yazen"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_yazen"></use>--}}
-                            </svg>
-                        </i>
-                        <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                            <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                <stop stop-color="#fdf497" offset="0"></stop>
-                                <stop stop-color="#fdf497" offset="0.05"></stop>
-                                <stop stop-color="#fd5949" offset="0.45"></stop>
-                                <stop stop-color="#d6249f" offset="0.6"></stop>
-                                <stop stop-color="#285AEB" offset="0.9"></stop>
-                            </radialGradient>
-                        </svg>
-                    </a><a rel="nofollow" target="_blank" href="https://ok.ru/group/68895085494316"
-                           class="socials__item socials__item_ok"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_ok"></use>--}}
-                            </svg>
-                        </i>
-                        <svg width="0" height="0" viewBox="0 0 0 0" class="vh">
-                            <radialGradient id="gradient" r="150%" cx="30%" cy="107%">
-                                <stop stop-color="#fdf497" offset="0"></stop>
-                                <stop stop-color="#fdf497" offset="0.05"></stop>
-                                <stop stop-color="#fd5949" offset="0.45"></stop>
-                                <stop stop-color="#d6249f" offset="0.6"></stop>
-                                <stop stop-color="#285AEB" offset="0.9"></stop>
-                            </radialGradient>
-                        </svg>
-                    </a></div>
+
+
+                @if(!empty(json_decode(setting('social'))))
+                    <div class="socials footer__socials">
+                        <span class="socials__desc">{{ language('genereal.we_social') }}</span>
+                        @foreach(json_decode(setting('social')) as $key => $value)
+                            <a
+                                rel="nofollow"
+                                target="_blank"
+                                href="{{ $value->link }}"
+                                class="socials__item socials__item_{{ $value->name }}"
+                            >
+                                <i class="icon socicon-{{ $value->name }}"></i>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </div>
-            <div class="footer__nav-line">
-                <nav class="footer__nav">
-                    <ul class="footer__nav-list">
-                        <li class="footer__nav-item"><a href="about/index.html" class="footer__nav-link">О
-                                компании</a></li> <!---->
-                        <li class="footer__nav-item"><a href="partnyery/index.html"
-                                                        class="footer__nav-link">Партнёры</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="zastroyshchikam/index.html" class="footer__nav-link">Застройщикам</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="dileram/index.html"
-                                                        class="footer__nav-link">Дилерам</a></li> <!---->
-                        <li class="footer__nav-item"><a href="rekvizity/index.html"
-                                                        class="footer__nav-link">Реквизиты</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="salons/index.html" class="footer__nav-link">Где
-                                купить</a></li> <!---->
-                        <li class="footer__nav-item"><a href="vozvrat-tovara/index.html" class="footer__nav-link">Возврат
-                                товара</a></li> <!---->
-                        <li class="footer__nav-item"><a href="actions/index.html" class="footer__nav-link">Акции и
-                                скидки</a></li> <!---->
-                        <li class="footer__nav-item"><a href="news/index.html" class="footer__nav-link">Новости</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="reviews/index.html"
-                                                        class="footer__nav-link">Отзывы</a></li> <!---->
-                        <li class="footer__nav-item"><a href="catalog/index.html"
-                                                        class="footer__nav-link">Каталог</a></li> <!---->
-                        <li class="footer__nav-item"><a href="catalog/mezhkomnatnye-dveri/index.html"
-                                                        class="footer__nav-link">Межкомнатные двери</a></li> <!---->
-                        <li class="footer__nav-item"><a href="catalog/furnitura/index.html"
-                                                        class="footer__nav-link">Фурнитура</a></li> <!---->
-                        <li class="footer__nav-item"><a href="skachat-katalog/index.html" class="footer__nav-link">Скачать
-                                каталог</a></li> <!---->
-                        <li class="footer__nav-item"><a href="oborudovanie/index.html" class="footer__nav-link">Оборудование</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="oplata/index.html#halva" class="footer__nav-link">Купить
-                                в рассрочку</a></li> <!---->
-                        <li class="footer__nav-item"><a href="https://dverihall.net/lichnyj-kabinet.html"
-                                                        class="footer__nav-link">Личный кабинет дилеров</a></li>
-                        <!---->
-                        <li class="footer__nav-item"><a href="politika-konfidentsialnosti/index.html"
-                                                        class="footer__nav-link">Политика конфиденциальности</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="soglasie-na-obrabotku-personalnykh-dannykh/index.html"
-                                                        class="footer__nav-link">Согласие на обработку персональных
-                                данных</a></li> <!---->
-                        <li class="footer__nav-item"><a href="prays-listy/index.html" class="footer__nav-link">Прайс-листы</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="sertifikaty/index.html" class="footer__nav-link">Сертификаты</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="dlya-internet-magazinov/index.html"
-                                                        class="footer__nav-link">Для интернет-магазинов</a></li>
-                        <!---->
-                        <li class="footer__nav-item"><a href="https://hr.velldoris.net/" class="footer__nav-link">Работа
-                                в VellDoris</a></li> <!---->
-                        <li class="footer__nav-item"><a href="otsenka-usloviy-truda/index.html"
-                                                        class="footer__nav-link">Оценка условий труда</a></li>
-                        <!---->
-                        <li class="footer__nav-item"><a href="garantiya/index.html"
-                                                        class="footer__nav-link">Гарантия</a>
-                        </li> <!---->
-                        <li class="footer__nav-item"><a href="map/index.html" class="footer__nav-link">Карта
-                                сайта</a></li> <!----></ul>
-                </nav>
-            </div>
-            <div class="footer__middle-line">
-                <div itemscope="itemscope" itemtype="http://schema.org/Organization" class="footer__contacts">
-                    <meta itemprop="name" content="Velldoris">
-                    <div itemprop="telephone" class="phone footer__phone"><a href="tel:+78126067551"
-                                                                             class="phone__link">+7 (812)
-                            606-75-51</a></div>
-                    <span itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"
-                          class="footer__address"><span itemprop="addressLocality">Санкт-Петербург</span></span>
+            <div class="footer__bottom-line">
+                <div>
+                    <span class="footer__year">AllDoors &copy; 2022 {{ language('general.rights_reserved') }}</span>
+                    <div class="footer__copyright">{!! language('general.copyright') !!}</div>
                 </div>
-                <div class="footer__btns">
-                    <div class="callmeasurelink footer__callmeasure"><a rel="nofollow" href="#"
-                                                                        class="btn btn_block btn_bordered">Вызвать
-                            замерщика</a></div>
-                    <div class="callbacklink footer__callback"><a rel="nofollow" href="#"
-                                                                  class="btn btn_block btn_bordered">Заказать
-                            звонок</a></div>
-                </div>
-            </div>
-            <div class="footer__bottom-line"><span class="footer__year">© 2022</span>
-                <div class="footer__copyright">
-                    <a href="https://orangepro.az/"><i>
-                            <svg class="icon">
-                                {{--                                <use xlink:href="{{ asset('frontend/assets/img/icons.svg') }}#ico_runway"></use>--}}
-                            </svg>
-                        </i>
-                    </a>
+                <div class="footer_menu">
+                    <ul class="footer-menu__list">
+                        @php
+                            $params = [
+                                'li_class' => "footer-menu__item",
+                                'a_class' => "footer-menu__link text-uppercase"
+                            ];
+                        @endphp
+                        {!! \App\Services\MenuServices::getMenu($HTTP_HOST,$languageID,2,0,[], $params) !!}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -203,13 +65,15 @@
 
                         <div class="form__section">
                             <div class="form__item">
-                                <input name="form_text_1" placeholder="{{ language('general.call_us_form_name') }}" type="text" class="input form__input">
+                                <input name="form_text_1" placeholder="{{ language('general.call_us_form_name') }}"
+                                       type="text" class="input form__input">
                                 <label class="form__label">{{ language('general.call_us_form_name') }}</label>
                             </div>
                         </div>
                         <div class="form__section">
                             <div class="form__item">
-                                <input name="form_text_2" placeholder="{{ language('general.call_us_form_phone') }}" type="text" class="input form__input" inputmode="text">
+                                <input name="form_text_2" placeholder="{{ language('general.call_us_form_phone') }}"
+                                       type="text" class="input form__input" inputmode="text">
                                 <label class="form__label">{{ language('general.call_us_form_phone') }}</label>
                             </div>
                         </div>
@@ -230,7 +94,8 @@
 
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/jquery/jquery-3.6.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/jquery/jquery-ui.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('frontend/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript"
+        src="{{ asset('frontend/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 {{--<script type="text/javascript" src="{{ asset('frontend/assets/plugins/OwlCarousel/js/owl.carousel.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('frontend/assets/plugins/owl/owl.carousel.min.js') }}"></script>
 

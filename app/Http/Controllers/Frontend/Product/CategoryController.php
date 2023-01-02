@@ -88,6 +88,16 @@ class CategoryController extends Controller
     }
 
 
+    public function catalog(Request $request) {
+
+
+
+        return view('frontend.product.category.catalog', compact(
+
+        ));
+    }
+
+
 
     public function detail(Request $request,$categorySlug = null)
     {
