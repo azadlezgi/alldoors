@@ -1,8 +1,8 @@
 @extends('frontend.layouts.index')
 
-@section('title',language('frontend.product.title'))
-@section('keywords', language('frontend.product.keyword') )
-@section('description', language('frontend.product.description') )
+@section('title',language('frontend.catalog.title'))
+@section('keywords', language('frontend.catalog.keyword') )
+@section('description', language('frontend.catalog.description') )
 
 @section('breadcrumb')
     <main class="main main--mt">
@@ -22,8 +22,8 @@
                     <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
                          class="breadcrumbs__item">
                         <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
-                           href="{{ route('frontend.product.index') }}">
-                            <span itemprop="name">{{ language('frontend.product.name') }}</span>
+                           href="{{ route('frontend.product.catalog') }}">
+                            <span itemprop="name">{{ language('frontend.catalog.name') }}</span>
                         </a>
                         <meta itemprop="position" content="2">
                     </div>
@@ -35,7 +35,7 @@
         @section('content')
 
             <div class="container">
-                <h1>{{ language('frontend.product.name') }}</h1>
+                <h1>{{ language('frontend.catalog.name') }}</h1>
             </div>
 
             <div class="content">
@@ -67,7 +67,7 @@
                     @endif
 
                     <div class="text-block">
-                        {!! language('frontend.product.catalog_text') !!}
+                        {!! language('frontend.catalog.text') !!}
                     </div>
                 </div>
             </div>

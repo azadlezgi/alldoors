@@ -3477,15 +3477,15 @@ textarea.form-control {
 .btn {
     display: inline-block;
     font-weight: 400;
-    color: #212529;
+    /*color: #212529;*/
     text-align: center;
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
+    /*background-color: transparent;*/
+    /*border: 1px solid transparent;*/
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -3500,7 +3500,7 @@ textarea.form-control {
 }
 
 .btn:hover {
-    color: #212529;
+    /*color: #212529;*/
     text-decoration: none
 }
 
@@ -11520,27 +11520,27 @@ noindex {
     animation-name: fadeIn
 }
 
-.btn {
-    position: relative;
-    display: inline-block;
-    padding: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 14px;
-    letter-spacing: .18px;
-    font-weight: 400;
-    color: #6d6d6d;
-    text-decoration: none;
-    border: 0;
-    border-radius: 0;
-    background-color: transparent;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    outline: none;
-    transition: .3s ease-in-out
-}
+/*.btn {*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    padding: 0;*/
+/*    font-family: Montserrat, sans-serif;*/
+/*    font-size: 14px;*/
+/*    letter-spacing: .18px;*/
+/*    font-weight: 400;*/
+/*    color: #6d6d6d;*/
+/*    text-decoration: none;*/
+/*    border: 0;*/
+/*    border-radius: 0;*/
+/*    background-color: transparent;*/
+/*    cursor: pointer;*/
+/*    -webkit-user-select: none;*/
+/*    -moz-user-select: none;*/
+/*    -ms-user-select: none;*/
+/*    user-select: none;*/
+/*    outline: none;*/
+/*    transition: .3s ease-in-out*/
+/*}*/
 
 .btn[disabled] {
     cursor: default;
@@ -11548,7 +11548,7 @@ noindex {
 }
 
 .btn:hover {
-    color: inherit;
+    /*color: inherit;*/
     transition: .3s ease-in-out
 }
 
@@ -11871,7 +11871,7 @@ noindex {
 .h1, .h2, h1, h2 {
     margin-top: 0;
     margin-bottom: 16px;
-    font-family: Prosto One, Arial;
+    /*font-family: Prosto One, Arial;*/
     color: #232228;
     text-transform: uppercase
 }
@@ -12269,11 +12269,14 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
 .breadcrumbs__item a[href]:after {
     content: "/";
     position: absolute;
-    top: 0;
+    top: -2px;
     right: 6px;
     cursor: default;
     line-height: 20px;
     color: #848388
+}
+.breadcrumbs li:last-child a[href]:after {
+    display: none;
 }
 
 .attach {
@@ -14150,4 +14153,8 @@ input:checked ~ .radio__label:after {
     width: 22px;
     height: 12px;
     cursor: pointer;
+}
+
+.bg-grey {
+    background-color: #f1f0f0;
 }

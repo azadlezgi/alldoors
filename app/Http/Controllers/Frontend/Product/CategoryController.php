@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Frontend\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute\Attribute;
 use App\Models\Attribute\AttributeGroup;
+use App\Models\Option\Option;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Services\CategoriesService;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,165 +17,108 @@ class CategoryController extends Controller
 
     public function index(Request $request, $categorySlug = null)
     {
-        $fullCategorySlug = $categorySlug;
 
 
-        if (!is_null($categorySlug) && strpos($categorySlug, "/")) {
-            $slug_array = explode("/", $categorySlug);
-            $categorySlug = $slug_array[(count($slug_array) - 1)];
-        }
-
-        $categories = "";
-        $products = '';
-        $productcCount = '';
-        $category = '';
-        if ($categorySlug != null) {
-
-            $category = ProductCategory::where('language_id',  $request->languageID)
-                ->join('products_categories_translations', 'products_categories_translations.category_id', '=', 'products_categories.id')
-                ->where('slug', $categorySlug)
-                ->with('getProductsCount')
-                ->where('status', 1)
-                ->first();
-
-
-
-            if ($category) {
-                $categories = ProductCategory::where('language_id', $request->languageID)
-                    ->with('getProductsCount')
-                    ->orderBy('id', 'DESC')
-                    ->where('status', 1)
-                    ->where('parent', $category->id)
-                    ->join('products_categories_translations', 'products_categories_translations.category_id', '=', 'products_categories.id')
-                    ->get();
-
-
-
-                $products = Product::with(array('productsTranslations' => function ($query) use($request) {
-                    $query->where('language_id', $request->languageID);
-
-                })) ->with('productsCategoriesCheck')
-                    ->where('products_categories_lists.category_id', $category->id)
-                    ->join('products_categories_lists', 'products_categories_lists.product_id', '=', 'products.id')
-                    ->orderBy('products.id', 'DESC')
-                    ->select('*', 'products.id as id')
-                    ->where('status', 1)
-                    ->paginate(10);
-
-
-
-            }else{
-                abort(404);
-            }
-
-
-        } else {
-            abort(404);
-        }
-
-
-        $categoryName = $category->name;
-
-
-
-        return view('frontend.product.category.index', compact(
-            'categories',
-            'fullCategorySlug',
-            'products',
-            'category',
-            'categoryName',
-        ));
+        return view('frontend.product.category.index', compact());
 
 
     }
 
 
-    public function catalog(Request $request) {
-
-
-
-        return view('frontend.product.category.catalog', compact(
-
-        ));
-    }
-
-
-
-    public function detail(Request $request,$categorySlug = null)
+    public function detail(Request $request)
     {
 
-        $fullCategorySlug = $categorySlug;
+        $slug = stripinput($request->slug);
 
-        if (!is_null($categorySlug) && strpos($categorySlug, "/")) {
-            $slug_array = explode("/", $categorySlug);
-            $lastSlug = $slug_array[(count($slug_array) - 1)];
-
-        }else{
-            $lastSlug = $categorySlug;
-        }
-
-
-        $slug = $lastSlug;
-        $product = Product::where('slug', $slug)
-            ->where('status', 1)
-            ->with(['productsTranslations' => function ($query) use ($request) {
-                $query->where('language_id', $request->languageID);
-            }])
-            ->with('productsCategoriesCheck')
-            ->with('getProductModel')
-            ->with('getProductDestination')
-            ->with(['getProductAttributeList' => function ($query) use ($request) {
-                $query->where('language_id', $request->languageID);
-            }])
-            ->with('getProductAttributeListAll')
+        $category = ProductCategory::where('slug', $slug)
+            ->join('products_categories_translations', 'products_categories.id', '=', 'products_categories_translations.category_id')
             ->first();
 
 
-
-
-
-        if (!$product || count($product->productsCategoriesCheck) == 0) {
+        if ($category == null) {
             abort(404);
         }
 
 
-        /*   ATTRIBUTES START   */
+        $products = Product::where('products_categories_lists.category_id', (int)$category->id)
+            ->join('products_translations', 'products.id', '=', 'products_translations.product_id')
+            ->join('products_categories_lists', 'products.id', '=', 'products_categories_lists.product_id')
+            ->where('products.status', 1)
+            ->groupBy('products.id')
+            ->orderBy('products.id', 'DESC')
+            ->paginate(12);
+        if ($products) {
+            foreach ($products as $product_index => $product) {
+
+                $product->image = $product->image ? $product->image : '/storage/no-image.png';
+                $product->image = ImageService::customImageSize($product->image, 204, 305, 100);
+
+                $product->attributes = [];
+                $attributes = Attribute::where('attributes_translations.language_id', $request->languageID)
+                    ->where('status', 1)
+                    ->join('attributes_translations', 'attributes.id', '=', 'attributes_translations.attribute_id')
+                    ->join('products_attributes_lists', 'attributes.id', '=', 'products_attributes_lists.attribute_id')
+                    ->orderBy('attributes.sort', 'ASC')
+                    ->where('products_attributes_lists.product_id', $product->id)
+                    ->where('products_attributes_lists.language_id', $request->languageID)
+                    ->select('*', 'attributes_translations.name as attributes_translations_name')
+                    ->get();
+                if ($attributes) {
+                    $product->attributes = $attributes;
+                }
 
 
-        $attributes = Attribute::where('attributes_translations.language_id', $request->languageID)
-            ->where('status', 1)
-            ->join('attributes_translations', 'attributes.id', '=', 'attributes_translations.attribute_id')
-            ->join('products_attributes_lists', 'attributes.id', '=', 'products_attributes_lists.attribute_id')
-            ->orderBy('attributes.sort', 'ASC')
-            ->where('products_attributes_lists.product_id', $product->id)
-            ->where('products_attributes_lists.language_id', $request->languageID)
-            ->select('*', 'attributes_translations.name as attributes_translations_name')
-            ->get();
+                $product->options = [];
+                $options = Option::select(
+                        'options.id as option_id',
+                        'options_translations.name as option_name',
+                        'options.type as option_type',
+                        'options_values.id as option_value_id',
+                        'options_values.image as option_value_image',
+                        'options_values_translations.text as option_value_text'
+                    )
+                    ->join('options_translations', function ($q) use ($request) {
+                        $q->on('options.id', '=', 'options_translations.option_id')
+                            ->where('options_translations.language_id', '=', $request->languageID);
+                    })
+                    ->join('products_options_lists', function ($q) use ($product) {
+                        $q->on('options.id', '=', 'products_options_lists.option_id')
+                            ->where('products_options_lists.product_id', '=', $product->id);
+                    })
+                    ->leftJoin('options_values', 'options_values.id', '=', 'products_options_lists.option_value_id')
+                    ->leftJoin('options_values_translations', function ($q) use ($request) {
+                        $q->on('options_values.id', '=', 'options_values_translations.option_value_id')
+                            ->where('options_values_translations.language_id', '=', $request->languageID);
+                    })
+                    ->where('options.status', 1)
+//                    ->groupBy('options.id')
+                    ->orderBy('options.sort', 'ASC')
+                    ->get();
+
+                if ($options) {
+                    foreach ($options as $option_index => $option) {
+                        if ($option->image) {
+                            $option->image = ImageService::customImageSize($option->image, 50, 50, 100);
+                        } else {
+                            $option->image = "";
+                        }
+                        $options[$option_index] = $option;
+                    }
+                    $product->options = $options;
+                }
+
+                $products[$product_index] = $product;
+            }
+        }
 
 
-        $attributeGroups = AttributeGroup::where('language_id', $request->languageID)
-            ->where('status', 1)
-            ->join('attributes_groups_translations', 'attributes_groups.id', '=', 'attributes_groups_translations.attribute_group_id')
-            ->orderBy('attributes_groups.sort', 'ASC')
-            ->get();
+//        dd($products);
 
 
-        $checkAttributeGroupList = [];
-        foreach ($attributes as $item):
-            $checkAttributeGroupList[] = $item->attribute_group_id;
-        endforeach;
-
-        /*   ATTRIBUTES END   */
-
-
-        return view('frontend.product.category.detail', compact(
-            'product',
-            'attributes',
-            'attributeGroups',
-            'checkAttributeGroupList',
-            'fullCategorySlug'
+        return view('frontend.product.category', compact(
+            'category',
+            'products'
         ));
-
 
 
     }

@@ -100,7 +100,7 @@
                                                 <div style="padding: 0.25rem;" class="card-body">
 
                                                     <!--  Parent START  -->
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display: none">
                                                         <span class="span-dvidder">Alt Kateqoriya</span>
 
                                                         <select  form="submit-form" class="form-control countriesOverflow selectpicker"

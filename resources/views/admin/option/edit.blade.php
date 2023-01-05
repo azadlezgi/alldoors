@@ -220,7 +220,7 @@
                                                                                                     </span>
                                                                                                 </div>
                                                                                                 <textarea class="form-control" form="submit-form"
-                                                                                                          name="option_list[language][{{$keySort}}][]"
+                                                                                                          name="option_list[language][{{$keySort}}][{{ $language->id }}]"
                                                                                                           placeholder="Text"
                                                                                                 >{{ getTranslateOptionData($optionValue[$keySort]->optionsValuesTranslations,$language->id,$sortValue->id,'text') }}</textarea>
                                                                                                 <input type="hidden" name="option_list[language_id][{{$keySort}}][]" value="{{ $language->id }}">
@@ -276,7 +276,7 @@
                                                                                                 <div class="image-post-input">
                                                                                                     <input type="text"
                                                                                                            id="image_label-{{ $imgClassname }}{{$keySort}}"
-                                                                                                           name="option_list[image][]"
+                                                                                                           name="option_list[image][{{$keySort}}]"
                                                                                                            value="{{ $sortValue->image }}"
                                                                                                            form="submit-form"
                                                                                                     >
@@ -295,7 +295,7 @@
 
                                                                             <td data-label="Sıra" class="colum-sort-box">
                                                                                 <div class="colum-sort">
-                                                                                    <input type="number" min="0" class="form-control" name="option_list[sort][]" placeholder="Sıra" value="{{ $sortValue->sort }}">
+                                                                                    <input type="number" min="0" class="form-control" name="option_list[sort][{{$keySort}}]" placeholder="Sıra" value="{{ $sortValue->sort }}">
                                                                                     <div class="removeButtonOption">
                                                                                         <div class="option-box-delete-container">
                                                                                             <div class="option-box-delete">

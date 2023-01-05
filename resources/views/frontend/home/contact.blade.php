@@ -4,208 +4,156 @@
 @section('keywords', language('frontend.contact.keywords') )
 @section('description',language('frontend.contact.description') )
 
-{{--@section('breadcrumb')--}}
-{{--    <!-- breadcumb-area-start -->--}}
-{{--    <div class="breadcumb-area bg-with-black">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-12">--}}
-{{--                    <div class="breadcumb">--}}
-{{--                        <h1 class="name">{{ language('frontend.contact.name') }}</h1>--}}
-{{--                        <ul class="links">--}}
-{{--                            <li><a href="{{ route('frontend.home.index') }}">{!! language('genereal.home') !!}</a></li>--}}
-{{--                            <li>--}}
-{{--                                <a href="{{ route('frontend.home.contact') }}">{{ language('frontend.contact.name') }}</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <!-- breadcumb-area-end -->--}}
-{{--@endsection--}}
+@section('breadcrumb')
 
-@section('content')
-
-
-    <!-- contact-details-area-start -->
-    <div class="page-contact-details contact-details-area">
+    <main class="main main--mt">
         <div class="container">
-
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 col-12">
-                    <div class="section-title">
-                        @if(!empty(language('frontend.contact.top_title')))
-                            <div class="h6">{!! language('frontend.contact.top_title') !!}</div>@endif
-                        @if(!empty(language('frontend.contact.name')))
-                            <h1>{!! language('frontend.contact.name') !!}</h1>@endif
-                        @if(!empty(language('frontend.contact.sub_title')))
-                            <p>{!! language('frontend.contact.sub_title') !!}</p>@endif
+            <ul itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList" class="breadcrumbs">
+                <li>
+                    <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
+                         class="breadcrumbs__item">
+                        <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
+                           href="{{ route('frontend.home.index') }}">
+                            <span itemprop="name">{{ language('genereal.home_page') }}</span>
+                        </a>
+                        <meta itemprop="position" content="1">
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="all-contact-details">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="single-contact-details">
-                                    <div class="icon">
-                                        <span class="fas fa-map-marker-alt"></span>
-                                    </div>
-                                    <div class="h4 title">{!! language('frontend.contact.address') !!}</div>
-                                    <p class="desc">{{  setting('address',true) }}</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="single-contact-details">
-                                    <div class="icon">
-                                        <span class="far fa-envelope"></span>
-                                    </div>
-                                    <div class="h4 title">{!! language('frontend.contact.email') !!}</div>
-                                    <a class="desc" href="mailto:{{  setting('email') }}">{{  setting('email') }}</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-12 col-12">
-                                <div class="single-contact-details">
-                                    <div class="icon">
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                    <div class="h4 title">{!! language('frontend.contact.tel') !!}</div>
-                                    @foreach( json_decode(setting('tel')) as $tel)
-
-                                        <a class="desc" href="tel:{{ \App\Services\CommonService::telText( $tel->tel )[0] }}">{{ \App\Services\CommonService::telText( $tel->tel )[1] }}</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                </li>
+                <li>
+                    <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
+                         class="breadcrumbs__item">
+                        <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
+                           href="{{ route('frontend.home.contact') }}">
+                            <span itemprop="name">{{ language('frontend.contact.name') }}</span>
+                        </a>
+                        <meta itemprop="position" content="2">
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
-    </div>
-    <!-- contact-details-area-end -->
-    <!-- map-start -->
-    <div class="map-area">
-        <div class="gmap">
-            <div id="googleMap"></div>
-        </div>
-    </div>
-    <!-- map-end -->
-    <!-- contact-send-msg-area-start -->
-    <div class="contact-send-msg-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 col-12">
-                    <div class="section-title">
-                        @if(!empty(language('frontend.contact.box.top_title')))
-                            <div class="h6">{!! language('frontend.contact.box.top_title') !!}</div>@endif
-                        @if(!empty(language('frontend.contact.box.title')))
-                            <h2>{!! language('frontend.contact.box.title') !!}</h2>@endif
-                        @if(!empty(language('frontend.contact.box.sub_title')))
-                            <p>{!! language('frontend.contact.box.sub_title') !!}</p>@endif
+
+        @endsection
+
+        @section('content')
+
+
+
+            <div class="container">
+
+                @if(!empty(setting('map')))
+                    <div>
+                        {!! setting('map') !!}
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="question-form-area">
-                        <div class="cf-msg"></div>
-                        <form id="formSend">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 col-12">
-                                    <div class="cf-box">
+                @endif
 
-                                        <input type="text" class="form-control checkForm"
-                                               data-validation-message="{{ language('frontend.contact.form_error_name') }}"
-                                               autocomplete="OFF" id="name" name="name"
-                                               placeholder="{{ language('frontend.contact.form_name') }}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-12">
-                                    <div class="cf-box">
-                                        <input type="text" class="form-control checkForm"
-                                               data-validation-message="{{ language('frontend.contact.form_error_email') }}"
-                                               autocomplete="OFF" id="email" name="email"
-                                               placeholder="{{ language('frontend.contact.form_email') }}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4 col-12">
-                                    <div class="cf-box">
-                                        <input type="text" class="form-control checkForm"
-                                               data-validation-message="{{ language('frontend.contact.form_error_tel') }}"
-                                               autocomplete="OFF" id="mobil" name="mobil"
-                                               placeholder="{{ language('frontend.contact.form_mobil') }}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-sm-12 col-12">
-                                    <div class="cf-box">
+                <div class="index-map__wrapper">
+                    <div class="index-map__text mb-4">
+                        <div class="h2">{{ language('frontend.home.contact_us') }}</div>
+                        @if(!empty(setting('address',true)))
+                            <address
+                                class="index-map__info index-map__info_address">{!! setting('address',true) !!}</address>
+                        @endif
+                        @if(!empty(json_decode(setting('tel'))))
+                            <div class="index-map__info index-map__info_phone">
+                                @foreach(json_decode(setting('tel')) as $key => $value)
+                                    {{--                                    @if($loop->first)--}}
+                                    <span>
+                                            <a href="tel:{{ \App\Services\CommonService::telText( $value->tel )[0] }}"
+                                               style="color: #0c0e1a">{{ \App\Services\CommonService::telText( $value->tel )[1] }}</a>
+                                        </span>
+                                    {{--                                    @endif--}}
+                                @endforeach
+                            </div>
+                        @endif
+                        @if(!empty(setting('email')))
+                            <div class="index-map__info index-map__info_email">{!! setting('email') !!}</div>
+                        @endif
+                    </div>
+                    <div class="index-map__map-wrapper">
 
-                                        <textarea class="contact-textarea checkForm"
+                        <div class="question-form-area mt-5">
+                            <div class="cf-msg"></div>
+                            <form id="formSend">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-12">
+                                        <div class="cf-box">
+
+                                            <input type="text" class="form-control checkForm"
+                                                   data-validation-message="{{ language('frontend.contact.form_error_name') }}"
+                                                   autocomplete="OFF" id="name" name="name"
+                                                   placeholder="{{ language('frontend.contact.form_name') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-4 col-12">
+                                        <div class="cf-box">
+                                            <input type="text" class="form-control checkForm"
+                                                   data-validation-message="{{ language('frontend.contact.form_error_email') }}"
+                                                   autocomplete="OFF" id="email" name="email"
+                                                   placeholder="{{ language('frontend.contact.form_email') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-4 col-12">
+                                        <div class="cf-box">
+                                            <input type="text" class="form-control checkForm"
+                                                   data-validation-message="{{ language('frontend.contact.form_error_tel') }}"
+                                                   autocomplete="OFF" id="mobil" name="mobil"
+                                                   placeholder="{{ language('frontend.contact.form_mobil') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12 col-12 pt-4 pb-4">
+                                        <div class="cf-box">
+
+                                        <textarea class="contact-textarea checkForm form-control"
                                                   data-validation-message="{{ language('frontend.contact.form_error_text') }}"
                                                   autocomplete="OFF" id="text" name="text"
-                                                  placeholder="{{ language('frontend.contact.form_text') }}"></textarea>
+                                                  placeholder="{{ language('frontend.contact.form_text') }}"
+                                                  style="height: 120px;"
+                                        ></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12 col-sm-12 col-12">
-                                    <div class="cf-box">
-                                        <div class="submit-form-error mb-4" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="alert alert-danger">
-                                                        <ul></ul>
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <div class="cf-box">
+                                            <div class="submit-form-error mb-4" style="display: none;">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="alert alert-danger m-0">
+                                                            <ul class="m-0 p-0"></ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
 
-                                        <div class="submit-form-success mb-4" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="alert alert-success"></div>
+                                            <div class="submit-form-success mb-4" style="display: none;">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="alert alert-success"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <button id="submitForm" class="cont-submit btn-contact">
+                                            <button id="submitForm" class="cont-submit btn-contact btn btn_block btn_accent">
                                             <span
                                                 class="submitForm">{{ language('frontend.contact.form_submit') }}</span>
-                                            <div class="spinner-box">
-                                                <span>{{ language('frontend.contact.form_submit_sending') }}</span>
-                                                <span><div id="spinner"></div></span>
-                                            </div>
-                                        </button>
+                                                <div class="spinner-box">
+                                                    <span>{{ language('frontend.contact.form_submit_sending') }}</span>
+                                                    <span><div id="spinner"></div></span>
+                                                </div>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
+                {{--                    <a href="{{ route('frontend.home.contact') }}" class="btn btn_block btn_accent index-map__btn">--}}
+                {{--                        {{ language('frontend.home.contact_us') }}--}}
+                {{--                    </a>--}}
             </div>
-        </div>
-    </div>
-    <!-- contact-send-msg-area-end -->
-    <!-- brands-area-start -->
-    <div class="brands-area">
-        <div class="container">
-            <div class="brand-carousel owl-carousel">
 
-
-                @foreach($partners as $partner)
-                    <div class="single-brand">
-                        <img src="{{ $partner->image }}" alt="{{ $partner->name }}">
-                    </div>
-                @endforeach
-
-
-            </div>
-        </div>
-    </div>
-    <!-- brands-area-end -->
-
+    </main>
 
 @endsection
 
@@ -360,10 +308,6 @@
         })
     </script>
     <!--  SUBMIT END  -->
-
-
-
-
 
 @endsection
 

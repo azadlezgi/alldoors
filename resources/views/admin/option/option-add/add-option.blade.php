@@ -15,7 +15,7 @@
                                     </span>
                         </div>
                         <textarea class="form-control" form="submit-form"
-                                  name="option_list[language][{{$imgClassname}}][]"
+                                  name="option_list[language][{{$imgClassname}}][{{ $language->id }}]"
                                   placeholder="Text"
                         ></textarea>
                         <input type="hidden" name="option_list[language_id][{{$imgClassname}}][]" value="{{ $language->id }}">
@@ -70,7 +70,7 @@
                     <div class="image-post-input">
                         <input type="text"
                                id="image_label-{{ $imgClassname }}"
-                               name="option_list[image][]"
+                               name="option_list[image][{{$imgClassname}}]"
                                form="submit-form"
                         >
 
@@ -87,7 +87,7 @@
     </td>
     <td data-label="Sıra" class="colum-sort-box">
         <div class="colum-sort">
-            <input type="number" min="0" class="form-control" name="option_list[sort][]" placeholder="Sıra">
+            <input type="number" min="0" class="form-control" name="option_list[sort][{{$imgClassname}}]" placeholder="Sıra">
             <div class="removeButtonOption">
                 <div class="option-box-delete-container">
                     <div class="option-box-delete">

@@ -12,11 +12,11 @@
     <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.carousel.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.theme.default.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/animate/animate.min.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('frontend/assets/css/main.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/layout.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/components.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('assets/plugins/socicon/css/socicon.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('frontend/assets/css/main.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/css/style.css') }}" type="text/css" rel="stylesheet"/>
     @yield('CSS')
 </head>

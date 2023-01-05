@@ -58,7 +58,7 @@ class OptionController extends Controller
             $query->where('language_id', $this->defaultLanguage);
 
         }))
-            ->where('option_group_id',$id)
+            ->where('option_group_id', $id)
             ->orderBy('sort', 'ASC')
             ->paginate(10);
 
@@ -166,8 +166,6 @@ class OptionController extends Controller
         } //OPTION VALUES IMAGE AND END
 
 
-
-
         //OPTION VALUES TEXT START
         if ($type == 2) {
 
@@ -194,8 +192,6 @@ class OptionController extends Controller
         }//OPTION VALUES TEXT END
 
 
-
-
         return redirect()->route('admin.option.index');
 
 
@@ -215,9 +211,15 @@ class OptionController extends Controller
             ->get();
 
 
-        $optionValue = OptionValue::with('optionsValuesTranslations')
+        $optionValue = [];
+        $optionValueQuery = OptionValue::with('optionsValuesTranslations')
             ->where('option_id', $id)
             ->get();
+        if ($optionValueQuery) {
+            foreach ($optionValueQuery as $optionValueItem) {
+                $optionValue[$optionValueItem->id] = $optionValueItem;
+            }
+        }
 
 
         return view('admin.option.edit', compact('option', 'optionGroups', 'optionValue'));
@@ -290,70 +292,85 @@ class OptionController extends Controller
 
         endforeach;
 
+        $optionValueListOld = [];
+        $optionValueListNew = [];
+        $optionValueListQuery = OptionValue::where('option_id', $id)->get();
+        if($optionValueListQuery) {
+            foreach ($optionValueListQuery as $optionValueListItem) {
+                $optionValueListOld[$optionValueListItem->id] = "";
+            }
+        }
 
-        //OPTION VALUES IMAGE AND TEXT START
-        if ($type == 1) {
 
+        foreach ($request->option_list['sort'] as $optionSortKey => $optionSortValue):
 
-            //OPTIONS DELETED
-            OptionValue::where('option_id', $id)->delete();
+            $optionValueListNew[$optionSortKey] = "";
 
-            //AFTER CREATE
+            $optionValueQuery = OptionValue::where('id', $optionSortKey)
+                ->where('option_id', $id)
+                ->first();
+            if ($optionValueQuery == null) {
 
-            foreach ($request->option_list['sort'] as $optionSortKey => $optionSortValue):
                 $optionValue = OptionValue::create([
                     'option_id' => $id,
                     'sort' => $optionSortValue == null ? 0 : $optionSortValue,
-                    'image' => str_replace(env('APP_URL'), '', $request->option_list['image'][$optionSortKey]),
+                    'image' => ($type == 1 ? str_replace(env('APP_URL'), '', $request->option_list['image'][$optionSortKey]) : ""),
                 ]);
 
 
-                foreach (array_values($request->option_list['language_id'])[$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
+                foreach ($request->option_list['language_id'][$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
 
                     OptionValueTranslation::create([
                         'option_value_id' => $optionValue->id,
                         'language_id' => $optionLanguageIDValue,
-                        'text' => array_values($request->option_list['language'])[$optionSortKey][$optionLanguageIDKey],
+                        'text' => $request->option_list['language'][$optionSortKey][$optionLanguageIDValue],
                     ]);
 
                 endforeach;
-
-
-            endforeach;
-        }   //OPTION VALUES IMAGE AND TEXT END
-
-
-
-        //OPTION VALUES IMAGE AND TEXT START
-        if ($type == 2) {
-
-
-            //OPTIONS DELETED
-            OptionValue::where('option_id', $id)->delete();
-
-            //AFTER CREATE
-
-            foreach ($request->option_list['sort'] as $optionSortKey => $optionSortValue):
-                $optionValue = OptionValue::create([
-                    'option_id' => $id,
-                    'sort' => $optionSortValue == null ? 0 : $optionSortValue,
-                    'image' => '',
-                ]);
-
-
-                foreach (array_values($request->option_list['language_id'])[$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
-
-                    OptionValueTranslation::create([
-                        'option_value_id' => $optionValue->id,
-                        'language_id' => $optionLanguageIDValue,
-                        'text' => array_values($request->option_list['language'])[$optionSortKey][$optionLanguageIDKey],
+            } else {
+                $optionValue = OptionValue::where('id', $optionSortKey)
+                    ->update([
+                        'sort' => $optionSortValue == null ? 0 : $optionSortValue,
+                        'image' => ($type == 1 ? str_replace(env('APP_URL'), '', $request->option_list['image'][$optionSortKey]) : ""),
                     ]);
 
+                foreach ($request->option_list['language_id'][$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
+
+                    //Eger yeni dil elave olunubsa bura ishleyecek.
+                    //Cunki databasede hemen tablede bele bir dil yoxdur update etmediyi ucun create etmelidir
+                    $optionValueTranslation = OptionValueTranslation::where('option_value_id', $optionValueQuery->id)
+                        ->where('language_id', $optionLanguageIDValue)->first();
+
+                    if (!$optionValueTranslation) {
+                        OptionValueTranslation::create([
+                            'option_value_id' => $optionValueQuery->id,
+                            'language_id' => $optionLanguageIDValue,
+                            'text' => $request->option_list['language'][$optionSortKey][$optionLanguageIDValue],
+                        ]);
+                    } else {
+
+                        OptionValueTranslation::where('option_value_id', $optionValueQuery->id)
+                            ->where('language_id', $optionLanguageIDValue)
+                            ->update([
+                                'text' => $request->option_list['language'][$optionSortKey][$optionLanguageIDValue]
+                            ]);
+                    }
+
                 endforeach;
+            }
 
 
-            endforeach;
-        }   //OPTION VALUES IMAGE AND TEXT END
+        endforeach;
+
+        foreach ($optionValueListNew as $optionValueListIndex => $optionValueListSil) {
+            unset($optionValueListOld[$optionValueListIndex]);
+        }
+
+        foreach ($optionValueListOld as $optionValueId => $optionValueListSil) {
+            OptionValue::where('id', $optionValueId)->delete();
+        }
+
+
 
 
         return redirect()->route('admin.option.index');

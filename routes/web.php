@@ -687,15 +687,16 @@ Route::group(
 
             /*   PRODUCTS START   */
             /*   PRODUCT START   */
-            Route::get('/catalog', 'Product\ProductController@index')->name('frontend.product.index');
+            Route::get('/catalog', 'Product\ProductController@catalog')->name('frontend.product.catalog');
             Route::get('/collection', 'Product\ProductController@collection')->name('frontend.product.collection');
+            Route::get('/catalog/{slug}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
             Route::get('/product/{slug}', 'Product\ProductController@detail')->name('frontend.product.detail');
 //            Route::get('/products/search/{search?}', 'Product\ProductController@search')->name('frontend.product.search');
             /*   PRODUCT END   */
 
             /*  PRODUCT CATEGORIES START   */
 //            Route::get('/products/categories/{any?}', 'Product\CategoryController@index')->where('any', '.*')->name('frontend.product.category.index');
-            Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
+//            Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
             /*  PRODUCT CATEGORIES END   */
 
             /*  PRODUCT COLLECTIONS START   */
@@ -721,7 +722,7 @@ Route::group(
 
             /*   SERVICE START   */
             Route::get('/services', 'Service\ServiceController@index')->name('frontend.service.index');
-            Route::get('/service/{slug}', 'Service\ServiceController@detail')->name('frontend.service.detail');
+//            Route::get('/service/{slug}', 'Service\ServiceController@detail')->name('frontend.service.detail');
             /*   SERVICE END   */
 
             /*   BLOG START   */
@@ -731,15 +732,15 @@ Route::group(
 
 
 
-            /*   TEAM START   */
-            Route::get('/teams', 'Team\TeamController@index')->name('frontend.team.index');
-            Route::get('/team/{slug}', 'Team\TeamController@detail')->name('frontend.team.detail');
-            /*   TEAM END   */
+//            /*   TEAM START   */
+//            Route::get('/teams', 'Team\TeamController@index')->name('frontend.team.index');
+//            Route::get('/team/{slug}', 'Team\TeamController@detail')->name('frontend.team.detail');
+//            /*   TEAM END   */
 
 
 
             //TEST UCUN OLAN HOME CONTROLLER START
-            Route::get('/pars', 'Home\HomeController@pars');
+//            Route::get('/pars', 'Home\HomeController@pars');
 //            Route::get('/home2', 'Home\HomeController@indexWelcome');
 //            Route::get('/mail', 'Mail\SendMailController@send');
             //TEST UCUN OLAN HOME CONTROLLER END

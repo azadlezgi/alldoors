@@ -14,8 +14,22 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-
     public function index(Request $request)
+    {
+
+
+
+
+//        dd($categories);
+
+
+        return view('frontend.product.index', compact(
+
+        ));
+    }
+
+
+    public function catalog(Request $request)
     {
 
 
@@ -37,7 +51,7 @@ class ProductController extends Controller
 //        dd($categories);
 
 
-        return view('frontend.product.index', compact(
+        return view('frontend.product.catalog', compact(
             'categories',
         ));
     }
