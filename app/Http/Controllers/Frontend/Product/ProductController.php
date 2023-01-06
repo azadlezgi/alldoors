@@ -19,13 +19,6 @@ class ProductController extends Controller
 
 
 
-
-//        dd($categories);
-
-
-        return view('frontend.product.index', compact(
-
-        ));
     }
 
 

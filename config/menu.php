@@ -12,9 +12,10 @@
 
 
 return[
-    'menu_position' => [0,1,2],
+    'menu_position' => [0,1,2,3],
     'menu_position_name' => [
         '1' => 'Yuxarı menyu',
         '2' => 'Aşağı menyu',
+        '3' => 'Sol menyu',
     ]
 ];

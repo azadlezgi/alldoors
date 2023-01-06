@@ -362,6 +362,10 @@ function generateRandomString($length = 10) {
     return $randomString;
 }
 
+function price_view($price) {
+    return number_format($price, 0, ".", " ") . "₼";
+}
+
 function product_price($price,$specialPrice = '', $startDate = '', $endDate = ''){
     if(empty($specialPrice)){
         if(!empty($price)){

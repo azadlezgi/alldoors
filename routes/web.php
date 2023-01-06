@@ -687,6 +687,7 @@ Route::group(
 
             /*   PRODUCTS START   */
             /*   PRODUCT START   */
+            Route::get('/search', 'Product\ProductController@search')->name('frontend.product.search');
             Route::get('/catalog', 'Product\ProductController@catalog')->name('frontend.product.catalog');
             Route::get('/collection', 'Product\ProductController@collection')->name('frontend.product.collection');
             Route::get('/catalog/{slug}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');

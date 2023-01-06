@@ -1,0 +1,23 @@
+
+.catalog-filter__item-btn {
+    border-top: none;
+    border-bottom: 1px solid #CFCDCC;
+    border-radius: 0;
+}
+
+.options_complete {
+    display: none;
+}
+.options_more_show .options_complete {
+    display: block;
+}
+.options_more {
+    display: block;
+    cursor: pointer;
+    color: #f88b3b;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.options_more:hover {
+    text-decoration: underline;
+}

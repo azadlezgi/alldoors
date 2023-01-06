@@ -120,7 +120,7 @@
                                                     'a_class' => "burger-nav__link"
                                                 ];
                                             @endphp
-                                            {!! \App\Services\MenuServices::getMenu($HTTP_HOST,$languageID,1,0,[], $params) !!}
+                                            {!! \App\Services\MenuServices::getMenu($HTTP_HOST,$languageID,3,0,[], $params) !!}
                                         </ul>
                                     </nav>
                                 </div>

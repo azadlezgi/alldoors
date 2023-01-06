@@ -7,8 +7,8 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted font-weight-bold mr-2">©{{ date('Y') }}</span>
-            <a href="http://ismailov.az" target="_blank"
-               class="text-dark-75 text-hover-primary">ismailov.az</a>
+            <a href="https://orangepro.az" target="_blank"
+               class="text-dark-75 text-hover-primary">OrangePro.Az</a>
         </div>
         <!--end::Copyright-->
         <!--begin::Nav-->

@@ -11741,8 +11741,13 @@ noindex {
     margin-right: 4px;
     border: solid #848388;
     border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+    -webkit-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+    transition: .3s
+}
+.collapsed.btn_lined:after {
+    -webkit-transform: rotate(225deg) !important;
+    transform: rotate(225deg) !important;
     transition: .3s
 }
 
@@ -11891,7 +11896,7 @@ noindex {
 .h3, h3 {
     margin-top: 0;
     margin-bottom: 8px;
-    font-family: Prosto One, cursive;
+    /*font-family: Prosto One, cursive;*/
     font-size: 12px;
     line-height: 16px;
     font-weight: 600;
@@ -11907,7 +11912,7 @@ noindex {
 
 .h4, h4 {
     margin: 0 0 8px;
-    font-family: Prosto One, cursive;
+    /*font-family: Prosto One, cursive;*/
     font-size: 13px;
     line-height: 16px;
     font-weight: 600;
@@ -12816,16 +12821,16 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
     cursor: pointer
 }
 
-.checkbox__label:before {
-    content: "";
-    position: absolute;
-    top: 3px;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    border: 1px solid #d0cdcc;
-    cursor: pointer
-}
+/*.checkbox__label:before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 3px;*/
+/*    left: 0;*/
+/*    height: 16px;*/
+/*    width: 16px;*/
+/*    border: 1px solid #d0cdcc;*/
+/*    cursor: pointer*/
+/*}*/
 
 .checkbox__label:before:focus {
     border-color: #f88b3b
@@ -12835,20 +12840,20 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
     display: none
 }
 
-.checkbox__label:after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: 5px;
-    display: block;
-    width: 9px;
-    height: 10px;
-    background-image: url(../img/ico_checkbox.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0;
-    transition: .3s
-}
+/*.checkbox__label:after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    left: 4px;*/
+/*    top: 5px;*/
+/*    display: block;*/
+/*    width: 9px;*/
+/*    height: 10px;*/
+/*    background-image: url(../img/ico_checkbox.svg);*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*    opacity: 0;*/
+/*    transition: .3s*/
+/*}*/
 
 .checkbox_color .checkbox__label:after {
     left: 0;
