@@ -140,7 +140,8 @@
                         </ul>
                     </nav>
                     <div class="callbacklink header__callback header__callback--orange header__callback--tablet">
-                        <button class="btn btn_block btn_bordered" data-bs-toggle="modal" data-bs-target="#call_usModal">{{ language('general.call_us') }}</button>
+{{--                        <button class="btn btn_block btn_bordered" data-bs-toggle="modal" data-bs-target="#call_usModal">{{ language('general.call_us') }}</button>--}}
+                        <a href="{{ route('frontend.home.contact') }}" class="btn btn_block btn_bordered">{{ language('general.call_us') }}</a>
                     </div>
                 </div>
             </div>

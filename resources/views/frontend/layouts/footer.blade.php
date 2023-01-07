@@ -48,46 +48,46 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="call_usModal" tabindex="-1" aria-labelledby="call_usModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="call_usModalLabel">{{ language('general.call_us_modal_title') }}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-layout">
-                    <form action="/api/form/callback/" method="POST" class="form">
-                        <div>
-                            <p class="form__text">{{ language('general.call_us_modal_desc') }}</p>
-                        </div>
+{{--<!-- Modal -->--}}
+{{--<div class="modal fade" id="call_usModal" tabindex="-1" aria-labelledby="call_usModalLabel" aria-hidden="true">--}}
+{{--    <div class="modal-dialog modal-dialog-centered">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h1 class="modal-title fs-5" id="call_usModalLabel">{{ language('general.call_us_modal_title') }}</h1>--}}
+{{--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
+{{--                <div class="form-layout">--}}
+{{--                    <form action="/api/form/callback/" method="POST" class="form">--}}
+{{--                        <div>--}}
+{{--                            <p class="form__text">{{ language('general.call_us_modal_desc') }}</p>--}}
+{{--                        </div>--}}
 
-                        <div class="form__section">
-                            <div class="form__item">
-                                <input name="form_text_1" placeholder="{{ language('general.call_us_form_name') }}"
-                                       type="text" class="input form__input">
-                                <label class="form__label">{{ language('general.call_us_form_name') }}</label>
-                            </div>
-                        </div>
-                        <div class="form__section">
-                            <div class="form__item">
-                                <input name="form_text_2" placeholder="{{ language('general.call_us_form_phone') }}"
-                                       type="text" class="input form__input" inputmode="text">
-                                <label class="form__label">{{ language('general.call_us_form_phone') }}</label>
-                            </div>
-                        </div>
-                        <div class="form__submit">
-                            <button type="submit" name="submit" class="btn">
-                                <span>{{ language('general.call_us_form_submit') }}</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--                        <div class="form__section">--}}
+{{--                            <div class="form__item">--}}
+{{--                                <input name="form_text_1" placeholder="{{ language('general.call_us_form_name') }}"--}}
+{{--                                       type="text" class="input form__input">--}}
+{{--                                <label class="form__label">{{ language('general.call_us_form_name') }}</label>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form__section">--}}
+{{--                            <div class="form__item">--}}
+{{--                                <input name="form_text_2" placeholder="{{ language('general.call_us_form_phone') }}"--}}
+{{--                                       type="text" class="input form__input" inputmode="text">--}}
+{{--                                <label class="form__label">{{ language('general.call_us_form_phone') }}</label>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form__submit">--}}
+{{--                            <button type="submit" name="submit" class="btn">--}}
+{{--                                <span>{{ language('general.call_us_form_submit') }}</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 {{--<div class="notifications notifications--top"></div>--}}
 {{--<div class="notifications notifications--bottom"></div> <!----></div>--}}
@@ -102,6 +102,11 @@
 {{--<script type="text/javascript" src="{{ asset('frontend/assets/js/bundle.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('frontend/assets/js/svgxuse.min.js') }}"></script>
 
+<script>
+    const languageChange = "{{ route('frontend.language.change') }}";
+    const fullUrl = "{{ url()->full() }}";
+</script>
+<script src="{{ asset('assets/js/common.js') }}"></script>
 
 <script>
     $(document).ready(function () {

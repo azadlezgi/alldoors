@@ -6872,9 +6872,9 @@ a.close.disabled {
 .modal-dialog-centered::before {
     display: block;
     height: calc(100vh - 1rem);
-    height: -webkit-min-content;
-    height: -moz-min-content;
-    height: min-content;
+    /*height: -webkit-min-content;*/
+    /*height: -moz-min-content;*/
+    /*height: min-content;*/
     content: ""
 }
 
@@ -7004,9 +7004,9 @@ a.close.disabled {
 
     .modal-dialog-centered::before {
         height: calc(100vh - 3.5rem);
-        height: -webkit-min-content;
-        height: -moz-min-content;
-        height: min-content
+        /*height: -webkit-min-content;*/
+        /*height: -moz-min-content;*/
+        /*height: min-content*/
     }
 
     .modal-sm {
@@ -11191,7 +11191,7 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 .text-hide {
-    font: 0/0 a;
+    /*font: 0/0 a;*/
     color: transparent;
     text-shadow: none;
     background-color: transparent;
@@ -11454,7 +11454,7 @@ noindex {
 }
 
 .slideIn-leave-active {
-    width: var(--search-width, 100%)
+    /*width: var(--search-width, 100%)*/
 }
 
 .slideIn-enter, .slideIn-leave-to {
@@ -11464,7 +11464,7 @@ noindex {
 }
 
 .slideIn-leave-to {
-    width: var(--search-width, 100%)
+    /*width: var(--search-width, 100%)*/
 }
 
 @-webkit-keyframes dash {
@@ -11599,7 +11599,7 @@ noindex {
 }
 
 .btn_bordered:not(.btn_active):active, .btn_bordered:not(.btn_active):focus {
-    color: #f9791a;
+    color: #fff;
     border-color: #f9791a;
     opacity: .8
 }
@@ -11843,13 +11843,13 @@ noindex {
     src: url(../fonts/prostoone-regular.woff2) format("woff2"), url(../fonts/prostoone-regular.woff) format("woff")
 }
 
-@font-face {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url(../fonts/Montserrat-Semibold.woff2) format("woff2"), url(../fonts/Montserrat-Semibold.woff) format("woff")
-}
+/*@font-face {*/
+/*    font-family: Montserrat;*/
+/*    font-style: normal;*/
+/*    font-weight: 600;*/
+/*    font-display: swap;*/
+/*    src: url(../fonts/Montserrat-Semibold.woff2) format("woff2"), url(../fonts/Montserrat-Semibold.woff) format("woff")*/
+/*}*/
 
 @font-face {
     font-family: Montserrat;
@@ -12437,10 +12437,10 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
     border-color: #f88b3b
 }
 
-.form__input:-moz-placeholder-shown + .form__label, .form__input:-moz-placeholder-shown + .label, .input:-moz-placeholder-shown + .form__label, .input:-moz-placeholder-shown + .label, .textarea:-moz-placeholder-shown + .form__label, .textarea:-moz-placeholder-shown + .label {
-    visibility: hidden;
-    z-index: -1
-}
+/*.form__input:-moz-placeholder-shown + .form__label, .form__input:-moz-placeholder-shown + .label, .input:-moz-placeholder-shown + .form__label, .input:-moz-placeholder-shown + .label, .textarea:-moz-placeholder-shown + .form__label, .textarea:-moz-placeholder-shown + .label {*/
+/*    visibility: hidden;*/
+/*    z-index: -1*/
+/*}*/
 
 .form__input:-ms-input-placeholder + .form__label, .form__input:-ms-input-placeholder + .label, .input:-ms-input-placeholder + .form__label, .input:-ms-input-placeholder + .label, .textarea:-ms-input-placeholder + .form__label, .textarea:-ms-input-placeholder + .label {
     visibility: hidden;
@@ -12452,14 +12452,14 @@ a[href]:not[class]:not(.btn):active, a[href]:not[class]:not(.btn):focus, a[href]
     z-index: -1
 }
 
-.form__input:focus:not(:-moz-placeholder-shown) + .form__label, .form__input:focus:not(:-moz-placeholder-shown) + .label, .form__input:not(:-moz-placeholder-shown) + .form__label, .form__input:not(:-moz-placeholder-shown) + .label, .input:focus:not(:-moz-placeholder-shown) + .form__label, .input:focus:not(:-moz-placeholder-shown) + .label, .input:not(:-moz-placeholder-shown) + .form__label, .input:not(:-moz-placeholder-shown) + .label, .textarea:focus:not(:-moz-placeholder-shown) + .form__label, .textarea:focus:not(:-moz-placeholder-shown) + .label, .textarea:not(:-moz-placeholder-shown) + .form__label, .textarea:not(:-moz-placeholder-shown) + .label {
-    z-index: 1;
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-    -moz-transition: transform .4s;
-    transition: transform .4s
-}
+/*.form__input:focus:not(:-moz-placeholder-shown) + .form__label, .form__input:focus:not(:-moz-placeholder-shown) + .label, .form__input:not(:-moz-placeholder-shown) + .form__label, .form__input:not(:-moz-placeholder-shown) + .label, .input:focus:not(:-moz-placeholder-shown) + .form__label, .input:focus:not(:-moz-placeholder-shown) + .label, .input:not(:-moz-placeholder-shown) + .form__label, .input:not(:-moz-placeholder-shown) + .label, .textarea:focus:not(:-moz-placeholder-shown) + .form__label, .textarea:focus:not(:-moz-placeholder-shown) + .label, .textarea:not(:-moz-placeholder-shown) + .form__label, .textarea:not(:-moz-placeholder-shown) + .label {*/
+/*    z-index: 1;*/
+/*    visibility: visible;*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*    -moz-transition: transform .4s;*/
+/*    transition: transform .4s*/
+/*}*/
 
 .form__input:focus:not(:-ms-input-placeholder) + .form__label, .form__input:focus:not(:-ms-input-placeholder) + .label, .form__input:not(:-ms-input-placeholder) + .form__label, .form__input:not(:-ms-input-placeholder) + .label, .input:focus:not(:-ms-input-placeholder) + .form__label, .input:focus:not(:-ms-input-placeholder) + .label, .input:not(:-ms-input-placeholder) + .form__label, .input:not(:-ms-input-placeholder) + .label, .textarea:focus:not(:-ms-input-placeholder) + .form__label, .textarea:focus:not(:-ms-input-placeholder) + .label, .textarea:not(:-ms-input-placeholder) + .form__label, .textarea:not(:-ms-input-placeholder) + .label {
     z-index: 1;
@@ -13278,7 +13278,7 @@ input:checked ~ .radio__label:after {
 }
 
 .slider-dots__item:not(.slider-dots__item_active):active, .slider-dots__item:not(.slider-dots__item_active):focus,
-.slider-dots .owl-dot:not(.slider-dots .owl-dot.active):active, ..slider-dots .owl-dot:not(.slider-dots .owl-dot.active):focus
+.slider-dots .owl-dot:not(.slider-dots .owl-dot.active):active, .slider-dots .owl-dot:not(.slider-dots .owl-dot.active):focus
 {
     background-color: #f88b3b;
     border-color: #f88b3b;
