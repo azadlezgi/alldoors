@@ -34,9 +34,8 @@
                 </div>
 
                 <div class="header__search header__search_desktop search search_shown" style="">
-                    <form action="/search/" class="search__form">
-                        <input type="search" name="q" placeholder="{{ language('general.search') }}"
-                               class="input input_search search__input">
+                    <form action="{{ route('frontend.product.search') }}" class="search__form">
+                        <input type="search" name="q" placeholder="{{ language('general.search') }}" class="input input_search search__input" value="{{ stripinput(request('q')) }}" />
                         <label class="label">{{ language('general.search') }}</label>
                         <button type="submit" class="btn search__link">
                             <i>

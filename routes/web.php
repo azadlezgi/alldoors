@@ -688,9 +688,10 @@ Route::group(
             /*   PRODUCTS START   */
             /*   PRODUCT START   */
             Route::get('/search', 'Product\ProductController@search')->name('frontend.product.search');
-            Route::get('/catalog', 'Product\ProductController@catalog')->name('frontend.product.catalog');
-            Route::get('/collection', 'Product\ProductController@collection')->name('frontend.product.collection');
+            Route::get('/catalog', 'Product\CategoryController@index')->name('frontend.product.catalog');
             Route::get('/catalog/{slug}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
+            Route::get('/collection', 'Product\CollectionController@index')->name('frontend.product.collection');
+            Route::get('/collection/{slug}', 'Product\CollectionController@detail')->where('any', '.*')->name('frontend.product.collection.detail');
             Route::get('/product/{slug}', 'Product\ProductController@detail')->name('frontend.product.detail');
 //            Route::get('/products/search/{search?}', 'Product\ProductController@search')->name('frontend.product.search');
             /*   PRODUCT END   */
@@ -702,7 +703,7 @@ Route::group(
 
             /*  PRODUCT COLLECTIONS START   */
 //            Route::get('/products/collections/{any?}', 'Product\CollectionController@index')->where('any', '.*')->name('frontend.product.collection.index');
-            Route::get('/product/collections/{any?}', 'Product\CollectionController@detail')->where('any', '.*')->name('frontend.product.collection.detail');
+//            Route::get('/product/collections/{any?}', 'Product\CollectionController@detail')->where('any', '.*')->name('frontend.product.collection.detail');
             /*  PRODUCT COLLECTIONS END   */
             /*   PRODUCTS END   */
 

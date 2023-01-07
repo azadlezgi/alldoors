@@ -118,6 +118,9 @@
                             <div class="catalog-filter">
                                 <noindex>
                                     <form name="catalogfilter" action="{{ route('frontend.product.search') }}" method="get" class="catalog-filter__form">
+                                        <input type="hidden" name="filter" value="1">
+                                        <input type="hidden" name="category" value="{{ $category->id }}">
+                                        <input type="hidden" name="q" value="{{ stripinput(request('q')) }}">
                                         <div class="catalog-filter__wrapper">
                                             <a href="#" aria-label="{{ language('frontend.catalog.filter_close') }}" class="btn btn_close catalog-filter__close d-md-none"></a>
                                             <span class="h2">{{ language('frontend.general.filters') }}</span>
@@ -135,18 +138,60 @@
                                                 <div id="collapsePrice" class="catalog-filter__fields collapse show" aria-labelledby="headingPrice">
                                                     <div class="catalog-filter__price">
                                                         <div class="catalog-filter__price-values">
-                                                            <span class="catalog-filter__price-value catalog-filter__price-value_min" id="price-min_view"></span>
-                                                            <span class="catalog-filter__price-value catalog-filter__price-value_max" id="price-max_view"></span>
+                                                            <span class="catalog-filter__price-value catalog-filter__price-value_min" id="price_min_view"></span>
+                                                            <span class="catalog-filter__price-value catalog-filter__price-value_max" id="price_max_view"></span>
                                                         </div>
 
-                                                        <input type="hidden" name="price-min" id="price-min" value=""/>
-                                                        <input type="hidden" name="price-max" id="price-max" value=""/>
+                                                        <input type="hidden" name="price_min" id="price_min" value=""/>
+                                                        <input type="hidden" name="price_max" id="price_max" value=""/>
 
                                                         <div id="price-slider" class="noUi-background mb-4"></div>
 
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            @if($filter_collections)
+                                                <div class="catalog-filter__item">
+                                                    <button
+                                                            type="button"
+                                                            class="btn btn_block btn_lined catalog-filter__item-btn catalog-filter__item-btn_active1 accordion-button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapseCollection"
+                                                            aria-expanded="true"
+                                                            aria-controls="collapseCollection"
+                                                    >
+                                                        <span>{{ language('frontend.catalog.filter_collections') }}</span>
+                                                    </button>
+                                                    <div id="collapseCollection" class="catalog-filter__fields collapse show"
+                                                         aria-labelledby="headingCollection">
+                                                        <div class="options_teaser">
+                                                            @foreach($filter_collections as $filter_collection)
+                                                                <div class="checkbox{{ $filter_collection['id'] }}">
+                                                                    <input
+                                                                            name="collection[]"
+                                                                            id="filter_collection_{{ $filter_collection['id'] }}"
+                                                                            type="checkbox"
+                                                                            class="visually-hidden"
+                                                                            value="{{ $filter_collection['id'] }}"
+                                                                    >
+                                                                    <label for="filter_collection_{{ $filter_collection['id'] }}" class="checkbox__label ms-2">
+                                                                        {{ $filter_collection['name'] }}
+                                                                    </label>
+                                                                </div>
+                                                                @if($loop->index == 5) </div>
+                                                        <div class="options_complete"> @endif
+                                                            @endforeach
+                                                        </div>
+                                                        @if(count($filter_collections) > 5)
+                                                            <span class="options_more">{{ language('frontend.general.show_more') }}</span>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            @endif
+
                                             @if($filter_options)
                                                 @foreach($filter_options as $filter_option)
                                                     <div class="catalog-filter__item">
@@ -166,9 +211,14 @@
                                                                 <div class="options_teaser">
                                                                     @foreach($filter_option['values'] as $options_values)
                                                                         <div class="checkbox{{ $options_values['id'] }}">
-                                                                            <input name="filter_options[{{ $filter_option['id'] }}]"
-                                                                                   id="filter_section_{{ $options_values['id'] }}" type="checkbox" class="visually-hidden" value="{{ $options_values['id'] }}">
-                                                                            <label for="filter_section_{{ $options_values['id'] }}" class="checkbox__label ms-2">
+                                                                            <input
+                                                                                    name="option[{{ $filter_option['id'] }}]"
+                                                                                    id="filter_option_{{ $options_values['id'] }}"
+                                                                                    type="checkbox"
+                                                                                    class="visually-hidden"
+                                                                                    value="{{ $options_values['id'] }}"
+                                                                            >
+                                                                            <label for="filter_option_{{ $options_values['id'] }}" class="checkbox__label ms-2">
                                                                                 @if($filter_option['type'] == 1 && $options_values['image'] != "")
                                                                                     <img src="{{ $options_values['image'] }}" alt="{{ $options_values['text'] }}"
                                                                                          style="width: 20px; height: 20px; display: inline-block"/>
@@ -204,7 +254,7 @@
                             </div>
                         </div>
                         <div class="catalog-section__items">
-                            @if($products)
+                            @if(count($products) > 0)
                                 <ul class="catalog-items">
                                     @foreach($products as $product)
                                         <li class="catalog-items__card" id="catalog-items__{{ $product->id }}">
@@ -283,6 +333,13 @@
                                         </div>
                                     </div>
                                 </div>
+                            @else
+                                <div class="alert alert-warning" role="alert">
+                                    {{ language('frontend.product.no_result') }}
+                                </div>
+                                <a href="{{ route('frontend.product.category.detail', $category->slug) }}" class="btn btn_block catalog-filter__reset">
+                                    <span>{{ language('frontend.general.filter_reset') }}</span>
+                                </a>
                             @endif
 
                             @if($category->text)
@@ -304,6 +361,66 @@
 @endsection
 
 @section('JS')
+
+    <script>
+        $('.catalog-filter__form' ).submit(function( event ) {
+            event.preventDefault();
+
+            let url = "";
+
+
+            let category = $("input[name='category']").val();
+            if (category) {
+                url += "&category="+ category;
+            }
+
+            let word = $("input[name='q']").val();
+            if (word) {
+                url += "&q="+ word;
+            }
+
+            let price_min = parseInt($('#price_min').val());
+            if (price_min) {
+                url += "&price_min="+ price_min;
+            }
+            let price_max = parseInt($('#price_max').val());
+            if (price_max) {
+                url += "&price_max="+ price_max;
+            }
+
+
+            let collection = [];
+            $.each($("input[name='collection[]']:checked"), function(){
+                collection.push(parseInt($(this).val()));
+            });
+            collection = collection.join(',');
+            if (collection) {
+                url += "&collection="+ collection;
+            }
+
+
+            @if($filter_options)
+            @foreach($filter_options as $filter_option)
+            let option{{ $filter_option['id'] }} = [];
+            $.each($("input[name='option[{{ $filter_option['id'] }}]']:checked"), function(){
+                option{{ $filter_option['id'] }}.push(parseInt($(this).val()));
+            });
+            option{{ $filter_option['id'] }} = option{{ $filter_option['id'] }}.join(',');
+            if (option{{ $filter_option['id'] }}) {
+                url += "&option[{{ $filter_option['id'] }}]="+ option{{ $filter_option['id'] }};
+            }
+            @endforeach
+                    @endif
+
+            if (url) {
+                $('.catalog-filter__form .catalog-filter__show').html('<i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
+                $('.catalog-filter__form .catalog-filter__show').prop('disabled', true);
+                url = '{{ route('frontend.product.search') }}?filter=1'+ url
+                window.location = url;
+            }
+
+        });
+    </script>
     <script>
         $('.options_more').click(function () {
             if ($(this).parent().hasClass('options_more_show')) {
@@ -316,11 +433,11 @@
         });
 
         $('.catalog-section__filters-button').click(function () {
-                $('.catalog-filter').addClass('catalog-filter_opened');
+            $('.catalog-filter').addClass('catalog-filter_opened');
         });
 
         $('.catalog-filter__close').click(function () {
-                $('.catalog-filter').removeClass('catalog-filter_opened');
+            $('.catalog-filter').removeClass('catalog-filter_opened');
         });
     </script>
     <script type="text/javascript" src="{{ asset('frontend/assets/plugins/icheck/icheck.min.js') }}"></script>
@@ -336,23 +453,23 @@
         noUiSlider.create(priceSlider, {
             connect: true,
             behaviour: 'tap',
-            margin: 50,
-            start: [100, 2000],
+            margin: 10,
+            start: [{{ (request('price_min') ? (int)request('price_min') : ($product_min_max_price['min_price'] ? $product_min_max_price['min_price'] : 0)) }}, {{ (request('price_max') ? (int)request('price_max') : ($product_min_max_price['max_price'] ? $product_min_max_price['max_price'] : 1000)) }}],
             step: 1,
             range: {
-                'min': 0,
-                'max': 2500
+                'min': {{ ($product_min_max_price['min_price'] ? $product_min_max_price['min_price'] : 0) }},
+                'max': {{ ($product_min_max_price['max_price'] ? $product_min_max_price['max_price'] : 1000) }}
             }
         });
 
 
         var priceValues = [
-            document.getElementById('price-min'),
-            document.getElementById('price-max')
+            document.getElementById('price_min'),
+            document.getElementById('price_max')
         ];
         var priceViews = [
-            document.getElementById('price-min_view'),
-            document.getElementById('price-max_view')
+            document.getElementById('price_min_view'),
+            document.getElementById('price_max_view')
         ];
 
 

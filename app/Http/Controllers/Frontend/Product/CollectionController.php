@@ -10,63 +10,57 @@ use App\Models\Option\OptionValue;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductCollection;
+use App\Services\CollectionsService;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CollectionController extends Controller
 {
+
 
     public function index(Request $request)
     {
 
-
-    }
-
-
-    public function search(Request $request)
-    {
-
-        $sort = stripinput($request->sort);
-        $filter_word = stripinput($request->q);
-        $filter_price_min = stripinput($request->price_min);
-        $filter_price_max = stripinput($request->price_max);
-        $filter_category = stripinput($request->category);
-        $filter_category_arr = explode(",", $filter_category);
-        $filter_collection = stripinput($request->collection);
-        $filter_collection_arr = explode(",", $filter_collection);
-        $filter_option = $request->option;
-        $filter_option_arr = [];
-        if ($filter_option) {
-            foreach ($filter_option as $filter_option_index => $filter_option_value) {
-                $filter_option[$filter_option_index] = stripinput($filter_option_value);
-                $filter_option_arr[$filter_option_index] = explode(",", $filter_option[$filter_option_index]);
+        $collections = [];
+        $collections_query = ProductCollection::where('language_id', $request->languageID)
+            ->where('status', 1)
+            ->join('products_collections_translations', 'products_collections.id', '=', 'products_collections_translations.collection_id')
+            ->orderBy('id', 'DESC')
+            ->get();
+        if ($collections_query) {
+            foreach ($collections_query as $collection) {
+                $collection->image = $collection->image ? $collection->image : '/storage/no-image.png';
+                $collection->image = ImageService::customImageSize($collection->image, 300, 220, 100);
+                $collections[] = $collection;
             }
         }
 
-//        dd($filter_option_arr);
+
+//        dd($collections);
 
 
-        $filter_url = "";
-        if ($filter_word) {
-            $filter_url .= "&q=" . $filter_word;
-        }
-        if ($filter_price_min) {
-            $filter_url .= "&price_min=" . $filter_price_min;
-        }
-        if ($filter_price_max) {
-            $filter_url .= "&price_max=" . $filter_price_max;
-        }
-        if ($filter_category) {
-            $filter_url .= "&category=" . $filter_category;
-        }
-        if ($filter_collection) {
-            $filter_url .= "&collection=" . $filter_collection;
-        }
-//        if ($filter_option) {
-//            $filter_url .= "&filter_options=" . $filter_option;
-//        }
-        if ($filter_url) {
-            $filter_url = "?filter=1" . $filter_url;
+        return view('frontend.product.collection', compact(
+            'collections',
+        ));
+    }
+
+
+
+    public function detail(Request $request)
+    {
+
+//        dd($request->sort);
+
+        $slug = stripinput($request->slug);
+        $sort = stripinput($request->sort);
+
+        $collection = ProductCollection::where('slug', $slug)
+            ->join('products_collections_translations', 'products_collections.id', '=', 'products_collections_translations.collection_id')
+            ->first();
+
+
+        if ($collection == null) {
+            abort(404);
         }
 
 
@@ -86,37 +80,14 @@ class ProductController extends Controller
             foreach ($categoriesQuery as $category) {
                 $filter_categories[$category->id]['id'] = $category->id;
                 $filter_categories[$category->id]['name'] = $category->name;
-                $filter_categories[$category->id]['selected'] = (in_array($category->id, $filter_category_arr) ? true : false);
             }
         }
-
-        $filter_collections = [];
-        $collectionsQuery = ProductCollection::select(
-            'products_collections.id',
-            'products_collections_translations.name'
-        )
-            ->join('products_collections_translations', function ($q) use ($request) {
-                $q->on('products_collections.id', '=', 'products_collections_translations.collection_id')
-                    ->where('products_collections_translations.language_id', '=', $request->languageID);
-            })
-            ->where('products_collections.status', 1)
-            ->orderBy('products_collections_translations.name', 'ASC')
-            ->get();
-        if ($collectionsQuery) {
-            foreach ($collectionsQuery as $collection) {
-                $filter_collections[$collection->id]['id'] = $collection->id;
-                $filter_collections[$collection->id]['name'] = $collection->name;
-                $filter_collections[$collection->id]['selected'] = (in_array($collection->id, $filter_collection_arr) ? true : false);
-            }
-        }
-
-//        dd($filter_collections);
 
 
         $filter_options = [];
         $optionsQuery = Option::select(
-            '*'
-        )
+                '*'
+            )
             ->join('options_translations', function ($q) use ($request) {
                 $q->on('options.id', '=', 'options_translations.option_id')
                     ->where('options_translations.language_id', '=', $request->languageID);
@@ -133,8 +104,8 @@ class ProductController extends Controller
                 $filter_options[$option->id]['values'] = [];
 
                 $optionsValuesQuery = OptionValue::select(
-                    '*'
-                )
+                        '*'
+                    )
                     ->leftJoin('options_values_translations', function ($q) use ($request) {
                         $q->on('options_values.id', '=', 'options_values_translations.option_value_id')
                             ->where('options_values_translations.language_id', '=', $request->languageID);
@@ -154,13 +125,10 @@ class ProductController extends Controller
                         } else {
                             $filter_options[$option->id]['values'][$optionsValue->id]['image'] = "";
                         }
-                        $filter_options[$option->id]['values'][$optionsValue->id]['selected'] = (isset($filter_option_arr[$option->id]) && in_array($optionsValue->id, $filter_option_arr[$option->id]) ? true : false);
                     }
                 }
             }
         }
-
-//        dd($filter_options);
 
 
         $product_min_max_price = [];
@@ -189,8 +157,6 @@ class ProductController extends Controller
             ];
         }
 
-//        dd($product_min_max_price);
-
 
         $products = Product::select(
             'products.id',
@@ -201,49 +167,17 @@ class ProductController extends Controller
             'products.slug'
         )
             ->join('products_translations', 'products.id', '=', 'products_translations.product_id')
+            ->join('products_collections_lists', 'products.id', '=', 'products_collections_lists.product_id')
             ->leftJoin('products_specials_prices_lists', 'products.id', '=', 'products_specials_prices_lists.product_id');
 
 
+        if ($sort && $sort == "popular") {
+            $products = $products->leftJoin('products_options_lists', 'products.id', '=', 'products_options_lists.product_id')
+                ->where('products_options_lists.option_value_id', 645);
+        }
+
         $products = $products->where('products.status', 1);
-
-
-        if ($filter_category) {;
-            $products = $products->leftJoin('products_categories_lists', 'products.id', '=', 'products_categories_lists.product_id')
-                ->whereIn('products_categories_lists.category_id', explode(",", $filter_category));
-        }
-
-        if ($filter_collection) {;
-            $products = $products->leftJoin('products_collections_lists', 'products.id', '=', 'products_collections_lists.product_id')
-                ->whereIn('products_collections_lists.collection_id', explode(",", $filter_collection));
-        }
-
-        if ($filter_option_arr || $sort && $sort == "popular") {
-            $products = $products->leftJoin('products_options_lists', 'products.id', '=', 'products_options_lists.product_id');
-
-            if ($sort && $sort == "popular") {
-                $products = $products->where('products_options_lists.option_value_id', 645);
-            }
-
-            foreach ($filter_option_arr as $filter_option_val) {
-                $products = $products->whereIn('products_options_lists.option_value_id', $filter_option_val);
-            }
-        }
-
-        if ($filter_word) {
-            $products = $products->where(function ($q) use ($filter_word) {
-                $q->where('products_translations.name', 'LIKE', "%" . $filter_word . "%")
-                    ->orWhere('products_translations.text', 'LIKE', "%" . $filter_word . "%");
-            });
-        }
-
-        if ($filter_price_min || $filter_price_max) {
-            $products = $products->where(function ($q) use ($filter_price_min, $filter_price_max) {
-                $q->where('products.price', '>', (int)$filter_price_min)
-                    ->where('products.price', '<', (int)$filter_price_max);
-            });
-        }
-
-
+        $products = $products->where('products_collections_lists.collection_id', (int)$collection->id);
         $products = $products->groupBy('products.id');
         if ($sort) {
             if ($sort == "price_asc") {
@@ -327,101 +261,19 @@ class ProductController extends Controller
         }
 
 
-        $sorts_by = [
-            [
-                'url' => route('frontend.product.search') . ($filter_url ? $filter_url : ""),
-                'name' => language('frontend.catalog.sort_last')
-            ],
-            [
-                'url' => route('frontend.product.search') . ($filter_url ? $filter_url . "&" : "?") . "sort=popular",
-                'name' => language('frontend.catalog.sort_popular')
-            ],
-            [
-                'url' => route('frontend.product.search') . ($filter_url ? $filter_url . "&" : "?") . "sort=price_asc",
-                'name' => language('frontend.catalog.sort_cheap')
-            ],
-            [
-                'url' => route('frontend.product.search') . ($filter_url ? $filter_url . "&" : "?") . "sort=price_desc",
-                'name' => language('frontend.catalog.sort_expensive')
-            ]
-        ];
-
-//        dd($sorts_by);
+//        dd($products);
 
 
-        return view('frontend.product.search', compact(
+        return view('frontend.product.collection-detail', compact(
+            'collection',
             'products',
             'sort',
             'filter_options',
-            'filter_url',
-            'sorts_by',
             'product_min_max_price',
-            'filter_categories',
-            'filter_collections'
-        ));
-    }
-
-
-    public function detail(Request $request)
-    {
-
-        $slug = $request->slug;
-        $product = Product::where('slug', $slug)
-            ->where('status', 1)
-            ->with(['productsTranslations' => function ($query) use ($request) {
-                $query->where('language_id', $request->languageID);
-            }])
-            ->with('productsCategoriesCheck')
-            ->with('getProductModel')
-            ->with('getProductDestination')
-            ->with(['getProductAttributeList' => function ($query) use ($request) {
-                $query->where('language_id', $request->languageID);
-            }])
-            ->with('getProductAttributeListAll')
-            ->first();
-
-        if (!$product || count($product->productsCategoriesCheck) == 0) {
-            abort(404);
-        }
-
-
-        /*   ATTRIBUTES START   */
-
-
-        $attributes = Attribute::where('attributes_translations.language_id', $request->languageID)
-            ->where('status', 1)
-            ->join('attributes_translations', 'attributes.id', '=', 'attributes_translations.attribute_id')
-            ->join('products_attributes_lists', 'attributes.id', '=', 'products_attributes_lists.attribute_id')
-            ->orderBy('attributes.sort', 'ASC')
-            ->where('products_attributes_lists.product_id', $product->id)
-            ->where('products_attributes_lists.language_id', $request->languageID)
-            ->select('*', 'attributes_translations.name as attributes_translations_name')
-            ->get();
-
-
-        $attributeGroups = AttributeGroup::where('language_id', $request->languageID)
-            ->where('status', 1)
-            ->join('attributes_groups_translations', 'attributes_groups.id', '=', 'attributes_groups_translations.attribute_group_id')
-            ->orderBy('attributes_groups.sort', 'ASC')
-            ->get();
-
-
-        $checkAttributeGroupList = [];
-        foreach ($attributes as $item):
-            $checkAttributeGroupList[] = $item->attribute_group_id;
-        endforeach;
-
-        /*   ATTRIBUTES END   */
-
-
-        return view('frontend.product.detail', compact(
-            'product',
-            'attributes',
-            'attributeGroups',
-            'checkAttributeGroupList',
+            'filter_categories'
         ));
 
-    }
 
+    }
 
 }

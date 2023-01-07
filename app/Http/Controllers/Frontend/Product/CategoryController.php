@@ -9,6 +9,7 @@ use App\Models\Option\Option;
 use App\Models\Option\OptionValue;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
+use App\Models\Product\ProductCollection;
 use App\Services\CategoriesService;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
@@ -16,13 +17,35 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function index(Request $request, $categorySlug = null)
+
+    public function index(Request $request)
     {
 
 
+        $categories = [];
+        $categories_query = ProductCategory::where('language_id', $request->languageID)
+            ->where('status', 1)
+            ->join('products_categories_translations', 'products_categories.id', '=', 'products_categories_translations.category_id')
+            ->orderBy('id', 'DESC')
+            ->get();
+        if ($categories_query) {
+            foreach ($categories_query as $category) {
+                $category->image = $category->image ? $category->image : '/storage/no-image.png';
+                $category->image = ImageService::customImageSize($category->image, 300, 220, 100);
+                $categories[] = $category;
+            }
+        }
 
 
+//        dd($categories);
+
+
+        return view('frontend.product.catalog', compact(
+            'categories',
+        ));
     }
+
+
 
 
     public function detail(Request $request)
@@ -42,6 +65,26 @@ class CategoryController extends Controller
             abort(404);
         }
 
+
+
+        $filter_collections = [];
+        $collectionsQuery = ProductCollection::select(
+            'products_collections.id',
+            'products_collections_translations.name'
+        )
+            ->join('products_collections_translations', function ($q) use ($request) {
+                $q->on('products_collections.id', '=', 'products_collections_translations.collection_id')
+                    ->where('products_collections_translations.language_id', '=', $request->languageID);
+            })
+            ->where('products_collections.status', 1)
+            ->orderBy('products_collections_translations.name', 'ASC')
+            ->get();
+        if ($collectionsQuery) {
+            foreach ($collectionsQuery as $collection) {
+                $filter_collections[$collection->id]['id'] = $collection->id;
+                $filter_collections[$collection->id]['name'] = $collection->name;
+            }
+        }
 
         $filter_options = [];
         $optionsQuery = Option::select(
@@ -87,6 +130,33 @@ class CategoryController extends Controller
                     }
                 }
             }
+        }
+
+
+        $product_min_max_price = [];
+        $min_max_priceQuery = Product::select(
+            'products.id',
+            'products.price',
+            'products_specials_prices_lists.special_price'
+        )
+            ->leftJoin('products_specials_prices_lists', 'products.id', '=', 'products_specials_prices_lists.product_id')
+            ->get();
+        if ($min_max_priceQuery) {
+
+            $min_max_price_arr = [];
+            $min_max_special_price_arr = [];
+
+            foreach ($min_max_priceQuery as $min_max_price) {
+                $min_max_price_arr[(string)$min_max_price->price] = $min_max_price->price;
+                $min_max_special_price_arr[(string)$min_max_price->special_price] = $min_max_price->special_price;
+            }
+            ksort($min_max_price_arr);
+            ksort($min_max_special_price_arr);
+
+            $product_min_max_price = [
+                'min_price' => (int)floor(reset($min_max_special_price_arr)),
+                'max_price' => (int)ceil(end($min_max_price_arr))
+            ];
         }
 
 
@@ -200,7 +270,9 @@ class CategoryController extends Controller
             'category',
             'products',
             'sort',
-            'filter_options'
+            'filter_options',
+            'product_min_max_price',
+            'filter_collections'
         ));
 
 

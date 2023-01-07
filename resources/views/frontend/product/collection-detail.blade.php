@@ -1,8 +1,8 @@
 @extends('frontend.layouts.index')
 
-@section('title',language('frontend.search.title'))
-@section('keywords', language('frontend.search.keyword') )
-@section('description', language('frontend.search.description') )
+@section('title',empty($collection->title) ? $collection->name : $collection->title)
+@section('keywords', $collection->keyword )
+@section('description', $collection->description  )
 
 @section('breadcrumb')
     <main class="main main--mt">
@@ -22,10 +22,20 @@
                     <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
                          class="breadcrumbs__item">
                         <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
-                           href="{{ route('frontend.product.search') }}">
-                            <span itemprop="name">{{ language('frontend.search.name') }}</span>
+                           href="{{ route('frontend.product.collection') }}">
+                            <span itemprop="name">{{ language('frontend.collection.name') }}</span>
                         </a>
                         <meta itemprop="position" content="2">
+                    </div>
+                </li>
+                <li>
+                    <div itemscope="itemscope" itemprop="itemListElement" itemtype="http://schema.org/ListItem"
+                         class="breadcrumbs__item">
+                        <a itemprop="item" itemscope="itemscope" itemtype="http://schema.org/Thing"
+                           href="{{ route('frontend.product.collection.detail', $collection->slug) }}">
+                            <span itemprop="name">{{ $collection->name }}</span>
+                        </a>
+                        <meta itemprop="position" content="3">
                     </div>
                 </li>
             </ul>
@@ -35,7 +45,7 @@
         @section('content')
 
             <div class="container">
-                <h1>{{ language('frontend.search.name') }}</h1>
+                <h1>{{ $collection->name }}</h1>
             </div>
 
 
@@ -61,15 +71,36 @@
                                     </span>
                                 </div>
                                 <div class="dropdown-menu">
-                                    @foreach($sorts_by as $sort_by)
-                                        <div class="sort__list-options">
-                                            <div class="sort__item">
-                                                <a rel="nofollow" href="{{ $sort_by['url'] }}" class="sort__item-link">
-                                                    <span class="sort__item-option">{{ $sort_by['name'] }}</span>
-                                                </a>
-                                            </div>
+                                    <div class="sort__list-options">
+                                        <div class="sort__item">
+                                            <a rel="nofollow"
+                                               href="{{ route('frontend.product.collection.detail', $collection->slug) }}"
+                                               class="sort__item-link">
+                                                <span class="sort__item-option">{{ language('frontend.catalog.sort_last') }}</span>
+                                            </a>
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    <div class="sort__list-options">
+                                        <div class="sort__item">
+                                            <a rel="nofollow" href="{{ route('frontend.product.collection.detail', $collection->slug) }}?sort=popular" class="sort__item-link">
+                                                <span class="sort__item-option">{{ language('frontend.catalog.sort_popular') }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="sort__list-options">
+                                        <div class="sort__item">
+                                            <a rel="nofollow" href="{{ route('frontend.product.collection.detail', $collection->slug) }}?sort=price_asc" class="sort__item-link">
+                                                <span class="sort__item-option">{{ language('frontend.catalog.sort_cheap') }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="sort__list-options">
+                                        <div class="sort__item">
+                                            <a rel="nofollow" href="{{ route('frontend.product.collection.detail', $collection->slug) }}?sort=price_desc" class="sort__item-link">
+                                                <span class="sort__item-option">{{ language('frontend.catalog.sort_expensive') }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -88,6 +119,7 @@
                                 <noindex>
                                     <form name="catalogfilter" action="{{ route('frontend.product.search') }}" method="get" class="catalog-filter__form">
                                         <input type="hidden" name="filter" value="1">
+                                        <input type="hidden" name="collection" value="{{ $collection->id }}">
                                         <input type="hidden" name="q" value="{{ stripinput(request('q')) }}">
                                         <div class="catalog-filter__wrapper">
                                             <a href="#" aria-label="{{ language('frontend.catalog.filter_close') }}" class="btn btn_close catalog-filter__close d-md-none"></a>
@@ -120,6 +152,7 @@
                                             </div>
 
 
+
                                             @if($filter_categories)
                                                 <div class="catalog-filter__item">
                                                     <button
@@ -143,7 +176,6 @@
                                                                             type="checkbox"
                                                                             class="visually-hidden"
                                                                             value="{{ $filter_category['id'] }}"
-                                                                            @if($filter_category['selected']) checked @endif
                                                                     >
                                                                     <label for="filter_category_{{ $filter_category['id'] }}" class="checkbox__label ms-2">
                                                                         {{ $filter_category['name'] }}
@@ -154,48 +186,6 @@
                                                             @endforeach
                                                         </div>
                                                         @if(count($filter_categories) > 5)
-                                                            <span class="options_more">{{ language('frontend.general.show_more') }}</span>
-                                                        @endif
-
-                                                    </div>
-                                                </div>
-                                            @endif
-
-
-                                            @if($filter_collections)
-                                                <div class="catalog-filter__item">
-                                                    <button
-                                                            type="button"
-                                                            class="btn btn_block btn_lined catalog-filter__item-btn catalog-filter__item-btn_active1 accordion-button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseCollection"
-                                                            aria-expanded="true"
-                                                            aria-controls="collapseCollection"
-                                                    >
-                                                        <span>{{ language('frontend.catalog.filter_collections') }}</span>
-                                                    </button>
-                                                    <div id="collapseCollection" class="catalog-filter__fields collapse show"
-                                                         aria-labelledby="headingCollection">
-                                                        <div class="options_teaser">
-                                                            @foreach($filter_collections as $filter_collection)
-                                                                <div class="checkbox{{ $filter_collection['id'] }}">
-                                                                    <input
-                                                                            name="collection[]"
-                                                                            id="filter_collection_{{ $filter_collection['id'] }}"
-                                                                            type="checkbox"
-                                                                            class="visually-hidden"
-                                                                            value="{{ $filter_collection['id'] }}"
-                                                                            @if($filter_collection['selected']) checked @endif
-                                                                    >
-                                                                    <label for="filter_collection_{{ $filter_collection['id'] }}" class="checkbox__label ms-2">
-                                                                        {{ $filter_collection['name'] }}
-                                                                    </label>
-                                                                </div>
-                                                                @if($loop->index == 5) </div>
-                                                        <div class="options_complete"> @endif
-                                                            @endforeach
-                                                        </div>
-                                                        @if(count($filter_collections) > 5)
                                                             <span class="options_more">{{ language('frontend.general.show_more') }}</span>
                                                         @endif
 
@@ -228,7 +218,6 @@
                                                                                     type="checkbox"
                                                                                     class="visually-hidden"
                                                                                     value="{{ $options_values['id'] }}"
-                                                                                    @if($options_values['selected']) checked @endif
                                                                             >
                                                                             <label for="filter_option_{{ $options_values['id'] }}" class="checkbox__label ms-2">
                                                                                 @if($filter_option['type'] == 1 && $options_values['image'] != "")
@@ -256,9 +245,9 @@
                                             <button type="submit" class="btn btn_block btn_accent catalog-filter__show">
                                                 {{ language('frontend.general.filter_submit') }}
                                             </button>
-                                            <a href="{{ route('frontend.product.search') }}" class="btn btn_block catalog-filter__reset">
-                                                <span>{{ language('frontend.general.filter_reset') }}</span>
-                                            </a>
+                                            {{--                                            <a href="{{ route('frontend.product.collection.detail', $collection->slug) }}" class="btn btn_block catalog-filter__reset">--}}
+                                            {{--                                                <span>{{ language('frontend.general.filter_reset') }}</span>--}}
+                                            {{--                                            </a>--}}
                                         </div>
 
                                     </form>
@@ -349,14 +338,16 @@
                                 <div class="alert alert-warning" role="alert">
                                     {{ language('frontend.product.no_result') }}
                                 </div>
-                                <a href="{{ route('frontend.product.search') }}" class="btn btn_block catalog-filter__reset">
+                                <a href="{{ route('frontend.product.collection.detail', $collection->slug) }}" class="btn btn_block catalog-filter__reset">
                                     <span>{{ language('frontend.general.filter_reset') }}</span>
                                 </a>
                             @endif
 
-                            <section class="catalog-element-description mb-4 mb-md-2">
-                                {!! language('frontend.search.text') !!}
-                            </section>
+                            @if($collection->text)
+                                <section class="catalog-element-description mb-4 mb-md-2">
+                                    {!! $collection->text !!}
+                                </section>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -371,12 +362,18 @@
 @endsection
 
 @section('JS')
+
     <script>
         $('.catalog-filter__form' ).submit(function( event ) {
             event.preventDefault();
 
             let url = "";
 
+
+            let collection = $("input[name='collection']").val();
+            if (collection) {
+                url += "&collection="+ collection;
+            }
 
             let word = $("input[name='q']").val();
             if (word) {
@@ -402,16 +399,6 @@
             }
 
 
-            let collection = [];
-            $.each($("input[name='collection[]']:checked"), function(){
-                collection.push(parseInt($(this).val()));
-            });
-            collection = collection.join(',');
-            if (collection) {
-                url += "&collection="+ collection;
-            }
-
-
             @if($filter_options)
             @foreach($filter_options as $filter_option)
             let option{{ $filter_option['id'] }} = [];
@@ -423,7 +410,7 @@
                 url += "&option[{{ $filter_option['id'] }}]="+ option{{ $filter_option['id'] }};
             }
             @endforeach
-            @endif
+                    @endif
 
             if (url) {
                 $('.catalog-filter__form .catalog-filter__show').html('<i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
@@ -492,3 +479,6 @@
         });
     </script>
 @endsection
+
+
+
