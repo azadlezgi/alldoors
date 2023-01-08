@@ -263,8 +263,7 @@
                                                     @if($product->options)
                                                         @foreach($product->options as $option)
                                                             @if($option->option_id == 151)
-                                                                <div class="product-card__status-item"
-                                                                     style="background:#f9791a;">
+                                                                <div class="product-card__status-item" style="background:#f9791a;">
                                                                     {{ $option->option_value_text }}
                                                                 </div>
                                                             @endif

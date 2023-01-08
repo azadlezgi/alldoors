@@ -685,7 +685,6 @@ Route::group(
             Route::get('/page/{slug}', 'Page\PageController@page')->name('frontend.page.index');
             /*   PAGE END   */
 
-            /*   PRODUCTS START   */
             /*   PRODUCT START   */
             Route::get('/search', 'Product\ProductController@search')->name('frontend.product.search');
             Route::get('/catalog', 'Product\CategoryController@index')->name('frontend.product.catalog');
@@ -695,31 +694,6 @@ Route::group(
             Route::get('/product/{slug}', 'Product\ProductController@detail')->name('frontend.product.detail');
 //            Route::get('/products/search/{search?}', 'Product\ProductController@search')->name('frontend.product.search');
             /*   PRODUCT END   */
-
-            /*  PRODUCT CATEGORIES START   */
-//            Route::get('/products/categories/{any?}', 'Product\CategoryController@index')->where('any', '.*')->name('frontend.product.category.index');
-//            Route::get('/product/categories/{any?}', 'Product\CategoryController@detail')->where('any', '.*')->name('frontend.product.category.detail');
-            /*  PRODUCT CATEGORIES END   */
-
-            /*  PRODUCT COLLECTIONS START   */
-//            Route::get('/products/collections/{any?}', 'Product\CollectionController@index')->where('any', '.*')->name('frontend.product.collection.index');
-//            Route::get('/product/collections/{any?}', 'Product\CollectionController@detail')->where('any', '.*')->name('frontend.product.collection.detail');
-            /*  PRODUCT COLLECTIONS END   */
-            /*   PRODUCTS END   */
-
-
-
-            /*   GALLERIES START   */
-            /*   GALLERY START   */
-//            Route::get('/galleries', 'Gallery\GalleryController@index')->name('frontend.gallery.index');
-//            Route::get('/gallery/{slug}', 'Gallery\GalleryController@detail')->name('frontend.gallery.detail');
-            /*   GALLERY END   */
-
-            /*  GALLERY CATEGORIES START   */
-//            Route::get('/galleries/categories/{any?}', 'Gallery\CategoryController@index')->where('any', '.*')->name('frontend.gallery.category.index');
-//            Route::get('/gallery/categories/{any?}', 'Gallery\CategoryController@detail')->where('any', '.*')->name('frontend.gallery.category.detail');
-            /*  GALLERY CATEGORIES END   */
-            /*   GALLERIES END   */
 
 
             /*   SERVICE START   */
