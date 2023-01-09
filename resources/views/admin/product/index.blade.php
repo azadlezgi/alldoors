@@ -102,7 +102,7 @@
                             <th width="10" data-breakpoints="xs">ID</th>
                             <th data-breakpoints="xs" data-sortable="false">Şəkil</th>
                             <th>Ad</th>
-                            <th data-breakpoints="xs sm md" data-sortable="false">Əsas məhsul</th>
+{{--                            <th data-breakpoints="xs sm md" data-sortable="false">Əsas məhsul</th>--}}
                             <th data-breakpoints="xs sm md" data-sortable="false">Kateqoriya</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Qiymət</th>
                             <th data-breakpoints="xs sm md" data-sortable="false">Tarix</th>
@@ -145,16 +145,16 @@
                                     <a href="{{ route('admin.product.edit',$product->id) }}">{{ $product->productsTranslations[0]->name }}</a>
                                 </td>
 
-                                <!--  PARENT  -->
-                                <td>
-                                    @if($product->parent != 0)
-                                    <a href="{{ route('admin.product.edit',$product->parent) }}">
-                                        {{ $product->children->name }}
-                                    </a>
-                                    @else
-                                        Əsas məhsul
-                                    @endif
-                                </td>
+{{--                                <!--  PARENT  -->--}}
+{{--                                <td>--}}
+{{--                                    @if($product->parent != 0)--}}
+{{--                                    <a href="{{ route('admin.product.edit',$product->parent) }}">--}}
+{{--                                        {{ $product->children->name }}--}}
+{{--                                    </a>--}}
+{{--                                    @else--}}
+{{--                                        Əsas məhsul--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
 
 
                                 <!--  Kateqoriyalar  -->

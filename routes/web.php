@@ -162,23 +162,23 @@ Route::namespace('Admin')->group(function () {
         /*   SLIDE END   */
 
 
-        /*   Online Catalog START   */
-        Route::namespace('OnlineCatalog')->group(function () {
-            Route::prefix('onlineCatalog')->group(function () {
-                Route::get('/', 'OnlineCatalogController@index')->name('admin.onlineCatalog.index');
-                Route::get('/add', 'OnlineCatalogController@add')->name('admin.onlineCatalog.add');
-                Route::post('/store', 'OnlineCatalogController@store')->name('admin.onlineCatalog.store');
-                Route::get('/edit/{id}', 'OnlineCatalogController@edit')->name('admin.onlineCatalog.edit');
-                Route::post('/update', 'OnlineCatalogController@update')->name('admin.onlineCatalog.update');
-                Route::post('/sort-ajax', 'OnlineCatalogController@sortAjax')->name('admin.onlineCatalog.sortAjax');
-                Route::post('/status-ajax', 'OnlineCatalogController@statusAjax')->name('admin.onlineCatalog.statusAjax');
-                Route::post('/delete', 'OnlineCatalogController@delete')->name('admin.onlineCatalog.delete');
-                Route::post('/delete-ajax', 'OnlineCatalogController@deleteAjax')->name('admin.onlineCatalog.deleteAjax');
-                Route::post('/all-delete-ajax', 'OnlineCatalogController@allDeleteAjax')->name('admin.onlineCatalog.allDeleteAjax');
-
-            });
-        });
-        /*   Online Catalog END   */
+//        /*   Online Catalog START   */
+//        Route::namespace('OnlineCatalog')->group(function () {
+//            Route::prefix('onlineCatalog')->group(function () {
+//                Route::get('/', 'OnlineCatalogController@index')->name('admin.onlineCatalog.index');
+//                Route::get('/add', 'OnlineCatalogController@add')->name('admin.onlineCatalog.add');
+//                Route::post('/store', 'OnlineCatalogController@store')->name('admin.onlineCatalog.store');
+//                Route::get('/edit/{id}', 'OnlineCatalogController@edit')->name('admin.onlineCatalog.edit');
+//                Route::post('/update', 'OnlineCatalogController@update')->name('admin.onlineCatalog.update');
+//                Route::post('/sort-ajax', 'OnlineCatalogController@sortAjax')->name('admin.onlineCatalog.sortAjax');
+//                Route::post('/status-ajax', 'OnlineCatalogController@statusAjax')->name('admin.onlineCatalog.statusAjax');
+//                Route::post('/delete', 'OnlineCatalogController@delete')->name('admin.onlineCatalog.delete');
+//                Route::post('/delete-ajax', 'OnlineCatalogController@deleteAjax')->name('admin.onlineCatalog.deleteAjax');
+//                Route::post('/all-delete-ajax', 'OnlineCatalogController@allDeleteAjax')->name('admin.onlineCatalog.allDeleteAjax');
+//
+//            });
+//        });
+//        /*   Online Catalog END   */
 
 
 
@@ -203,64 +203,64 @@ Route::namespace('Admin')->group(function () {
 
 
 
-        /*   PARTNER START   */
-        Route::namespace('Partner')->group(function () {
-            Route::prefix('partner')->group(function () {
-                Route::get('/', 'PartnersController@index')->name('admin.partner.index');
-                Route::get('/add', 'PartnersController@add')->name('admin.partner.add');
-                Route::post('/store', 'PartnersController@store')->name('admin.partner.store');
-                Route::get('/edit/{id}', 'PartnersController@edit')->name('admin.partner.edit');
-                Route::post('/update', 'PartnersController@update')->name('admin.partner.update');
-                Route::post('/sort-ajax', 'PartnersController@sortAjax')->name('admin.partner.sortAjax');
-                Route::post('/status-ajax', 'PartnersController@statusAjax')->name('admin.partner.statusAjax');
-                Route::post('/delete', 'PartnersController@delete')->name('admin.partner.delete');
-                Route::post('/delete-ajax', 'PartnersController@deleteAjax')->name('admin.partner.deleteAjax');
-                Route::post('/all-delete-ajax', 'PartnersController@allDeleteAjax')->name('admin.partner.allDeleteAjax');
-
-            });
-        });
-        /*   PARTNER END   */
-
-
-
-        /*   REVIEW START   */
-        Route::namespace('Review')->group(function () {
-            Route::prefix('review')->group(function () {
-                Route::get('/', 'ReviewsController@index')->name('admin.review.index');
-                Route::get('/add', 'ReviewsController@add')->name('admin.review.add');
-                Route::post('/store', 'ReviewsController@store')->name('admin.review.store');
-                Route::get('/edit/{id}', 'ReviewsController@edit')->name('admin.review.edit');
-                Route::post('/update', 'ReviewsController@update')->name('admin.review.update');
-                Route::post('/sort-ajax', 'ReviewsController@sortAjax')->name('admin.review.sortAjax');
-                Route::post('/status-ajax', 'ReviewsController@statusAjax')->name('admin.review.statusAjax');
-                Route::post('/delete', 'ReviewsController@delete')->name('admin.review.delete');
-                Route::post('/delete-ajax', 'ReviewsController@deleteAjax')->name('admin.review.deleteAjax');
-                Route::post('/all-delete-ajax', 'ReviewsController@allDeleteAjax')->name('admin.review.allDeleteAjax');
-
-            });
-        });
-        /*   REVIEW END   */
+//        /*   PARTNER START   */
+//        Route::namespace('Partner')->group(function () {
+//            Route::prefix('partner')->group(function () {
+//                Route::get('/', 'PartnersController@index')->name('admin.partner.index');
+//                Route::get('/add', 'PartnersController@add')->name('admin.partner.add');
+//                Route::post('/store', 'PartnersController@store')->name('admin.partner.store');
+//                Route::get('/edit/{id}', 'PartnersController@edit')->name('admin.partner.edit');
+//                Route::post('/update', 'PartnersController@update')->name('admin.partner.update');
+//                Route::post('/sort-ajax', 'PartnersController@sortAjax')->name('admin.partner.sortAjax');
+//                Route::post('/status-ajax', 'PartnersController@statusAjax')->name('admin.partner.statusAjax');
+//                Route::post('/delete', 'PartnersController@delete')->name('admin.partner.delete');
+//                Route::post('/delete-ajax', 'PartnersController@deleteAjax')->name('admin.partner.deleteAjax');
+//                Route::post('/all-delete-ajax', 'PartnersController@allDeleteAjax')->name('admin.partner.allDeleteAjax');
+//
+//            });
+//        });
+//        /*   PARTNER END   */
 
 
 
+//        /*   REVIEW START   */
+//        Route::namespace('Review')->group(function () {
+//            Route::prefix('review')->group(function () {
+//                Route::get('/', 'ReviewsController@index')->name('admin.review.index');
+//                Route::get('/add', 'ReviewsController@add')->name('admin.review.add');
+//                Route::post('/store', 'ReviewsController@store')->name('admin.review.store');
+//                Route::get('/edit/{id}', 'ReviewsController@edit')->name('admin.review.edit');
+//                Route::post('/update', 'ReviewsController@update')->name('admin.review.update');
+//                Route::post('/sort-ajax', 'ReviewsController@sortAjax')->name('admin.review.sortAjax');
+//                Route::post('/status-ajax', 'ReviewsController@statusAjax')->name('admin.review.statusAjax');
+//                Route::post('/delete', 'ReviewsController@delete')->name('admin.review.delete');
+//                Route::post('/delete-ajax', 'ReviewsController@deleteAjax')->name('admin.review.deleteAjax');
+//                Route::post('/all-delete-ajax', 'ReviewsController@allDeleteAjax')->name('admin.review.allDeleteAjax');
+//
+//            });
+//        });
+//        /*   REVIEW END   */
 
-        /*   TEAM START   */
-        Route::namespace('Team')->group(function () {
-            Route::prefix('team')->group(function () {
-                Route::get('/', 'TeamsController@index')->name('admin.team.index');
-                Route::get('/add', 'TeamsController@add')->name('admin.team.add');
-                Route::post('/store', 'TeamsController@store')->name('admin.team.store');
-                Route::get('/edit/{id}', 'TeamsController@edit')->name('admin.team.edit');
-                Route::post('/update', 'TeamsController@update')->name('admin.team.update');
-                Route::post('/sort-ajax', 'TeamsController@sortAjax')->name('admin.team.sortAjax');
-                Route::post('/status-ajax', 'TeamsController@statusAjax')->name('admin.team.statusAjax');
-                Route::post('/delete', 'TeamsController@delete')->name('admin.team.delete');
-                Route::post('/delete-ajax', 'TeamsController@deleteAjax')->name('admin.team.deleteAjax');
-                Route::post('/all-delete-ajax', 'TeamsController@allDeleteAjax')->name('admin.team.allDeleteAjax');
 
-            });
-        });
-        /*   TEAM END   */
+
+
+//        /*   TEAM START   */
+//        Route::namespace('Team')->group(function () {
+//            Route::prefix('team')->group(function () {
+//                Route::get('/', 'TeamsController@index')->name('admin.team.index');
+//                Route::get('/add', 'TeamsController@add')->name('admin.team.add');
+//                Route::post('/store', 'TeamsController@store')->name('admin.team.store');
+//                Route::get('/edit/{id}', 'TeamsController@edit')->name('admin.team.edit');
+//                Route::post('/update', 'TeamsController@update')->name('admin.team.update');
+//                Route::post('/sort-ajax', 'TeamsController@sortAjax')->name('admin.team.sortAjax');
+//                Route::post('/status-ajax', 'TeamsController@statusAjax')->name('admin.team.statusAjax');
+//                Route::post('/delete', 'TeamsController@delete')->name('admin.team.delete');
+//                Route::post('/delete-ajax', 'TeamsController@deleteAjax')->name('admin.team.deleteAjax');
+//                Route::post('/all-delete-ajax', 'TeamsController@allDeleteAjax')->name('admin.team.allDeleteAjax');
+//
+//            });
+//        });
+//        /*   TEAM END   */
 
 
 
@@ -328,46 +328,46 @@ Route::namespace('Admin')->group(function () {
 
 
 
-        /*   GALLERY START   */
-        Route::namespace('Gallery')->group(function () {
-            Route::prefix('gallery')->group(function () {
-                Route::get('/', 'GalleryController@index')->name('admin.gallery.index');
-                Route::get('/add', 'GalleryController@add')->name('admin.gallery.add');
-                Route::post('/store', 'GalleryController@store')->name('admin.gallery.store');
-                Route::get('/edit/{id}', 'GalleryController@edit')->name('admin.gallery.edit');
-                Route::post('/update', 'GalleryController@update')->name('admin.gallery.update');
-                Route::post('/slug', 'GalleryController@slug')->name('admin.gallery.slug');
-                Route::post('/status-ajax', 'GalleryController@statusAjax')->name('admin.gallery.statusAjax');
-                Route::post('/delete', 'GalleryController@delete')->name('admin.gallery.delete');
-                Route::post('/delete-ajax', 'GalleryController@deleteAjax')->name('admin.gallery.deleteAjax');
-                Route::post('/all-delete-ajax', 'GalleryController@allDeleteAjax')->name('admin.gallery.allDeleteAjax');
-                Route::get('/search', 'GalleryController@search')->name('admin.gallery.search');
-                Route::get('/categories/{id}', 'GalleryController@categories')->name('admin.gallery.categories');
+//        /*   GALLERY START   */
+//        Route::namespace('Gallery')->group(function () {
+//            Route::prefix('gallery')->group(function () {
+//                Route::get('/', 'GalleryController@index')->name('admin.gallery.index');
+//                Route::get('/add', 'GalleryController@add')->name('admin.gallery.add');
+//                Route::post('/store', 'GalleryController@store')->name('admin.gallery.store');
+//                Route::get('/edit/{id}', 'GalleryController@edit')->name('admin.gallery.edit');
+//                Route::post('/update', 'GalleryController@update')->name('admin.gallery.update');
+//                Route::post('/slug', 'GalleryController@slug')->name('admin.gallery.slug');
+//                Route::post('/status-ajax', 'GalleryController@statusAjax')->name('admin.gallery.statusAjax');
+//                Route::post('/delete', 'GalleryController@delete')->name('admin.gallery.delete');
+//                Route::post('/delete-ajax', 'GalleryController@deleteAjax')->name('admin.gallery.deleteAjax');
+//                Route::post('/all-delete-ajax', 'GalleryController@allDeleteAjax')->name('admin.gallery.allDeleteAjax');
+//                Route::get('/search', 'GalleryController@search')->name('admin.gallery.search');
+//                Route::get('/categories/{id}', 'GalleryController@categories')->name('admin.gallery.categories');
+//
+//            });
+//        });
+//        /*   GALLERY END   */
 
-            });
-        });
-        /*   GALLERY END   */
 
 
-
-        /*   GALLERY CATEGORY START   */
-        Route::namespace('Gallery')->group(function () {
-            Route::prefix('gallery/category/')->group(function () {
-                Route::get('/', 'GalleryCategoryController@index')->name('admin.gallery.category.index');
-                Route::get('/add', 'GalleryCategoryController@add')->name('admin.gallery.category.add');
-                Route::post('/store', 'GalleryCategoryController@store')->name('admin.gallery.category.store');
-                Route::get('/edit/{id}', 'GalleryCategoryController@edit')->name('admin.gallery.category.edit');
-                Route::post('/update', 'GalleryCategoryController@update')->name('admin.gallery.category.update');
-                Route::post('/slug', 'GalleryCategoryController@slug')->name('admin.gallery.category.slug');
-                Route::post('/status-ajax', 'GalleryCategoryController@statusAjax')->name('admin.gallery.category.statusAjax');
-                Route::post('/delete', 'GalleryCategoryController@delete')->name('admin.gallery.category.delete');
-                Route::post('/delete-ajax', 'GalleryCategoryController@deleteAjax')->name('admin.gallery.category.deleteAjax');
-                Route::post('/all-delete-ajax', 'GalleryCategoryController@allDeleteAjax')->name('admin.gallery.category.allDeleteAjax');
-                Route::get('/search', 'GalleryCategoryController@search')->name('admin.gallery.category.search');
-
-            });
-        });
-        /*   GALLERY CATEGORY END   */
+//        /*   GALLERY CATEGORY START   */
+//        Route::namespace('Gallery')->group(function () {
+//            Route::prefix('gallery/category/')->group(function () {
+//                Route::get('/', 'GalleryCategoryController@index')->name('admin.gallery.category.index');
+//                Route::get('/add', 'GalleryCategoryController@add')->name('admin.gallery.category.add');
+//                Route::post('/store', 'GalleryCategoryController@store')->name('admin.gallery.category.store');
+//                Route::get('/edit/{id}', 'GalleryCategoryController@edit')->name('admin.gallery.category.edit');
+//                Route::post('/update', 'GalleryCategoryController@update')->name('admin.gallery.category.update');
+//                Route::post('/slug', 'GalleryCategoryController@slug')->name('admin.gallery.category.slug');
+//                Route::post('/status-ajax', 'GalleryCategoryController@statusAjax')->name('admin.gallery.category.statusAjax');
+//                Route::post('/delete', 'GalleryCategoryController@delete')->name('admin.gallery.category.delete');
+//                Route::post('/delete-ajax', 'GalleryCategoryController@deleteAjax')->name('admin.gallery.category.deleteAjax');
+//                Route::post('/all-delete-ajax', 'GalleryCategoryController@allDeleteAjax')->name('admin.gallery.category.allDeleteAjax');
+//                Route::get('/search', 'GalleryCategoryController@search')->name('admin.gallery.category.search');
+//
+//            });
+//        });
+//        /*   GALLERY CATEGORY END   */
 
 
 

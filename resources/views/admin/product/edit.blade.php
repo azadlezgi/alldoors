@@ -178,7 +178,7 @@
 
 
                                                                         <!-- SUB NAME START  -->
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="display: none;">
                                                                             <span class="span-dvidder">Qısa Ad ({{ $language->code }})</span>
                                                                             <input
                                                                                 type="text"
@@ -205,7 +205,7 @@
 
 
                                                                         <!--  SHORT CONTENT START  -->
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="display: none">
                                                                             <span class="span-dvidder">Qısa Mətn ({{ $language->code }})</span>
                                                                             <textarea
                                                                                 type="text"
@@ -300,7 +300,7 @@
 
 
                                                                     <!-- Dimensions (Ölçülər) -->
-                                                                    <div class="form-group">
+                                                                    <div class="form-group" style="display: none">
                                                                         <hr class="hr mt-10 mb-10"/>
 
                                                                         <div class="row">

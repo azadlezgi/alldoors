@@ -8,6 +8,8 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link rel="shortcut icon" type="image/png" href="{{ asset('storage') }}/{{ setting('favicon') }}">
+
     <link href="{{ asset('frontend/assets/plugins/fontawesome/css/fontawesome-all.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.carousel.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('frontend/assets/plugins/owlcarousel/assets/owl.theme.default.min.css') }}" type="text/css" rel="stylesheet"/>
@@ -35,7 +37,7 @@
 
                 <div class="header__search header__search_desktop search search_shown" style="">
                     <form action="{{ route('frontend.product.search') }}" class="search__form">
-                        <input type="search" name="q" placeholder="{{ language('general.search') }}" class="input input_search search__input" value="{{ stripinput(request('q')) }}" />
+                        <input type="search" name="q" placeholder="{{ language('general.search') }}" class="input input_search search__input" value="{{ stripinput(request('q')) }}"/>
                         <label class="label">{{ language('general.search') }}</label>
                         <button type="submit" class="btn search__link">
                             <i>
@@ -50,6 +52,13 @@
                 <div itemscope="itemscope" itemtype="http://schema.org/Organization"
                      class="salon header__salon header__salon--line header__salon--desktop">
                     <meta itemprop="name" content="{{ language('general.title') }}">
+                    @if(!empty(json_decode(setting('tel'))))
+                        @foreach(json_decode(setting('tel')) as $key => $value)
+                            @if($loop->first)
+                                <meta itemprop="telephone" content="{{ \App\Services\CommonService::telText( $value->tel )[0] }}">
+                            @endif
+                        @endforeach
+                    @endif
                     <span itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"
                           class="salon__address">
                         <span itemprop="streetAddress">
@@ -65,7 +74,7 @@
                         @foreach(json_decode(setting('tel')) as $key => $value)
                             @if($loop->first)
                                 <li class="salon__phone d-none d-md-block">
-                                    <a itemprop="telephone" class="phone__link"
+                                    <a class="phone__link"
                                        href="tel:{{ \App\Services\CommonService::telText( $value->tel )[0] }}">{{ \App\Services\CommonService::telText( $value->tel )[1] }}</a>
                                 </li>
                             @endif
@@ -140,7 +149,7 @@
                         </ul>
                     </nav>
                     <div class="callbacklink header__callback header__callback--orange header__callback--tablet">
-{{--                        <button class="btn btn_block btn_bordered" data-bs-toggle="modal" data-bs-target="#call_usModal">{{ language('general.call_us') }}</button>--}}
+                        {{--                        <button class="btn btn_block btn_bordered" data-bs-toggle="modal" data-bs-target="#call_usModal">{{ language('general.call_us') }}</button>--}}
                         <a href="{{ route('frontend.home.contact') }}" class="btn btn_block btn_bordered">{{ language('general.call_us') }}</a>
                     </div>
                 </div>

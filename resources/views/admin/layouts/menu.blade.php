@@ -591,88 +591,88 @@
 
 
 
-                <!--  Gallery  -->
-                <li class="menu-item menu-item-submenu {{Route::is(
-                                                        [
-                                                        'admin.gallery.index',
-                                                        'admin.gallery.add',
-                                                        'admin.gallery.edit',
-                                                        'admin.gallery.category.index',
-                                                        'admin.gallery.category.add',
-                                                        'admin.gallery.category.edit',
-                                                        'admin.gallery.search',
-                                                        'admin.gallery.categories',
-                                                        ]
-                                                        )? "menu-item-open":""}}" aria-haspopup="true"
-                    data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
+{{--                <!--  Gallery  -->--}}
+{{--                <li class="menu-item menu-item-submenu {{Route::is(--}}
+{{--                                                        [--}}
+{{--                                                        'admin.gallery.index',--}}
+{{--                                                        'admin.gallery.add',--}}
+{{--                                                        'admin.gallery.edit',--}}
+{{--                                                        'admin.gallery.category.index',--}}
+{{--                                                        'admin.gallery.category.add',--}}
+{{--                                                        'admin.gallery.category.edit',--}}
+{{--                                                        'admin.gallery.search',--}}
+{{--                                                        'admin.gallery.categories',--}}
+{{--                                                        ]--}}
+{{--                                                        )? "menu-item-open":""}}" aria-haspopup="true"--}}
+{{--                    data-menu-toggle="hover">--}}
+{{--                    <a href="javascript:;" class="menu-link menu-toggle">--}}
 
-                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Tools/Pantone.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon points="0 0 24 0 24 24 0 24"/>
-        <path d="M22,15 L22,19 C22,20.1045695 21.1045695,21 20,21 L8,21 C5.790861,21 4,19.209139 4,17 C4,14.790861 5.790861,13 8,13 L20,13 C21.1045695,13 22,13.8954305 22,15 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000" opacity="0.3"/>
-        <path d="M15.5421357,5.69999981 L18.3705628,8.52842693 C19.1516114,9.30947552 19.1516114,10.5758055 18.3705628,11.3568541 L9.88528147,19.8421354 C8.3231843,21.4042326 5.79052439,21.4042326 4.22842722,19.8421354 C2.66633005,18.2800383 2.66633005,15.7473784 4.22842722,14.1852812 L12.7137086,5.69999981 C13.4947572,4.91895123 14.7610871,4.91895123 15.5421357,5.69999981 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000" opacity="0.3"/>
-        <path d="M5,3 L9,3 C10.1045695,3 11,3.8954305 11,5 L11,17 C11,19.209139 9.209139,21 7,21 C4.790861,21 3,19.209139 3,17 L3,5 C3,3.8954305 3.8954305,3 5,3 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000"/>
-    </g>
-</svg><!--end::Svg Icon--></span>
-
-
-
-                        <span class="menu-text">Qalereyalar</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-
-                            <!--  GALLERIES  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.gallery.index',
-                                                      'admin.gallery.edit',
-                                                      'admin.gallery.search',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.gallery.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Qalereyalar</span>
-                                </a>
-                            </li>
-
-                            <!--  Qalereya əlavə et  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.gallery.add',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.gallery.add') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Qalereya əlavə et</span>
-                                </a>
-                            </li>
+{{--                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Tools/Pantone.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">--}}
+{{--    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
+{{--        <polygon points="0 0 24 0 24 24 0 24"/>--}}
+{{--        <path d="M22,15 L22,19 C22,20.1045695 21.1045695,21 20,21 L8,21 C5.790861,21 4,19.209139 4,17 C4,14.790861 5.790861,13 8,13 L20,13 C21.1045695,13 22,13.8954305 22,15 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000" opacity="0.3"/>--}}
+{{--        <path d="M15.5421357,5.69999981 L18.3705628,8.52842693 C19.1516114,9.30947552 19.1516114,10.5758055 18.3705628,11.3568541 L9.88528147,19.8421354 C8.3231843,21.4042326 5.79052439,21.4042326 4.22842722,19.8421354 C2.66633005,18.2800383 2.66633005,15.7473784 4.22842722,14.1852812 L12.7137086,5.69999981 C13.4947572,4.91895123 14.7610871,4.91895123 15.5421357,5.69999981 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000" opacity="0.3"/>--}}
+{{--        <path d="M5,3 L9,3 C10.1045695,3 11,3.8954305 11,5 L11,17 C11,19.209139 9.209139,21 7,21 C4.790861,21 3,19.209139 3,17 L3,5 C3,3.8954305 3.8954305,3 5,3 Z M7,19 C8.1045695,19 9,18.1045695 9,17 C9,15.8954305 8.1045695,15 7,15 C5.8954305,15 5,15.8954305 5,17 C5,18.1045695 5.8954305,19 7,19 Z" fill="#000000"/>--}}
+{{--    </g>--}}
+{{--</svg><!--end::Svg Icon--></span>--}}
 
 
-                            <!--  Qalereya Categories  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.gallery.category.index',
-                                                     'admin.gallery.category.add',
-                                                     'admin.gallery.category.edit',
-                                                     'admin.gallery.categories',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.gallery.category.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Kateqoriyalar </span>
-                                </a>
-                            </li>
+
+{{--                        <span class="menu-text">Qalereyalar</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
+
+{{--                    <div class="menu-submenu">--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <ul class="menu-subnav">--}}
+
+{{--                            <!--  GALLERIES  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.gallery.index',--}}
+{{--                                                      'admin.gallery.edit',--}}
+{{--                                                      'admin.gallery.search',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.gallery.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Qalereyalar</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+{{--                            <!--  Qalereya əlavə et  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.gallery.add',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.gallery.add') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Qalereya əlavə et</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
 
-                        </ul>
-                    </div>
+{{--                            <!--  Qalereya Categories  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.gallery.category.index',--}}
+{{--                                                     'admin.gallery.category.add',--}}
+{{--                                                     'admin.gallery.category.edit',--}}
+{{--                                                     'admin.gallery.categories',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.gallery.category.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Kateqoriyalar </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                </li>
+
+{{--                        </ul>--}}
+{{--                    </div>--}}
+
+{{--                </li>--}}
 
 
                 <!--  Service  -->
@@ -881,69 +881,69 @@
 
 
 
-                <!--  Online Catalogs  -->
-                <li class="menu-item menu-item-submenu {{Route::is(
-                                                        [
-                                                        'admin.onlineCatalog.index',
-                                                        'admin.onlineCatalog.add',
-                                                        'admin.onlineCatalog.edit',
-                                                        ]
-                                                        )? "menu-item-open":""}}" aria-haspopup="true"
-                    data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
+{{--                <!--  Online Catalogs  -->--}}
+{{--                <li class="menu-item menu-item-submenu {{Route::is(--}}
+{{--                                                        [--}}
+{{--                                                        'admin.onlineCatalog.index',--}}
+{{--                                                        'admin.onlineCatalog.add',--}}
+{{--                                                        'admin.onlineCatalog.edit',--}}
+{{--                                                        ]--}}
+{{--                                                        )? "menu-item-open":""}}" aria-haspopup="true"--}}
+{{--                    data-menu-toggle="hover">--}}
+{{--                    <a href="javascript:;" class="menu-link menu-toggle">--}}
 
 
-       <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Design/Image.svg-->
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon points="0 0 24 0 24 24 0 24"/>
-        <path
-            d="M6,5 L18,5 C19.6568542,5 21,6.34314575 21,8 L21,17 C21,18.6568542 19.6568542,20 18,20 L6,20 C4.34314575,20 3,18.6568542 3,17 L3,8 C3,6.34314575 4.34314575,5 6,5 Z M5,17 L14,17 L9.5,11 L5,17 Z M16,14 C17.6568542,14 19,12.6568542 19,11 C19,9.34314575 17.6568542,8 16,8 C14.3431458,8 13,9.34314575 13,11 C13,12.6568542 14.3431458,14 16,14 Z"
-            fill="#000000"/>
-    </g>
-</svg><!--end::Svg Icon--></span>
+{{--       <span class="svg-icon menu-icon">--}}
+{{--                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Design/Image.svg-->--}}
+{{--                                            <svg--}}
+{{--                                                xmlns="http://www.w3.org/2000/svg"--}}
+{{--                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"--}}
+{{--                                                viewBox="0 0 24 24" version="1.1">--}}
+{{--    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
+{{--        <polygon points="0 0 24 0 24 24 0 24"/>--}}
+{{--        <path--}}
+{{--            d="M6,5 L18,5 C19.6568542,5 21,6.34314575 21,8 L21,17 C21,18.6568542 19.6568542,20 18,20 L6,20 C4.34314575,20 3,18.6568542 3,17 L3,8 C3,6.34314575 4.34314575,5 6,5 Z M5,17 L14,17 L9.5,11 L5,17 Z M16,14 C17.6568542,14 19,12.6568542 19,11 C19,9.34314575 17.6568542,8 16,8 C14.3431458,8 13,9.34314575 13,11 C13,12.6568542 14.3431458,14 16,14 Z"--}}
+{{--            fill="#000000"/>--}}
+{{--    </g>--}}
+{{--</svg><!--end::Svg Icon--></span>--}}
 
-                        <span class="menu-text">Onlayn Kataloqlar</span>
-                        <i class="menu-arrow"></i>
-                    </a>
+{{--                        <span class="menu-text">Onlayn Kataloqlar</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
 
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
+{{--                    <div class="menu-submenu">--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <ul class="menu-subnav">--}}
 
-                            <!--  Onlayn Kataloqlar  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.onlineCatalog.index',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.onlineCatalog.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Onlayn Kataloqlar</span>
-                                </a>
-                            </li>
+{{--                            <!--  Onlayn Kataloqlar  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.onlineCatalog.index',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.onlineCatalog.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Onlayn Kataloqlar</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                            <!--  Onlayn Kataloq əlavə et  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.onlineCatalog.add',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.onlineCatalog.add') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Onlayn Kataloq əlavə et</span>
-                                </a>
-                            </li>
+{{--                            <!--  Onlayn Kataloq əlavə et  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.onlineCatalog.add',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.onlineCatalog.add') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Onlayn Kataloq əlavə et</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
 
-                        </ul>
-                    </div>
+{{--                        </ul>--}}
+{{--                    </div>--}}
 
-                </li>
+{{--                </li>--}}
 
 
 
@@ -1015,194 +1015,194 @@
 
 
 
-                <!--  Teams  -->
-                <li class="menu-item menu-item-submenu {{Route::is(
-                                                        [
-                                                        'admin.team.index',
-                                                        'admin.team.add',
-                                                        'admin.team.edit',
-                                                        ]
-                                                        )? "menu-item-open":""}}" aria-haspopup="true"
-                    data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
+{{--                <!--  Teams  -->--}}
+{{--                <li class="menu-item menu-item-submenu {{Route::is(--}}
+{{--                                                        [--}}
+{{--                                                        'admin.team.index',--}}
+{{--                                                        'admin.team.add',--}}
+{{--                                                        'admin.team.edit',--}}
+{{--                                                        ]--}}
+{{--                                                        )? "menu-item-open":""}}" aria-haspopup="true"--}}
+{{--                    data-menu-toggle="hover">--}}
+{{--                    <a href="javascript:;" class="menu-link menu-toggle">--}}
 
 
 
-                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Files/User-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"/>
-        <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
-        <path d="M12,13 C10.8954305,13 10,12.1045695 10,11 C10,9.8954305 10.8954305,9 12,9 C13.1045695,9 14,9.8954305 14,11 C14,12.1045695 13.1045695,13 12,13 Z" fill="#000000" opacity="0.3"/>
-        <path d="M7.00036205,18.4995035 C7.21569918,15.5165724 9.36772908,14 11.9907452,14 C14.6506758,14 16.8360465,15.4332455 16.9988413,18.5 C17.0053266,18.6221713 16.9988413,19 16.5815,19 C14.5228466,19 11.463736,19 7.4041679,19 C7.26484009,19 6.98863236,18.6619875 7.00036205,18.4995035 Z" fill="#000000" opacity="0.3"/>
-    </g>
-</svg><!--end::Svg Icon--></span>
+{{--                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Files/User-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">--}}
+{{--    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
+{{--        <rect x="0" y="0" width="24" height="24"/>--}}
+{{--        <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>--}}
+{{--        <path d="M12,13 C10.8954305,13 10,12.1045695 10,11 C10,9.8954305 10.8954305,9 12,9 C13.1045695,9 14,9.8954305 14,11 C14,12.1045695 13.1045695,13 12,13 Z" fill="#000000" opacity="0.3"/>--}}
+{{--        <path d="M7.00036205,18.4995035 C7.21569918,15.5165724 9.36772908,14 11.9907452,14 C14.6506758,14 16.8360465,15.4332455 16.9988413,18.5 C17.0053266,18.6221713 16.9988413,19 16.5815,19 C14.5228466,19 11.463736,19 7.4041679,19 C7.26484009,19 6.98863236,18.6619875 7.00036205,18.4995035 Z" fill="#000000" opacity="0.3"/>--}}
+{{--    </g>--}}
+{{--</svg><!--end::Svg Icon--></span>--}}
 
 
-                        <span class="menu-text">Əməkdaşlar</span>
-                        <i class="menu-arrow"></i>
-                    </a>
+{{--                        <span class="menu-text">Əməkdaşlar</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
 
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
+{{--                    <div class="menu-submenu">--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <ul class="menu-subnav">--}}
 
-                            <!--  Team  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.team.index',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.team.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Əməkdaşlar</span>
-                                </a>
-                            </li>
+{{--                            <!--  Team  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.team.index',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.team.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Əməkdaşlar</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                            <!--  Team əlavə et  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.team.add',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.team.add') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Əməkdaş əlavə et</span>
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-
-                </li>
+{{--                            <!--  Team əlavə et  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.team.add',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.team.add') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Əməkdaş əlavə et</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
 
+{{--                        </ul>--}}
+{{--                    </div>--}}
 
-
-
-                <!--  Partners  -->
-                <li class="menu-item menu-item-submenu {{Route::is(
-                                                        [
-                                                        'admin.partner.index',
-                                                        'admin.partner.add',
-                                                        'admin.partner.edit',
-                                                        ]
-                                                        )? "menu-item-open":""}}" aria-haspopup="true"
-                    data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-
-
-
-                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <polygon points="0 0 24 0 24 24 0 24"/>
-                                <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                            </g>
-                        </svg><!--end::Svg Icon--></span>
-
-
-                        <span class="menu-text">Partnyorlar</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-
-                            <!--  Partner  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.partner.index',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.partner.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Partnyorlar</span>
-                                </a>
-                            </li>
-
-                            <!--  Partner əlavə et  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.partner.add',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.partner.add') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Partnyor əlavə et</span>
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-
-                </li>
+{{--                </li>--}}
 
 
 
 
-                <!--  Reviews  -->
-                <li class="menu-item menu-item-submenu {{Route::is(
-                                                        [
-                                                        'admin.review.index',
-                                                        'admin.review.add',
-                                                        'admin.review.edit',
-                                                        ]
-                                                        )? "menu-item-open":""}}" aria-haspopup="true"
-                    data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
+
+{{--                <!--  Partners  -->--}}
+{{--                <li class="menu-item menu-item-submenu {{Route::is(--}}
+{{--                                                        [--}}
+{{--                                                        'admin.partner.index',--}}
+{{--                                                        'admin.partner.add',--}}
+{{--                                                        'admin.partner.edit',--}}
+{{--                                                        ]--}}
+{{--                                                        )? "menu-item-open":""}}" aria-haspopup="true"--}}
+{{--                    data-menu-toggle="hover">--}}
+{{--                    <a href="javascript:;" class="menu-link menu-toggle">--}}
+
+
+
+{{--                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">--}}
+{{--                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
+{{--                                <polygon points="0 0 24 0 24 24 0 24"/>--}}
+{{--                                <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>--}}
+{{--                                <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>--}}
+{{--                            </g>--}}
+{{--                        </svg><!--end::Svg Icon--></span>--}}
+
+
+{{--                        <span class="menu-text">Partnyorlar</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
+
+{{--                    <div class="menu-submenu">--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <ul class="menu-subnav">--}}
+
+{{--                            <!--  Partner  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.partner.index',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.partner.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Partnyorlar</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+{{--                            <!--  Partner əlavə et  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.partner.add',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.partner.add') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Partnyor əlavə et</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+
+{{--                        </ul>--}}
+{{--                    </div>--}}
+
+{{--                </li>--}}
 
 
 
 
-                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Chat6.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24"/>
-                        <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M14.4862 18L12.7975 21.0566C12.5304 21.54 11.922 21.7153 11.4386 21.4483C11.2977 21.3704 11.1777 21.2597 11.0887 21.1255L9.01653 18H5C3.34315 18 2 16.6569 2 15V6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H14.4862Z" fill="black"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H6C5.44772 9 5 8.55228 5 8C5 7.44772 5.44772 7 6 7ZM6 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11Z" fill="black"/>
-                    </g>
-                </svg><!--end::Svg Icon--></span>
+{{--                <!--  Reviews  -->--}}
+{{--                <li class="menu-item menu-item-submenu {{Route::is(--}}
+{{--                                                        [--}}
+{{--                                                        'admin.review.index',--}}
+{{--                                                        'admin.review.add',--}}
+{{--                                                        'admin.review.edit',--}}
+{{--                                                        ]--}}
+{{--                                                        )? "menu-item-open":""}}" aria-haspopup="true"--}}
+{{--                    data-menu-toggle="hover">--}}
+{{--                    <a href="javascript:;" class="menu-link menu-toggle">--}}
 
 
-                        <span class="menu-text">Rəylər</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-
-                            <!--  Review  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.review.index',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.review.index') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Rəylər</span>
-                                </a>
-                            </li>
-
-                            <!--  Review əlavə et  -->
-                            <li class="menu-item {{Route::is([
-                                                     'admin.review.add',
-                                                    ])? "menu-item-active":""}}" aria-haspopup="true">
-                                <a href="{{ route('admin.review.add') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Rəy əlavə et</span>
-                                </a>
-                            </li>
 
 
-                        </ul>
-                    </div>
+{{--                        <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Chat6.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">--}}
+{{--                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
+{{--                        <rect x="0" y="0" width="24" height="24"/>--}}
+{{--                        <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M14.4862 18L12.7975 21.0566C12.5304 21.54 11.922 21.7153 11.4386 21.4483C11.2977 21.3704 11.1777 21.2597 11.0887 21.1255L9.01653 18H5C3.34315 18 2 16.6569 2 15V6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H14.4862Z" fill="black"/>--}}
+{{--                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H6C5.44772 9 5 8.55228 5 8C5 7.44772 5.44772 7 6 7ZM6 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11Z" fill="black"/>--}}
+{{--                    </g>--}}
+{{--                </svg><!--end::Svg Icon--></span>--}}
 
-                </li>
+
+{{--                        <span class="menu-text">Rəylər</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
+
+{{--                    <div class="menu-submenu">--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <ul class="menu-subnav">--}}
+
+{{--                            <!--  Review  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.review.index',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.review.index') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Rəylər</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+{{--                            <!--  Review əlavə et  -->--}}
+{{--                            <li class="menu-item {{Route::is([--}}
+{{--                                                     'admin.review.add',--}}
+{{--                                                    ])? "menu-item-active":""}}" aria-haspopup="true">--}}
+{{--                                <a href="{{ route('admin.review.add') }}" class="menu-link">--}}
+{{--                                    <i class="menu-bullet menu-bullet-dot">--}}
+{{--                                        <span></span>--}}
+{{--                                    </i>--}}
+{{--                                    <span class="menu-text">Rəy əlavə et</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+
+{{--                        </ul>--}}
+{{--                    </div>--}}
+
+{{--                </li>--}}
 
 
 
