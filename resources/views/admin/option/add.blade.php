@@ -71,9 +71,13 @@
                                             <div class="form-group">
                                                 <span class="span-dvidder">Seçim Qrup</span>
 
-                                                <select form="submit-form"
+                                                <select
+                                                        form="submit-form"
                                                         class="form-control countriesOverflow selectpicker"
-                                                        name="option_group_id" data-size="5" data-live-search="true">
+                                                        name="option_group_id"
+                                                        data-size="5"
+                                                        data-live-search="true"
+                                                >
                                                     <option value="">Seç</option>
                                                     @foreach($optionGroups as $optionGroup)
                                                         <option
@@ -83,8 +87,7 @@
 
                                                 </select>
 
-                                                @error('option_group_id' )<span
-                                                    class="text-danger">{{ $message }}</span> @enderror
+                                                @error('option_group_id' )<span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <!--  OPTION GROUP END  -->
 

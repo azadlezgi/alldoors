@@ -151,12 +151,12 @@ class OptionController extends Controller
                 ]);
 
 
-                foreach (array_values($request->option_list['language_id'])[$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
+                foreach ($request->option_list['language_id'][$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
 
                     OptionValueTranslation::create([
                         'option_value_id' => $optionValue->id,
                         'language_id' => $optionLanguageIDValue,
-                        'text' => array_values($request->option_list['language'])[$optionSortKey][$optionLanguageIDKey],
+                        'text' => $request->option_list['language'][$optionSortKey][$optionLanguageIDValue],
                     ]);
 
                 endforeach;
@@ -177,12 +177,12 @@ class OptionController extends Controller
                 ]);
 
 
-                foreach (array_values($request->option_list['language_id'])[$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
+                foreach ($request->option_list['language_id'][$optionSortKey] as $optionLanguageIDKey => $optionLanguageIDValue):
 
                     OptionValueTranslation::create([
                         'option_value_id' => $optionValue->id,
                         'language_id' => $optionLanguageIDValue,
-                        'text' => array_values($request->option_list['language'])[$optionSortKey][$optionLanguageIDKey],
+                        'text' => $request->option_list['language'][$optionSortKey][$optionLanguageIDValue],
                     ]);
 
                 endforeach;

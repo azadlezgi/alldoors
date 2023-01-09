@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    @foreach(array_values($oldData['language_id'])[$keySort] as $key => $language)
+                    @foreach($oldData['language_id'][$keySort] as $key => $language)
 
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
@@ -18,9 +18,9 @@
                                     </span>
                             </div>
                             <textarea class="form-control" form="submit-form"
-                                      name="option_list[language][{{$keySort}}][]"
+                                      name="option_list[language][{{$keySort}}][{{ $language }}]"
                                       placeholder="Text"
-                            >{{ array_values($oldData['language'])[$keySort][$key] }}</textarea>
+                            >{{ $oldData['language'][$keySort][$language] }}</textarea>
                             <input type="hidden" name="option_list[language_id][{{$keySort}}][]"
                                    value="{{ $language }}">
                         </div>
@@ -81,7 +81,7 @@
                             <div class="image-post-input">
                                 <input type="text"
                                        id="image_label-{{ $imgClassname }}{{$keySort}}"
-                                       name="option_list[image][]"
+                                       name="option_list[image][{{$keySort}}]"
                                        value="{{ $oldData['image'][$keySort] }}"
                                        form="submit-form"
                                 >
@@ -101,7 +101,7 @@
 
         <td data-label="Sıra" class="colum-sort-box">
             <div class="colum-sort">
-                <input type="number" min="0" class="form-control" name="option_list[sort][]" placeholder="Sıra"
+                <input type="number" min="0" class="form-control" name="option_list[sort][{{$keySort}}]" placeholder="Sıra"
                        value="{{ $sortValue }}">
                 <div class="removeButtonOption">
                     <div class="option-box-delete-container">
